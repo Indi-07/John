@@ -16,6 +16,8 @@ import {
   CALLBACK_DECLINE_TEXT,
   CAR_LESSONS_OUT_OF_SCOPE_TEXT,
   CLARIFY_TEXT,
+  CONTACT_DETAILS_TEXT,
+  CONTACT_ON_BEHALF_TEXT,
   GREETING_TEXT,
   HANDOFF_TEXT,
   INSTRUCTOR_SELECTION_TEXT,
@@ -28,7 +30,9 @@ import {
   containsPersonalInfo,
   isBroadOfferingQuery,
   isCallbackRequest,
+  isContactOnBehalfRequest,
   isGreeting,
+  isHowToContactQuery,
   isInstructorSelectionRequest,
   isOrdinaryCarLessonQuery,
   isShortAffirmative,
@@ -166,6 +170,13 @@ function updatePendingPricingOffer(sessionId: string | undefined, g: Grounding):
 // Checked in order; the first match wins.
 const DETERMINISTIC_REPLIES: { test: (message: string) => boolean; intent: Intent; text: string }[] = [
   { test: containsPersonalInfo, intent: "out_of_scope", text: PERSONAL_INFO_TEXT },
+  // Checked ahead of isCallbackRequest: both isHowToContactQuery ("how can I
+  // get in touch") and isContactOnBehalfRequest ("get in touch with the
+  // office for me") overlap with LEAD_HINTS ("get in touch"), but are more
+  // specific — asking HOW to reach NEDS, or asking the bot to reach NEDS FOR
+  // them, are different questions from "NEDS, please contact ME".
+  { test: isHowToContactQuery, intent: "faq_query", text: CONTACT_DETAILS_TEXT },
+  { test: isContactOnBehalfRequest, intent: "lead_or_callback_request", text: CONTACT_ON_BEHALF_TEXT },
   { test: isCallbackRequest, intent: "lead_or_callback_request", text: CALLBACK_DECLINE_TEXT },
   { test: isInstructorSelectionRequest, intent: "out_of_scope", text: INSTRUCTOR_SELECTION_TEXT },
 ];

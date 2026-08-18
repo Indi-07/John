@@ -37,6 +37,8 @@ Answer the visitor's question using ONLY the APPROVED FACTS provided to you in t
 14. Personal information requests: do not ask for, collect, or store any personal information through the chat — including names, phone numbers, email addresses, or any other contact or identifying details. If someone asks for a callback, to leave their contact details, or offers personal information unprompted, politely decline to take it. Apologise briefly, explain that this isn't something you're able to do, and direct them to get in touch with the team directly using the contact details on the NEDS website. Do not suggest alternative ways to submit personal information (e.g. do not offer a form or ask them to type it "just for reference") — only point them to official contact channels. Example: "Can you call me back?" → "I'm sorry, but I'm not able to do that. If you'd like to get in touch with the team, please reach out using the contact details on our website."
 15. Instructor selection requests: if someone asks to choose, request, or specify their instructor in any way (including by gender or any other personal characteristic), state clearly and directly that this isn't something NEDS allows — do not treat it as a concern to escalate or investigate. Lead with the policy itself, not with an apology or a promise to look into it. Follow with an offer to contact the team on ${OFFICE_PHONE} or ${OFFICE_EMAIL} if they have any concerns. Example: "Can I request the gender of my instructor?" → "Unfortunately, we don't allow clients to choose their instructor. If you have any concerns about this, please contact our team on ${OFFICE_PHONE} or ${OFFICE_EMAIL}."
 16. Maintaining conversation context: if the APPROVED FACTS are marked CONFIRMED_OFFER, the visitor just gave a short "yes" to your own previous offer to run through pricing — answer that directly and follow through (actually give the price), don't treat their short reply as a new standalone question. Open with a small acknowledgement like "Sure —" rather than restating the offer. Example: bot previously said "We offer Driver CPC periodic training here at NEDS. Want me to run through pricing too?", visitor replies "yes please" → "Sure — Driver CPC periodic training is £[price] per course. Let me know if you'd like to know anything else."
+17. Requests to contact the office on the user's behalf: recognise when someone is asking you to reach out to NEDS for them — phrases like "can you call the office," "can you contact them for me," "can you email the office," "get in touch with the team for me." Treat this as its own distinct case, not as a course or FAQ lookup — do not match it against course names or FAQ entries just because a word like "office" or "contact" appears in both. Respond by saying clearly that you're not able to do that yourself, then give the person the means to contact NEDS directly. Example: "Can you call the office for me?" → "I'm not able to contact the office for you, but you can reach the team directly on ${OFFICE_PHONE} or ${OFFICE_EMAIL}, and they'll help you from there."
+18. "How do I contact the office" requests: recognise phrasing that asks how to reach or contact NEDS/the office/the team (e.g. "how do I contact the office," "how can I get in touch," "how do you contact the office," including ungrammatical variants like "how do contact the office"). Always respond with the actual contact details — phone number and email — so the person can act on it immediately. Never match this to, or reference, "transport-office awareness training" or any other course containing the word "office" — that course only belongs in an answer when someone is clearly asking about training content, not how to get in touch. Example: "How do contact the office" → "You can reach the NEDS office on ${OFFICE_PHONE} or ${OFFICE_EMAIL}, and the team will help you from there."
 
 Example of the tone to aim for: "If you don't pass the Category D test, please don't worry — you'll be able to retake it, and we may recommend some extra tuition beforehand. Just get in touch with us to confirm dates and any additional costs."
 
@@ -85,6 +87,13 @@ export const IRRELEVANT_TEXT =
 export const PERSONAL_INFO_TEXT =
   "Please do not provide me with any personal information as my purpose is solely to answer questions. If you wish to book with us, please contact our team directly or fill out our contact form https://www.nedrivingschool.co.uk/contact/ and somebody from our team will contact you";
 
+// Deterministic answer for "how do I contact the office" — gives the actual
+// phone/email immediately rather than deferring, and never touches
+// retrieval, which was otherwise liable to match "office" in this phrasing
+// against the unrelated "transport-office awareness training" course.
+export const CONTACT_DETAILS_TEXT =
+  `You can reach the NEDS office on ${OFFICE_PHONE} or ${OFFICE_EMAIL}, and the team will help you from there.`;
+
 // Deterministic decline for callback/contact-detail requests — the chat does
 // not collect a name, phone number or email for this, even to arrange a
 // callback (see the "Personal information requests" policy). Also never
@@ -92,6 +101,15 @@ export const PERSONAL_INFO_TEXT =
 // the visitor's details.
 export const CALLBACK_DECLINE_TEXT =
   "I'm sorry, but I'm not able to do that. If you'd like to get in touch with the team, please reach out using the contact details on our website.";
+
+// Deterministic decline when a visitor asks the bot to reach NEDS on their
+// behalf ("can you call the office for me?") — the opposite direction from
+// CALLBACK_DECLINE_TEXT (NEDS contacting the visitor). Never forwarded to
+// the model, so a generic "office"/"contact" word overlap can't get matched
+// against an unrelated course or FAQ instead (see "Requests to contact the
+// office on the user's behalf").
+export const CONTACT_ON_BEHALF_TEXT =
+  `I'm not able to contact the office for you, but you can reach the team directly on ${OFFICE_PHONE} or ${OFFICE_EMAIL}, and they'll help you from there.`;
 
 // Deterministic reply for instructor-selection requests (by gender or any
 // other characteristic) — states the policy directly, first, rather than

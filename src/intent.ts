@@ -52,6 +52,46 @@ export function isCallbackRequest(text: string): boolean {
   return has(text.toLowerCase(), LEAD_HINTS);
 }
 
+// A visitor asking the BOT to reach NEDS on their behalf ("can you call the
+// office for me?") is the opposite direction from isCallbackRequest (NEDS
+// contacting the visitor) — a distinct case with its own reply
+// (CONTACT_ON_BEHALF_TEXT). Requires an action word AND a target word
+// (office/team/them/NEDS) together, so this can't be triggered by "office"
+// or "contact" merely appearing somewhere in an unrelated question (that
+// word overlap was previously matching random course/FAQ content instead).
+const CONTACT_ACTION_WORDS = [
+  "call", "contact", "email", "phone", "ring", "message", "reach out",
+  "get in touch",
+];
+const CONTACT_TARGET_WORDS = ["office", "them", "team", "neds"];
+const ON_BEHALF_WORDS = ["for me", "on my behalf", "for us"];
+
+export function isContactOnBehalfRequest(text: string): boolean {
+  const t = text.toLowerCase();
+  if (!has(t, CONTACT_ACTION_WORDS) || !has(t, CONTACT_TARGET_WORDS)) return false;
+  return has(t, ON_BEHALF_WORDS) || /\byou\b/.test(t);
+}
+
+// A visitor asking HOW to reach NEDS themselves wants the actual phone/email
+// immediately (CONTACT_DETAILS_TEXT) — this must win over isCallbackRequest
+// (whose LEAD_HINTS includes "get in touch", which would otherwise wrongly
+// decline "how can I get in touch?" instead of answering it) and never touch
+// retrieval, which was matching "office" in this phrasing against the
+// unrelated "transport-office awareness training" course. Phrase-matched
+// (not composed from word-lists) since the examples are a specific,
+// enumerable set of "how do/can I/you ..." shapes, including the
+// ungrammatical "how do contact the office".
+const HOW_TO_CONTACT_HINTS = [
+  "how do i contact", "how can i contact", "how do you contact",
+  "how do contact", "how can you contact",
+  "how do i get in touch", "how can i get in touch", "how do you get in touch",
+  "how do i reach", "how can i reach", "how do you reach",
+];
+
+export function isHowToContactQuery(text: string): boolean {
+  return has(text.toLowerCase(), HOW_TO_CONTACT_HINTS);
+}
+
 // NEDS does not let clients choose/request/specify their instructor, by
 // gender, age, race or any other characteristic (see
 // INSTRUCTOR_SELECTION_TEXT). Gated on the word "instructor" so generic uses
