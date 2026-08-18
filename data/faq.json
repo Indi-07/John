@@ -1,65 +1,4596 @@
 {
-  "_note": "PLACEHOLDER SEED Q&A — illustrative only, HGV/professional focus. Replaced by the approved xlsx Q&A via tooling/ingest_xlsx.py. Any licensing wording here is a placeholder and MUST be approved before a pilot — never treat these as verified licensing claims.",
+  "_note": "Generated from NEDS-chatbot-question-bank-3.xlsx ('Q&A Bank' sheet) by tooling/ingest_xlsx.py. Includes rows office-approved as 'PK Reviewed'/'Ad Reviewed', or with 'High'/'Medium' research confidence; always excludes 'DELETE'/'Not Relevant' rows even if confident. Do not edit by hand — re-run the ingest script instead.",
   "faqs": [
     {
-      "id": "areas-covered",
-      "question": "What areas do you cover?",
-      "answer": "NEDS is based in the North East and covers the surrounding area. If you tell us your postcode we can confirm whether we cover you.",
-      "keywords": ["area", "areas", "cover", "location", "where", "postcode", "near me"]
+      "id": "1",
+      "question": "What training courses do you offer?",
+      "answer": "We offer Category C1, C, C+E, C+E Direct, Category D, B+E trailer training, Initial and periodic Driver CPC, ADR, forklift, driving assessments and driver medicals.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
     },
     {
-      "id": "car-licence-before-hgv",
-      "question": "Do I need a car licence before I can train for an HGV?",
-      "answer": "Yes — you'll usually need a full car (Category B) licence before you can train for a Category C HGV. Our team can confirm exactly what you need for your situation.",
-      "keywords": ["car licence", "full licence", "before hgv", "need a licence", "prerequisite", "requirement", "entitlement", "learn to drive hgv"]
+      "id": "2",
+      "question": "Do you provide HGV driving lessons?",
+      "answer": "Yes. HGV and vocational driver training are among our core services.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
     },
     {
-      "id": "how-to-book",
-      "question": "How do I book?",
-      "answer": "You can book by calling the office or sending us an enquiry, and our team will arrange your training. If you'd like, I can take your details for a callback.",
-      "keywords": ["book", "booking", "arrange", "sign up", "start", "enrol"]
+      "id": "4",
+      "question": "Do you train complete beginners?",
+      "answer": "Yes. We train beginners starting from a full car licence.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
     },
     {
-      "id": "hgv-which-licence",
+      "id": "5",
+      "question": "Can you help me become an HGV driver from scratch?",
+      "answer": "Yes. We can arrange the medical, provisional application support, study materials, theory tests, practical training and Driver CPC elements required for the selected route.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "6",
+      "question": "Do you train individual customers as well as businesses?",
+      "answer": "Yes. We provide training for individuals and tailored training for businesses and fleet operators.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "7",
+      "question": "Which areas of the North East do you cover?",
+      "answer": "We are based on the Team Valley Trading Estate in Gateshead and serve Newcastle, Gateshead, Sunderland, Durham and the wider North East. Some business training is available nationwide.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "9",
+      "question": "Is NEDS part of Chartwise?",
+      "answer": "Yes. We are a division of Chartwise (UK) Limited.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "12",
+      "question": "What vehicles do you use?",
+      "answer": "We operate a maintained fleet of LGV vehicles and supply test-compliant, correctly insured vehicles for our courses.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "16",
+      "question": "Can I speak to someone before choosing a course?",
+      "answer": "Yes. Call 0191 500 9450, email info@nedrivingschool.co.uk or use our website contact form.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "17",
       "question": "Which HGV licence do I need?",
-      "answer": "It depends on the vehicle: Category C1 covers 3.5t to 7.5t, Category C covers rigid lorries over 3.5t, and Category C+E covers articulated lorries. Many drivers take C first, then C+E. Our team can advise based on the driving you plan to do.",
-      "keywords": ["which licence", "category c", "c1", "c+e", "class 1", "class 2", "rigid", "artic"]
+      "answer": "It depends on the vehicle and use: C1 is generally 3.5–7.5 tonnes, C is for rigid goods vehicles above 3.5 tonnes, and C+E is for Category C vehicles towing a trailer over 750kg. We’ll confirm the right route from the intended vehicle’s MAM and your current licence.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
     },
     {
-      "id": "cpc-what-is",
+      "id": "18",
+      "question": "What is the difference between C1, C and C+E?",
+      "answer": "C1 covers medium vehicles between 3.5 and 7.5 tonnes; Category C covers large rigid goods vehicles; Category C+E adds a trailer over 750kg and is the articulated/Class 1 route.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "19",
+      "question": "What is the difference between Class 1 and Class 2?",
+      "answer": "Class 1 is the common industry name for Category C+E. Class 2 is the common name for Category C.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "20",
+      "question": "Is C+E the same as Class 1?",
+      "answer": "Yes. Category C+E is commonly called Class 1.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "21",
+      "question": "Is Category C the same as Class 2?",
+      "answer": "Yes. Category C is commonly called Class 2.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "23",
+      "question": "Can I go straight from a car licence to Class 1?",
+      "answer": "Yes. Eligible drivers with a full car licence can follow the C+E Direct route.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "24",
+      "question": "Do I have to pass Category C before taking C+E?",
+      "answer": "Not for the direct route. We offer C+E Direct from a full car licence. Our standard C+E course is for people who already hold Category C.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "25",
+      "question": "Which licence lets me drive a 7.5-tonne vehicle?",
+      "answer": "Category C1 is the usual entitlement for a vehicle over 3.5 tonnes and up to 7.5 tonnes MAM.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "26",
+      "question": "Which licence do I need to drive a rigid lorry?",
+      "answer": "Category C is the normal large-rigid-lorry entitlement. C1 covers medium vehicles up to 7.5 tonnes.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "27",
+      "question": "Which licence do I need to drive an articulated lorry?",
+      "answer": "Category C+E is the normal entitlement for articulated lorries and other large vehicle-and-trailer combinations.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "29",
+      "question": "Which licence do I need for a bus or coach?",
+      "answer": "Category D is the full bus and coach category; D1 may cover smaller minibuses. The exact entitlement depends on passenger seats and use.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "34",
+      "question": "Does passing C+E automatically give me Category C?",
+      "answer": "C+E includes entitlement to drive Category C vehicles within the relevant licence rules.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "35",
+      "question": "Does passing Category C also give me C1?",
+      "answer": "Yes. Passing Category C also provides Category C1 entitlement.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "36",
+      "question": "Can I train if I have never driven a large vehicle before?",
+      "answer": "Yes. We offer training for eligible beginners. An assessment can help determine the appropriate amount of tuition.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "37",
+      "question": "What licence must I already hold?",
+      "answer": "For first-time HGV or bus qualification you need a full car licence before applying for the relevant provisional vocational entitlement.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "38",
+      "question": "Do I need a full UK car licence?",
+      "answer": "You need a full UK Category B licence to start our C1, C, C+E Direct or Category D routes.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "44",
+      "question": "Can you tell me what entitlements are already on my licence?",
+      "answer": "Use GOV.UK's 'View or share your driving licence information' service, then ask us to interpret the categories for the course you want.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "54",
+      "question": "Can you assess my experience before recommending the number of lessons?",
+      "answer": "Yes. We offer taster/assessment sessions to assess ability and recommend the amount of practical training.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "55",
+      "question": "What is a Category C1 licence?",
+      "answer": "Category C1 covers vehicles over 3,500kg and up to 7,500kg MAM, with a trailer up to 750kg.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "56",
+      "question": "What vehicles can I drive with C1?",
+      "answer": "Category C1 covers vehicles over 3,500kg and up to 7,500kg MAM, with a trailer up to 750kg.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "57",
+      "question": "How heavy can a C1 vehicle be?",
+      "answer": "Up to 7,500kg maximum authorised mass for the C1 vehicle; separate trailer rules apply.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "63",
+      "question": "Do I need C1 for my motorhome or campervan?",
+      "answer": "A motorhome over 3.5 tonnes and up to 7.5 tonnes normally needs C1; over 7.5 tonnes normally needs Category C. Check the vehicle's plated MAM.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "64",
+      "question": "Can you help me work out whether my motorhome is over 3.5 tonnes?",
+      "answer": "A motorhome over 3.5 tonnes and up to 7.5 tonnes normally needs C1; over 7.5 tonnes normally needs Category C. Check the vehicle's plated MAM.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "70",
+      "question": "Does C1 include Initial Driver CPC?",
+      "answer": "Initial CPC is generally required only when the driving will be professional and no exemption applies. It is package-dependent, not automatic for every C1 candidate.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "73",
+      "question": "What is a Category C licence?",
+      "answer": "Category C covers large rigid goods vehicles over 3,500kg MAM with a trailer up to 750kg. It is mainly used for rigid vehicles between 7.5 and 32 tonnes.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "74",
+      "question": "What vehicles can I drive with Category C?",
+      "answer": "Category C covers large rigid goods vehicles over 3,500kg MAM with a trailer up to 750kg. It is mainly used for rigid vehicles between 7.5 and 32 tonnes.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "75",
+      "question": "Is Category C suitable for rigid lorries?",
+      "answer": "Yes. Category C is the normal route for large rigid vehicles such as tippers, box wagons, curtain-siders and flatbeds, subject to the individual vehicle's plated weight.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "76",
+      "question": "Can I drive a tipper with Category C?",
+      "answer": "Yes. Category C is the normal route for large rigid vehicles such as tippers, box wagons, curtain-siders and flatbeds, subject to the individual vehicle's plated weight.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "79",
+      "question": "How long does Category C training take?",
+      "answer": "Practical Category C training is normally delivered as a concentrated block of about one week. The complete process usually takes longer because of the medical, provisional licence and theory-test availability.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "81",
+      "question": "Is Category C training completed in one week?",
+      "answer": "Practical Category C training is normally delivered as a concentrated block of about one week. The complete process usually takes longer because of the medical, provisional licence and theory-test availability.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "88",
+      "question": "What is a Category C+E licence?",
+      "answer": "Category C+E covers Category C vehicles towing a trailer over 750kg and is the usual articulated/Class 1 entitlement.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "89",
+      "question": "What can I drive with C+E?",
+      "answer": "Category C+E covers Category C vehicles towing a trailer over 750kg and is the usual articulated/Class 1 entitlement.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "90",
+      "question": "What is the difference between standard C+E and C+E Direct?",
+      "answer": "Standard C+E is for someone who already holds Category C and is mainly practical training/testing. C+E Direct is the full route from a car licence and can include medical, provisional, theory, practical and CPC elements.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "91",
+      "question": "Can I take C+E Direct with only a car licence?",
+      "answer": "Yes. C+E Direct is specifically advertised for eligible candidates starting from a full Category B car licence.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "92",
+      "question": "Do I need Category C for the standard C+E course?",
+      "answer": "Yes. our standard C+E course requires a full Category C licence.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "93",
+      "question": "I already have Category C—what training do I need?",
+      "answer": "You normally take the standard C+E practical route: reversing/coupling preparation, Module 3a and Module 3b. CPC depends on your existing DQC history.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "98",
+      "question": "How many C+E lessons are included?",
+      "answer": "Standard C+E is described as four four-hour lessons plus a one-hour pre-test lesson. C+E Direct is described as six four-hour lessons plus a one-hour pre-test lesson, with vehicle hire.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "99",
+      "question": "Will I learn coupling and uncoupling?",
+      "answer": "Yes. Trailer routes include reversing and coupling/uncoupling preparation for the off-road Module 3a test.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "100",
+      "question": "Does the course include reversing practice?",
+      "answer": "Yes. Trailer routes include reversing and coupling/uncoupling preparation for the off-road Module 3a test.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "102",
+      "question": "Where is the Module 3b road test taken?",
+      "answer": "Module 3b is the on-road test with a DVSA examiner at an agreed test centre.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "108",
+      "question": "Do you provide bus and coach driver training?",
+      "answer": "Yes. We offer Category D bus and coach training.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "109",
+      "question": "What is a Category D licence?",
+      "answer": "Category D is the full bus/coach category for vehicles with more than 8 passenger seats, with a trailer up to 750kg. D1 covers smaller minibuses.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "110",
+      "question": "What vehicles can I drive with Category D?",
+      "answer": "Category D is the full bus/coach category for vehicles with more than 8 passenger seats, with a trailer up to 750kg. D1 covers smaller minibuses.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "112",
+      "question": "What licence do I need for a vehicle with more than 16 passenger seats?",
+      "answer": "Category D is normally required for a bus or coach with more than 16 passenger seats; D1 is limited to up to 16 passenger seats.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "113",
+      "question": "Can I go from a car licence directly to Category D?",
+      "answer": "Yes. An eligible full car-licence holder can apply for provisional Category D and complete the required medical, theory and practical tests.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "114",
+      "question": "Do I need a medical for Category D?",
+      "answer": "Yes. A D4 medical is normally required when applying for provisional Category D.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "115",
+      "question": "Do bus and coach drivers need Driver CPC?",
+      "answer": "Professional bus and coach drivers normally need Driver CPC unless a specific exemption applies.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "116",
+      "question": "How long does Category D training take?",
+      "answer": "Practical Category D training takes roughly one week; the complete licensing process takes longer.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "121",
+      "question": "Can you train drivers for a bus or coach company?",
+      "answer": "Yes. We offer training for businesses and can discuss company bookings.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "123",
+      "question": "Do you provide car-and-trailer training?",
+      "answer": "Yes. We offer B+E car-and-trailer competence training.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "124",
+      "question": "Do I still need a B+E test?",
+      "answer": "For most GB car drivers a separate BE test is no longer required. The entitlement shown and the vehicle/trailer limits must still be checked.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "125",
+      "question": "If B+E is already on my licence, why should I take training?",
+      "answer": "Training can build competence in coupling, reversing, road positioning and safe towing, and may be requested by an employer or insurer even where no extra test is required.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "127",
+      "question": "How long is the B+E course?",
+      "answer": "Our B+E course is normally a half-day course.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "128",
+      "question": "Do you provide a certificate of competence?",
+      "answer": "Yes. Successful candidates receive a certificate of competence.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "132",
+      "question": "Can you teach me to tow a caravan?",
+      "answer": "Yes. We offer this training for trailers, caravans and horseboxes.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "133",
+      "question": "Can you teach me to tow a horsebox?",
+      "answer": "Yes. We offer this training for trailers, caravans and horseboxes.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "140",
+      "question": "What are all the steps to become an HGV driver?",
+      "answer": "Typical first-time route: hold a full car licence; complete a D4 medical; submit D2 and D4 for provisional entitlement; pass Module 1a multiple-choice and 1b hazard perception; pass Module 2 if professional CPC is needed; complete practical training; pass Module 3a off-road and 3b on-road; then pass Module 4 if professional CPC is needed.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "141",
+      "question": "What should I do first?",
+      "answer": "Choose the vehicle category, then arrange the D4 medical and provisional application. We can help plan the route.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "142",
+      "question": "Do I need the medical before applying for provisional entitlement?",
+      "answer": "Yes. The D4 medical report is normally submitted with the D2 provisional application.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "143",
+      "question": "Can I study for theory while waiting for my licence?",
+      "answer": "Yes. We recommend using the waiting time for provisional entitlement to study, although the tests cannot be booked until the provisional licence is available.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "144",
+      "question": "How do I apply for provisional HGV entitlement?",
+      "answer": "Complete a D2 application and a doctor-completed D4 medical report, then send both with the required licence/documents to DVLA, Swansea SA99 1BR. GOV.UK says there is no application fee.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "145",
+      "question": "Will NEDS help me complete the application?",
+      "answer": "Yes. We can arrange the medical and help with D2/D4 paperwork.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "146",
+      "question": "What are Modules 1a and 1b?",
+      "answer": "Module 1a is the vocational multiple-choice theory test; Module 1b is hazard perception.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "147",
+      "question": "What is Module 2?",
+      "answer": "Module 2 is the Driver CPC case-studies test for new professional drivers.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "148",
+      "question": "What is Module 3a?",
+      "answer": "Module 3a is the off-road practical exercise/reversing test, including coupling elements for trailer categories.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "149",
+      "question": "What is Module 3b?",
+      "answer": "Module 3b is the on-road practical driving test with an examiner.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "150",
+      "question": "What is Module 4?",
+      "answer": "Module 4 is the Driver CPC practical demonstration test covering professional vehicle-safety knowledge; it is not another road-driving test.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "152",
+      "question": "In what order do I take the tests?",
+      "answer": "Provisional entitlement comes first, followed by Modules 1a and 1b; Module 2 if required; practical training; Modules 3a then 3b; and Module 4 if required. Module 2 must be passed before Module 4 on our training route.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "155",
+      "question": "Can I complete everything during one week off work?",
+      "answer": "The practical driving block may fit into about one week, but the full medical, provisional, theory and CPC process normally cannot be completed in one week.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "156",
+      "question": "Which parts are handled by NEDS and which by DVLA or DVSA?",
+      "answer": "We can arrange/support the medical, paperwork, study materials, training and test bookings. DVLA issues provisional/licence entitlements; DVSA controls official theory and on-road tests; authorised our facilities may conduct Module 3a and Module 4.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "157",
+      "question": "Can you manage the entire process for me?",
+      "answer": "We offer a managed start-to-finish service, subject to external DVLA/DVSA processes.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "159",
+      "question": "What happens after I pass?",
+      "answer": "DVLA updates the relevant driving entitlement. If full Initial Driver CPC was completed, a DQC is issued for professional driving; periodic training is then required to keep CPC current.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "160",
+      "question": "Do I need a driver medical?",
+      "answer": "Most first-time applicants for provisional lorry or bus entitlement need a doctor-completed D4 medical report.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "161",
+      "question": "What is a D4 medical?",
+      "answer": "D4 is the medical examination report used for Group 2 lorry and bus licence applications.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "162",
+      "question": "What happens during the medical?",
+      "answer": "The medical includes eyesight and blood-pressure checks plus health questions. The doctor completes the D4; an optician may need to complete the eyesight section.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "166",
+      "question": "Do you provide the D4 form?",
+      "answer": "Yes. D2 and D4 forms are available at our office. GOV.UK also provides D4 guidance and directs applicants to eligible Post Offices for D2 forms.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "167",
+      "question": "Do you stock D2 application forms?",
+      "answer": "Yes. D2 and D4 forms are available at our office. GOV.UK also provides D4 guidance and directs applicants to eligible Post Offices for D2 forms.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "168",
+      "question": "Can you help me complete the D2 and D4 forms?",
+      "answer": "Yes. Our team can help with D2 and D4 paperwork and check it is complete, although the medical sections must be completed by the appropriate medical professional.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "169",
+      "question": "How do I send the forms to DVLA?",
+      "answer": "Send the completed D2, D4 and required licence/documents to DVLA, Swansea, SA99 1BR, following the current GOV.UK instructions.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "170",
+      "question": "How long does DVLA usually take?",
+      "answer": "GOV.UK says the licence should normally arrive within 3 weeks of DVLA receiving the application, but it can take longer if health or personal details need checking.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "171",
+      "question": "Can I book a medical without booking a training course?",
+      "answer": "Yes. We offer standalone driver-medical appointments.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "172",
+      "question": "Do you provide HGV and LGV medicals?",
+      "answer": "Yes. We offer medicals for LGV/HGV, PCV, taxi and motorsport drivers.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "173",
+      "question": "Do you provide PCV medicals?",
+      "answer": "Yes. We offer medicals for LGV/HGV, PCV, taxi and motorsport drivers.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "174",
+      "question": "Do you provide taxi-driver medicals?",
+      "answer": "Yes. We offer medicals for LGV/HGV, PCV, taxi and motorsport drivers.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "175",
+      "question": "Do you provide motorsport medicals?",
+      "answer": "Yes. We offer medicals for LGV/HGV, PCV, taxi and motorsport drivers.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "178",
+      "question": "What happens if the doctor identifies a medical issue?",
+      "answer": "The medical includes eyesight and blood-pressure checks plus health questions. The doctor completes the D4; an optician may need to complete the eyesight section.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "182",
+      "question": "Which theory tests do I need?",
+      "answer": "For a first lorry/bus entitlement, Module 1 consists of separately booked multiple-choice and hazard-perception tests. New professional drivers normally also take the Module 2 case-studies test.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "183",
+      "question": "Do I need a separate HGV theory test?",
+      "answer": "Yes. Lorry/bus candidates take vocational multiple-choice and hazard-perception tests rather than relying on their old car-theory pass.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "184",
+      "question": "What is the hazard-perception test?",
+      "answer": "You watch 19 road-scene clips and identify developing hazards as early as possible. The lorry/bus pass mark is 67 out of 100.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "186",
+      "question": "How many questions are in the test?",
+      "answer": "The vocational multiple-choice test has 100 questions. The hazard-perception test uses 19 clips containing 20 scoreable developing hazards.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "187",
+      "question": "What score do I need to pass?",
+      "answer": "The current GOV.UK pass marks are 85/100 for multiple choice and 67/100 for hazard perception.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "188",
+      "question": "Where will I take the theory test?",
+      "answer": "At an agreed official DVSA theory-test centre.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "191",
+      "question": "What study materials do you provide?",
+      "answer": "We offer e-learning for vocational theory, hazard perception and Module 2, plus mock tests and practical-training guidance.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "192",
+      "question": "Do I receive online e-learning access?",
+      "answer": "Yes. We offer online e-learning access for relevant theory/CPC products.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "194",
+      "question": "Are mock tests included?",
+      "answer": "Yes. We offer mock-test support within our e-learning system.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "195",
+      "question": "Can I use the NEDS study room?",
+      "answer": "Yes. We offer a dedicated study room at Team Valley for our candidates.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "198",
+      "question": "Is there an audio or read-aloud option?",
+      "answer": "DVSA can provide audio/read-aloud and other support for eligible candidates when requested during booking, with evidence where required.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "200",
+      "question": "What happens if I fail the theory test?",
+      "answer": "You receive feedback and can rebook immediately, but GOV.UK says you cannot retake the test for 3 clear working days.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "203",
+      "question": "How long is each lesson?",
+      "answer": "Our main vehicle courses use four-hour practical lessons, plus a shorter pre-test session.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "204",
+      "question": "Is the practical training intensive?",
+      "answer": "Yes. We normally organise practical tuition in a concentrated block.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "210",
+      "question": "Where does practical training take place?",
+      "answer": "Classroom/base work is at Team Valley, off-road manoeuvre work may be at Birtley, and road tuition takes place on local roads/test routes.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "211",
+      "question": "What will I learn during the lessons?",
+      "answer": "Vehicle control, observation, road positioning, safe and efficient driving, reversing/off-road exercises and—where relevant—coupling and uncoupling.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "212",
+      "question": "Will I practise reversing?",
+      "answer": "Yes. Reversing/off-road manoeuvres form part of preparation for Module 3a.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "213",
+      "question": "Will I practise coupling and uncoupling?",
+      "answer": "Yes for trailer categories such as C+E and B+E. Non-trailer categories do not include that element.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "220",
+      "question": "Can I have an assessment lesson first?",
+      "answer": "Yes. We offer taster/assessment sessions to recommend the amount of training.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "229",
       "question": "What is Driver CPC?",
-      "answer": "Driver CPC is the professional qualification for lorry, bus and coach drivers. Once qualified, you complete 35 hours of periodic training every 5 years to keep it valid. We run classroom periodic training modules.",
-      "keywords": ["cpc", "driver cpc", "35 hours", "periodic", "professional", "qualification"]
+      "answer": "Driver CPC is the professional qualification normally required to drive lorries, buses or coaches as the main part of a job.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
     },
     {
-      "id": "medical-what-is",
-      "question": "Do I need a medical for an HGV licence?",
-      "answer": "Yes, you need a D4 driver medical to apply for an HGV or PCV licence. It includes an eyesight and general health check completed by a medical professional. We can arrange this for you.",
-      "keywords": ["medical", "d4", "eyesight", "health", "hgv licence", "pcv"]
+      "id": "231",
+      "question": "What is the difference between Initial and periodic CPC?",
+      "answer": "Initial CPC is the qualification route for many new professional drivers and includes Module 2 and Module 4 alongside licence tests. Periodic CPC is ongoing training used to keep an existing professional qualification current.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
     },
     {
-      "id": "age-requirement",
-      "question": "How old do I need to be to train for an HGV?",
-      "answer": "You can usually train for a Category C HGV from age 18, provided you hold a full car licence. Some categories have different rules, so our team can confirm for your situation.",
-      "keywords": ["age", "how old", "18", "minimum age", "young"]
+      "id": "232",
+      "question": "What is a Driver Qualification Card?",
+      "answer": "The Driver Qualification Card, or DQC, is evidence of Driver CPC. Professional drivers must carry it when required.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
     },
     {
-      "id": "test-fees-included",
-      "question": "Are test fees included in the price?",
-      "answer": "Course prices usually cover training and use of the vehicle, but DVSA test fees are charged separately. Our team will confirm exactly what's included when you enquire.",
-      "keywords": ["test fee", "included", "dvsa", "extra cost", "what's included"]
+      "id": "233",
+      "question": "What is Module 2 CPC?",
+      "answer": "Module 2 is a computer-based case-studies test for the Initial Driver CPC route.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
     },
     {
-      "id": "how-long-hgv",
-      "question": "How long does HGV training take?",
-      "answer": "It varies with the category and your experience, but many learners complete practical HGV training over a small number of intensive days. Our team can give you a realistic timeline once they know your starting point.",
-      "keywords": ["how long", "duration", "days", "weeks", "hgv training", "time"]
+      "id": "234",
+      "question": "What is Module 4 CPC?",
+      "answer": "Module 4 is a practical demonstration test of professional vehicle-safety knowledge.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
     },
     {
-      "id": "finance-available",
-      "question": "Do you offer payment plans or finance?",
-      "answer": "For payment options, please contact the office directly and the team will talk you through what's available.",
-      "keywords": ["finance", "payment plan", "instalments", "spread cost", "afford", "deposit"]
+      "id": "237",
+      "question": "Must I pass Module 2 before Module 4?",
+      "answer": "Module 2 must be passed before Module 4 on our Initial CPC route.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "239",
+      "question": "I will only drive privately—do I need CPC?",
+      "answer": "Non-commercial private carriage can be exempt from Driver CPC, but the correct vocational driving entitlement is still required.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "243",
+      "question": "How many periodic CPC hours do I need?",
+      "answer": "You need 35 hours within each five-year period. For professional driving in Europe all 35 hours must be International Driver CPC; UK-only drivers can use National courses or a mix permitted by GOV.UK.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "247",
+      "question": "Which CPC subjects do you offer?",
+      "answer": "Our Driver CPC topics include drivers’ hours, working time, tachographs, safe loading, safe and fuel-efficient driving, transport documents, defects and emergency first aid.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "252",
+      "question": "How can I check how many CPC hours I already have?",
+      "answer": "Use the GOV.UK 'Check your Driver CPC periodic training hours' service. You need your driving-licence number and postcode.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "253",
+      "question": "When will I receive my DQC?",
+      "answer": "The DQC is normally sent automatically to the address on the driving licence. For periodic training, contact DVSA if it has not arrived within 20 days of when it was due.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "266",
+      "question": "Is the displayed amount a deposit or the full course price?",
+      "answer": "The booking page lists separate deposit products for several vehicle courses. A deposit is not the full course price; check the product title and written quotation.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "287",
+      "question": "How long is a quotation valid?",
+      "answer": "Our quotations are valid for 30 days.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "289",
+      "question": "How do I book a course?",
+      "answer": "Please book through our website to sign up, or if you're struggling to do so, contact our team and we'll help you through the process.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "290",
+      "question": "Can I book online?",
+      "answer": "Yes. Selected deposits and products can be purchased through our online booking page.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "291",
+      "question": "Can I request a callback?",
+      "answer": "Yes. Course pages include a callback option, or you can use the contact form.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "293",
+      "question": "What happens after I pay the deposit?",
+      "answer": "The relevant deposit pages say the team is alerted, contacts the customer, arranges the next steps and discusses proposed training/test dates.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "298",
+      "question": "How far ahead should I book?",
+      "answer": "We recommend starting as early as possible and allowing roughly 8–10 weeks for the full process because DVLA and DVSA stages can be bottlenecks.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "310",
+      "question": "What happens if I arrive late?",
+      "answer": "If you arrive late, the instructor may refuse entry and you may be liable for extra training costs.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "312",
+      "question": "What is your cancellation policy?",
+      "answer": "For classroom/online courses: 30+ days gives a full refund; 10–29 days means the deposit is non-refundable; within 10 days full fees are payable. Practical vehicle-training deposits are separately described as non-refundable.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "313",
+      "question": "Is the deposit refundable?",
+      "answer": "Practical vehicle-training deposits are non-refundable under our terms. Management may consider exceptional partial refunds case by case, but I cannot promise one.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "315",
+      "question": "I paid but have not received confirmation—what should I do?",
+      "answer": "Call 0191 500 9450 or email info@nedrivingschool.co.uk with your name and booking reference. Do not post payment-card details in chat.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "316",
+      "question": "Can someone check the status of my booking?",
+      "answer": "Call 0191 500 9450 or email info@nedrivingschool.co.uk with your name and booking reference. Do not post payment-card details in chat.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "317",
+      "question": "Where are you based?",
+      "answer": "our main centre is at 143 Princesway, Team Valley Industrial Estate, Gateshead, NE11 0TU.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "318",
+      "question": "What is your address?",
+      "answer": "our main centre is at 143 Princesway, Team Valley Industrial Estate, Gateshead, NE11 0TU.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "319",
+      "question": "Is the centre in Team Valley?",
+      "answer": "our main centre is at 143 Princesway, Team Valley Industrial Estate, Gateshead, NE11 0TU.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "320",
+      "question": "What training takes place at Birtley?",
+      "answer": "Off-road manoeuvre training may take place at our Birtley training area.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "321",
+      "question": "Which centre will my course use?",
+      "answer": "It depends on the activity: classroom/base work is at Team Valley, off-road manoeuvres may be at Birtley, road tuition is local, and theory tests are at an agreed DVSA centre. The booking team confirms the venue.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "322",
+      "question": "Where will I take my theory test?",
+      "answer": "At an agreed official DVSA theory-test centre.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "323",
+      "question": "Where will I take my practical test?",
+      "answer": "Module 3a may be conducted at our authorised off-road facility; Module 3b is at an agreed DVSA practical-test location.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "330",
+      "question": "Is there free parking?",
+      "answer": "Yes. Free parking is available outside our Team Valley building.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "339",
+      "question": "What is ADR training?",
+      "answer": "ADR training qualifies drivers to carry specified dangerous goods by road and leads to an ADR driver card after the required training and tests.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "343",
+      "question": "What is the Packages module?",
+      "answer": "Packages training covers dangerous goods carried in packages rather than tanks, alongside Core and relevant class modules.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "344",
+      "question": "What is the Tanks module?",
+      "answer": "Tanks training covers dangerous goods carried in tanks and is added to Core and relevant class modules.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "345",
+      "question": "Which dangerous-goods classes do you teach?",
+      "answer": "Our ADR training covers Core, Packages, Tanks, standard Classes 2, 3, 4, 5, 6, 8 and 9, with specialist Classes 1 and 7 available by private booking.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "346",
+      "question": "Do you offer Classes 1 and 7?",
+      "answer": "Yes. We can confirm Classes 1 and 7 are available by private booking.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "349",
+      "question": "Where is ADR training held?",
+      "answer": "We offer ADR training from our Gateshead facilities.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "355",
+      "question": "How early can I renew my ADR?",
+      "answer": "You can start refresher training one year before expiry. The refresher exam must be taken at least two weeks before the current card expires; otherwise an initial course may be required.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "356",
+      "question": "Does ADR count towards periodic Driver CPC?",
+      "answer": "Yes. Current GOV.UK guidance allows up to 14 hours of eligible ADR training to count towards periodic Driver CPC.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "357",
+      "question": "Exactly how many CPC hours can my ADR course contribute?",
+      "answer": "Up to 14 hours under current GOV.UK guidance, subject to the course being eligible and the required evidence/recording process.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "362",
+      "question": "Can I download your ADR guide?",
+      "answer": "Yes. The ADR page advertises a free introductory guide/infographic download.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "363",
+      "question": "Do you provide forklift training?",
+      "answer": "Yes. We offer forklift operator training.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "364",
+      "question": "Which types of forklift do you cover?",
+      "answer": "We offer counterbalance and reach-truck training.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "365",
+      "question": "Do you train counterbalance operators?",
+      "answer": "We offer counterbalance and reach-truck training.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "366",
+      "question": "Do you train reach-truck operators?",
+      "answer": "We offer counterbalance and reach-truck training.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "367",
+      "question": "Which forklift course do I need?",
+      "answer": "Novice is for new operators; experienced-operator is for people with meaningful experience but no suitable current evidence; refresher is for previously trained operators needing reassessment/updating.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "368",
+      "question": "What is the difference between novice, experienced-operator and refresher training?",
+      "answer": "Novice provides full basic theory/practical training; experienced-operator is a shorter assessed route for experienced users; refresher addresses previously trained operators whose competence needs updating.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "369",
+      "question": "How long is the novice forklift course?",
+      "answer": "Our novice forklift course is five days.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "370",
+      "question": "I have experience but no certificate—which course should I take?",
+      "answer": "We offer an experienced-operator route, subject to an assessment of genuine prior experience.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "372",
+      "question": "How often should forklift training be refreshed?",
+      "answer": "HSE sets no fixed legal interval. It says employers may choose a 3–5 year cycle, but earlier retraining may be needed after unsafe practice, an incident, a long gap or workplace changes.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "373",
+      "question": "Can I train with no previous experience?",
+      "answer": "Yes. The novice course is intended for new operators.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "374",
+      "question": "Is the course theory and practical?",
+      "answer": "Yes. HSE guidance expects basic training and testing to cover theoretical knowledge and practical skills.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "375",
+      "question": "Is there a test at the end?",
+      "answer": "Yes. HSE guidance says the operator should pass practical and theoretical tests demonstrating safe competence.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "378",
+      "question": "Is it a forklift licence or a training certificate?",
+      "answer": "There is no government-issued forklift driving licence. Employers rely on adequate training, competence and suitable evidence such as a training certificate.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "383",
+      "question": "Can you assess an existing forklift operator?",
+      "answer": "Yes. The experienced-operator/refresher routes and HSE guidance support assessment of existing competence.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "384",
+      "question": "What happens if I fail the assessment?",
+      "answer": "Further training should be arranged before the person operates independently. The duration depends on the shortcomings identified.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "386",
+      "question": "What is Transport Manager CPC?",
+      "answer": "It is the professional qualification used to demonstrate competence to manage road-haulage or passenger-transport operations for operator-licensing purposes.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "387",
+      "question": "Do I need Transport Manager CPC?",
+      "answer": "A standard national or international operator's licence normally needs a professionally competent transport manager. The operator may employ or contract a qualified person.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "388",
+      "question": "Is it suitable for a driver moving into management?",
+      "answer": "Yes. The course is suitable for experienced drivers moving into transport management.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "389",
+      "question": "Do I need previous transport-management experience?",
+      "answer": "GOV.UK does not require a driving licence, a minimum age or previous management experience to take the qualification, but substantial study is required.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "390",
+      "question": "What subjects does the course cover?",
+      "answer": "Topics include civil/commercial/social/fiscal rules, business and finance, operator licensing, drivers' hours, maintenance, vehicle standards, road safety and international paperwork.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "392",
+      "question": "Which examinations must I pass?",
+      "answer": "The approved Transport Manager CPC exam has two parts: multiple-choice questions and a case-study paper. Both must be passed.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "396",
+      "question": "Do you offer classroom learning?",
+      "answer": "Yes. We offer intensive training at our Team Valley facilities.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "404",
+      "question": "Do you offer Transport Manager refresher training?",
+      "answer": "Yes. We offer Transport Manager refresher training.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "406",
+      "question": "What is Operator Licence Awareness Training?",
+      "answer": "OLAT is Operator Licence Awareness Training covering the responsibilities involved in obtaining and maintaining a commercial vehicle operator's licence.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "407",
+      "question": "Who should attend OLAT?",
+      "answer": "It is aimed at operators, transport managers and other transport staff who need operator-licence compliance knowledge or refresher/remedial training.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "408",
+      "question": "Is OLAT suitable for a new operator-licence applicant?",
+      "answer": "Yes. OLAT is suitable for people who want to understand how to obtain and maintain an operator’s licence.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "410",
+      "question": "Do you offer one-day and two-day OLAT?",
+      "answer": "We offer both one-day and two-day OLAT formats.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "413",
+      "question": "Do you provide transport-office awareness training?",
+      "answer": "Yes. We offer transport-office awareness training among our related transport-management courses.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "415",
+      "question": "What training do you provide for businesses?",
+      "answer": "We offer vocational licence training, Driver CPC, ADR, driver assessments, induction/development programmes, medicals, toolbox talks and bespoke transport-compliance training for businesses.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "416",
+      "question": "Can you train our existing drivers?",
+      "answer": "Yes. We offer tailored driver-development and compliance programmes for operators and fleets.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "417",
+      "question": "Can you manage training for a fleet?",
+      "answer": "Yes. We offer tailored driver-development and compliance programmes for operators and fleets.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "418",
+      "question": "Can you create a bespoke training programme?",
+      "answer": "Yes. We offer tailored driver-development and compliance programmes for operators and fleets.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "421",
+      "question": "Can you arrange driver-induction training?",
+      "answer": "Yes. Driver-induction training is listed among our business services.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "422",
+      "question": "Do you provide toolbox talks?",
+      "answer": "Yes. We offer toolbox talks and bespoke courses for businesses.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "423",
+      "question": "Can you assess a driver after an incident?",
+      "answer": "Yes. our driving-assessment service is designed to identify at-risk drivers and support recruitment, refresher or development decisions.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "424",
+      "question": "Can you assess a newly recruited driver?",
+      "answer": "Yes. our driving-assessment service is designed to identify at-risk drivers and support recruitment, refresher or development decisions.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "425",
+      "question": "Can you assess high-risk or potentially unsafe drivers?",
+      "answer": "Yes. our driving-assessment service is designed to identify at-risk drivers and support recruitment, refresher or development decisions.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "426",
+      "question": "Can you recommend refresher training following an assessment?",
+      "answer": "Yes. Assessments can support recommendations for refresher training and improvement.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "429",
+      "question": "Can you provide licence-category upgrades for employees?",
+      "answer": "Yes. We can arrange relevant vocational licence training for eligible employees.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "432",
+      "question": "Can you combine ADR and CPC training?",
+      "answer": "Yes, where the ADR course is eligible. Current GOV.UK guidance allows up to 14 ADR hours to count toward periodic Driver CPC.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "440",
+      "question": "I have failed previously—can you assess what support I need?",
+      "answer": "Yes. We offer assessment sessions that can identify current ability and recommend further training.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "441",
+      "question": "I have dyslexia—what support is available?",
+      "answer": "DVSA can provide eligible candidates with audio, extra time, a reader/recorder or rewording support when requested at booking, with evidence where required. Ask us to help plan the request.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "442",
+      "question": "I have difficulty reading—can I get theory-test support?",
+      "answer": "DVSA can provide eligible candidates with audio, extra time, a reader/recorder or rewording support when requested at booking, with evidence where required. Ask us to help plan the request.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "460",
+      "question": "Do you guarantee employment?",
+      "answer": "No. We do not guarantee employment.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "469",
+      "question": "When will my DQC arrive?",
+      "answer": "The DQC is normally sent automatically. For periodic training, GOV.UK says contact DVSA if it has not arrived within 20 days of when it was due.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "473",
+      "question": "Can I return later to upgrade from Category C to C+E?",
+      "answer": "Yes. Category C holders can later take the standard C+E upgrade route, subject to current entitlement and CPC status.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "474",
+      "question": "Do you offer post-test or workplace-refresher training?",
+      "answer": "We offer driving assessments and business driver-development/refresher services.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "478",
+      "question": "I want a refund—who decides this?",
+      "answer": "Refund decisions are made by our management team under our terms. I can’t approve or promise a refund, but I can help you contact the team.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "479",
+      "question": "My payment failed—what should I do?",
+      "answer": "Contact us immediately. Our terms include rules for missed direct-debit payments and cancellation. Please do not send bank or card details in chat.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "480",
+      "question": "I need to change an instalment or direct debit.",
+      "answer": "Contact us immediately. Our terms include rules for missed direct-debit payments and cancellation. Please do not send bank or card details in chat.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "481",
+      "question": "Can I get a copy of my invoice or receipt?",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your name and booking/course reference. Do not send passwords or payment-card details.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "482",
+      "question": "Can I get a replacement certificate?",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your name and booking/course reference. Do not send passwords or payment-card details.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "483",
+      "question": "Can you resend my e-learning login?",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your name and booking/course reference. Do not send passwords or payment-card details.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "484",
+      "question": "I have forgotten my password.",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your name and booking/course reference. Do not send passwords or payment-card details.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "485",
+      "question": "My e-learning is not working.",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your name and booking/course reference. Do not send passwords or payment-card details.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "486",
+      "question": "I have not received my booking confirmation.",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your name and booking/course reference. Do not send passwords or payment-card details.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "487",
+      "question": "I have not received a callback.",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your name and booking/course reference. Do not send passwords or payment-card details.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "488",
+      "question": "How can I speak to a person?",
+      "answer": "Call us on 0191 500 9450.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "489",
+      "question": "What is your telephone number?",
+      "answer": "Call us on 0191 500 9450.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "490",
+      "question": "What is your email address?",
+      "answer": "Email info@nedrivingschool.co.uk.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "493",
+      "question": "Why do you need my telephone number or email?",
+      "answer": "Call us on 0191 500 9450.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "502",
+      "question": "Is the chatbot giving legal or medical advice?",
+      "answer": "No. I can provide general, sourced information only. Questions about medical fitness, legal exemptions or disputed cases must be referred to the appropriate professional or authority.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "503",
+      "question": "Can the chatbot confirm whether I qualify for a legal exemption?",
+      "answer": "It can explain the published GOV.UK examples, but it should not make a definitive legal determination. GOV.UK itself recommends legal advice if the exemption is uncertain.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "504",
+      "question": "Can I have a link to your terms, privacy policy or cookie policy?",
+      "answer": "Terms: https://www.nedrivingschool.co.uk/terms-and-conditions/ | Privacy: https://www.nedrivingschool.co.uk/privacy-policy/ | Cookies: https://www.nedrivingschool.co.uk/cookie-policy/",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "3",
+      "question": "Do you provide ordinary car driving lessons?",
+      "answer": "We do not provide ordinary car driving lessons.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "8",
+      "question": "Why should I train with NEDS?",
+      "answer": "We provide a start-to-finish service, dedicated off-road facilities, NRI qualified instructors and in-house authorised Module 3a and Module 4 testing.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "10",
+      "question": "Are your instructors qualified?",
+      "answer": "Our LGV instructors hold professional training qualifications, and our centre and instructors are NRI-qualified.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "11",
+      "question": "Are you approved by the DVSA?",
+      "answer": "Yes our site, centre and assessors hold relevant DVSA approvals, including Module 3a and Module 4 approvals.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "13",
+      "question": "Do you use manual or automatic vehicles?",
+      "answer": "Our LGV fleet includes automatic vehicles only. When you pass your test in an automatic veicle you get both manual and automatic entitlement. We’ll confirm which vehicle is allocated to your course.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "15",
+      "question": "Do you guarantee that I will pass?",
+      "answer": "No. We cannot guarantee a pass. Passing depends on reaching the required standard and passing the independent tests.",
+      "keywords": [
+        "general",
+        "enquiries"
+      ]
+    },
+    {
+      "id": "22",
+      "question": "Should I take Category C or go directly to C+E?",
+      "answer": "We offer both Category C and a direct C+E route. The best choice depends on the vehicles you want to drive, budget, experience and employer requirements; ask us for a tailored comparison.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "28",
+      "question": "Which licence do I need for a tipper or box wagon?",
+      "answer": "These are commonly Category C vehicles, but the exact entitlement depends on the vehicle's plated MAM and trailer.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "30",
+      "question": "Which licence do I need to tow a trailer?",
+      "answer": "For a car and trailer, check Category B/BE rules and the vehicle's towing limits. For a medium or large lorry with a trailer, C1+E or C+E may be required.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "32",
+      "question": "Can you check my current licence and recommend the right course?",
+      "answer": "We can recommend a route from your current licence categories and intended vehicle. Please do not share your licence number or a licence image in this chat, give us a call to discuss further.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "33",
+      "question": "What vehicles will I be allowed to drive after passing?",
+      "answer": "That depends on the category gained and any licence codes. Check the final photocard/online driving record against GOV.UK category definitions.",
+      "keywords": [
+        "choosing",
+        "the",
+        "correct",
+        "licence",
+        "or",
+        "course"
+      ]
+    },
+    {
+      "id": "40",
+      "question": "Is there a minimum age for HGV training?",
+      "answer": "GOV.UK says HGV and bus drivers normally need to be over 18, although limited exceptions exist.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "43",
+      "question": "Can I train if I already have provisional entitlement?",
+      "answer": "Yes. If the correct provisional entitlement is already valid, we can tailor the remaining theory, CPC and practical elements.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "45",
+      "question": "I passed my car test before 1997—do I already have C1?",
+      "answer": "Drivers who passed before 1 January 1997 often have acquired C1 entitlement, but you must check your current driving record and any restriction codes.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "50",
+      "question": "I already passed my theory tests elsewhere—can I book practical training only?",
+      "answer": "A valid matching theory pass can normally be used regardless of training provider. Both theory parts must be passed within two years and the practical tests completed before the certificate expires; we’ll verify the details before booking.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "51",
+      "question": "I already have a medical and provisional entitlement—can I skip those parts?",
+      "answer": "Usually, yes. We can quote for the remaining theory, CPC and practical elements rather than repeating valid steps you have already completed.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "58",
+      "question": "Do I need C1 to drive an ambulance?",
+      "answer": "Many ambulances fall within C1, but the required category depends on the individual vehicle's plated MAM. Check the vehicle/employer specification.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "59",
+      "question": "Do trainee paramedics need Driver CPC?",
+      "answer": "Ambulance-service C1 candidates generally do not need Initial Driver CPC. The exact exemption depends on the role and vehicle use, so your employer should confirm it.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "60",
+      "question": "Do you offer C1 training for ambulance-service applicants?",
+      "answer": "Yes - we often provide category C1 training for trainee paramedics and local ambulance service candidates.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "61",
+      "question": "Do I need C1 for a horsebox?",
+      "answer": "A horsebox over 3.5 tonnes and up to 7.5 tonnes normally requires C1, subject to the vehicle's MAM and trailer. We offer horsebox-focused C1 training.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "62",
+      "question": "Do you provide horsebox-specific training?",
+      "answer": "A horsebox over 3.5 tonnes and up to 7.5 tonnes normally requires C1, subject to the vehicle's MAM and trailer. We offer horsebox-focused C1 training.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "65",
+      "question": "How long does C1 training take?",
+      "answer": "C1 practical training is delivered as a concentrated course, usually 3-4 days. The full process for the full medical, provisional and theory process, and practical will usually be spread over 6-8 weeks.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "66",
+      "question": "How many C1 driving lessons are included?",
+      "answer": "Our detailed C1 package includes three four-hour practical lessons, a one-hour pre-test lesson and test-vehicle hire. Please confirm the current package with us before booking.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "67",
+      "question": "Can I book a three-day C1 course?",
+      "answer": "We currently offer a three-day C1. Confirm eligibility, inclusions and current dates with the booking team.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "68",
+      "question": "Can I take practical-only C1 training?",
+      "answer": "Yes - our C1 product has practical-only and combined variants. Ask for a tailored quote based on steps already completed.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "69",
+      "question": "Does the C1 course include the medical and theory tests?",
+      "answer": "It depends on the selected C1 package. We offer options covering medical, study/theory and practical elements; confirm the exact inclusion list in writing.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "72",
+      "question": "What happens if I fail the C1 test?",
+      "answer": "You would need to arrange a retest and possibly further tuition. Dates, test fees and vehicle-hire charges must be confirmed with us.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "77",
+      "question": "Can I drive a refuse vehicle with Category C?",
+      "answer": "Often Category C, but the exact entitlement depends on the vehicle's plated MAM, configuration and any statutory exemption. Check the specific vehicle and employer requirement.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "78",
+      "question": "Can I drive a fire engine with Category C?",
+      "answer": "Often Category C, but the exact entitlement depends on the vehicle's plated MAM, configuration and any statutory exemption. Check the specific vehicle and employer requirement.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "82",
+      "question": "Does the course include the medical?",
+      "answer": "Yes, normally our packages include medicals. We offer various bundled Category C routes, but inclusions vary by package. Please request a written, itemised quotation confirming what is included.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "83",
+      "question": "Does the course include theory and hazard-perception tests?",
+      "answer": "We offer bundled Category C routes, but inclusions vary by package. Please request a written, itemised quotation confirming what is included.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "84",
+      "question": "Does the course include Initial Driver CPC?",
+      "answer": "We offer bundled Category C routes, but inclusions vary by package. Please request a written, itemised quotation confirming what is included.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "85",
+      "question": "Can I book Category C practical training only?",
+      "answer": "A tailored practical-only route may be possible if the required medical, provisional and theory steps are already valid. We’ll confirm the quote and dates.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "86",
+      "question": "Should I take Category C or spend more and go straight to C+E?",
+      "answer": "We offer both routes. Category C is the rigid-lorry route; C+E Direct provides the articulated entitlement. The best option depends on target work, experience and budget.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "87",
+      "question": "What happens if I fail my Category C test?",
+      "answer": "A failed test requires a retest and may require further tuition. We’ll confirm retest availability and any additional fees.",
+      "keywords": [
+        "category",
+        "c"
+      ]
+    },
+    {
+      "id": "94",
+      "question": "Do I need to repeat my theory tests for C+E?",
+      "answer": "For the standard upgrade from a valid Category C licence, The vocational theory tests normally do not need to be repeated.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "95",
+      "question": "Do I need to repeat Driver CPC for C+E?",
+      "answer": "Not automatically. It depends on whether your DQC is current and whether you need National or International Driver CPC for your work.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "96",
+      "question": "How long does standard C+E training take?",
+      "answer": "Standard C+E practical training takes about one week. Bookings are often several weeks after the deposit is paid, subject to availability.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "97",
+      "question": "How long does C+E Direct take?",
+      "answer": "C+E Direct is a course that includes seven days of practical training. However, the full process commonly takes around 6–10 weeks because of DVLA and theory-test timings.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "101",
+      "question": "Is the Module 3a test carried out at your centre?",
+      "answer": "We are approved to conduct Module 3a off-road tests at our dedicated facility.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "103",
+      "question": "Can I book C+E practical training only?",
+      "answer": "Yes, for eligible Category C holders through the standard C+E route. We’ll confirm the exact package.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "104",
+      "question": "Can I move from C1 directly to C+E?",
+      "answer": "A C1 holder who also has a full Category B licence may be eligible for the C+E Direct route. We’ll check the current licence record first.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "105",
+      "question": "Can I upgrade from Category C to C+E after several years away from driving?",
+      "answer": "Usually possible if the Category C entitlement remains valid, but an assessment/refresher may be sensible before the C+E course.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "107",
+      "question": "What happens if I fail either part of the C+E practical test?",
+      "answer": "You will need to retake the failed part; additional tuition, test fees and vehicle hire may apply. We’ll confirm the retest package.",
+      "keywords": [
+        "category",
+        "c+e",
+        "and",
+        "c+e",
+        "direct"
+      ]
+    },
+    {
+      "id": "111",
+      "question": "Can I drive a minibus with Category D?",
+      "answer": "A minibus may fall under D1 or D depending on passenger capacity and use. Check the vehicle and any licence restriction codes.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "117",
+      "question": "Does the Category D package include theory and practical tests?",
+      "answer": "We offer Category D training. We’ll confirm the current package inclusions and any practical-only option in an itemised quotation.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "118",
+      "question": "Do you provide Category D practical-only training?",
+      "answer": "We offer Category D training. We’ll confirm the current package inclusions and any practical-only option in an itemised quotation.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "120",
+      "question": "If I already have C+E, will passing Category D give me D+E?",
+      "answer": "If you already hold C+E and gain Category D, you may also receive D+E entitlement. Please confirm the final entitlement with DVLA.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "122",
+      "question": "What happens if I fail the Category D test?",
+      "answer": "If you fail the Category D test, please do not worry; you will be allowed to retake the test. This may require extra tuition. Dates and additional charges must be confirmed with us.",
+      "keywords": [
+        "category",
+        "d",
+        "buses",
+        "and",
+        "coaches"
+      ]
+    },
+    {
+      "id": "126",
+      "question": "Can your trailer course satisfy my employer or insurer?",
+      "answer": "We provide a competence certificate, but your employer or insurer must confirm whether it meets their requirements.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "129",
+      "question": "Will I learn how to couple and uncouple a trailer?",
+      "answer": "The course covers coupling/uncoupling, manoeuvring, road positioning and safe towing. Confirm whether load-security content is required for your booking.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "130",
+      "question": "Does the course cover reversing and manoeuvring?",
+      "answer": "The course covers coupling/uncoupling, manoeuvring, road positioning and safe towing. Confirm whether load-security content is required for your booking.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "131",
+      "question": "Does the course include safe loading?",
+      "answer": "The course covers coupling/uncoupling, manoeuvring, road positioning and safe towing. Confirm whether load-security content is required for your booking.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "134",
+      "question": "Can I use my own car and trailer?",
+      "answer": "You may use your own suitable car and trailer by arrangement because there is no current B+E test.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "135",
+      "question": "Can I use your vehicle and trailer?",
+      "answer": "We can provide a training vehicle/trailer; confirm availability when booking.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "136",
+      "question": "Does my vehicle need to meet any requirements?",
+      "answer": "Any combination must be roadworthy, insured, within the car's towing limit and comply with legal weight, coupling, braking, lighting and number-plate requirements. We must approve own equipment before training.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "137",
+      "question": "Do I need an assessment before booking?",
+      "answer": "Some B+E pricing may be assessment-based. We’ll confirm whether an assessment is currently required.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "139",
+      "question": "Can you train several employees in trailer towing?",
+      "answer": "We offer business and group training; ask for a tailored trailer-training plan and quote.",
+      "keywords": [
+        "b+e",
+        "and",
+        "trailer",
+        "training"
+      ]
+    },
+    {
+      "id": "151",
+      "question": "Which modules do I actually need?",
+      "answer": "Everyone needs the relevant licence-acquisition theory and practical tests. Modules 2 and 4 are normally added when full Driver CPC is required for professional driving. Exemptions must be assessed from the actual use.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "153",
+      "question": "How long does the complete process normally take?",
+      "answer": "We recommend allowing roughly 8–10 weeks overall. GOV.UK says the provisional licence should usually arrive within 3 weeks, but medical checks and test availability can extend the timetable.",
+      "keywords": [
+        "the",
+        "hgv",
+        "licence",
+        "process"
+      ]
+    },
+    {
+      "id": "165",
+      "question": "Do I need my glasses or prescription?",
+      "answer": "Bring any glasses or contact-lens prescription used for driving and follow the appointment instructions, because eyesight forms part of the D4 assessment.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "176",
+      "question": "Are Saturday appointments available?",
+      "answer": "Saturday appointments may be available. Please ask us for the next available date.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "179",
+      "question": "Can I discuss a medical condition privately with someone?",
+      "answer": "Yes, but please use a private conversation with the medical provider or our team. Do not enter detailed medical information in this chat.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "181",
+      "question": "Do I need another medical to renew my vocational licence?",
+      "answer": "A further medical is normally required at vocational-licence renewal from age 45, then every 5 years to 65 and annually from 65. Individual cases should be checked with DVLA.",
+      "keywords": [
+        "driver",
+        "medicals",
+        "and",
+        "paperwork"
+      ]
+    },
+    {
+      "id": "189",
+      "question": "Can NEDS book the theory test for me?",
+      "answer": "We manage theory-test arrangements as part of relevant packages.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "190",
+      "question": "Are theory-test fees included in my package?",
+      "answer": "This depends on the package. Ask for an itemised quotation showing every theory and CPC test fee.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "196",
+      "question": "Can someone help if I am struggling with the theory?",
+      "answer": "Ask us for study support and an explanation of weaker subject areas; the advertised e-learning adapts practice to identified weaknesses.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "199",
+      "question": "Can I take the theory test in another language?",
+      "answer": "GB theory tests are provided in English or Welsh. BSL and approved accessibility support are available, but foreign-language voiceovers/interpreters are not generally offered.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "201",
+      "question": "Can I transfer a valid theory pass from another training provider?",
+      "answer": "A valid pass is tied to you, not the training provider. We’ll verify that it matches the required category and remains within its two-year validity window.",
+      "keywords": [
+        "theory",
+        "hazard",
+        "perception",
+        "and",
+        "study",
+        "support"
+      ]
+    },
+    {
+      "id": "202",
+      "question": "How many driving lessons will I receive?",
+      "answer": "It depends on the category and package. C1 and standard C+E typically include four four-hour lessons plus a pre-test hour; C+E Direct typically includes six four-hour lessons plus a pre-test hour.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "205",
+      "question": "Is training completed on consecutive days?",
+      "answer": "Usually. Practical training is typically arranged across consecutive days, but we’ll confirm the exact schedule when you book.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "207",
+      "question": "Is the test taken at the end of the course?",
+      "answer": "We normally plan the practical test for the end of the training block, subject to test availability and your readiness.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "208",
+      "question": "Does the course include test-vehicle hire?",
+      "answer": "our course information include use of the training vehicle for the practical test in the relevant package. Confirm the itemised quote.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "209",
+      "question": "Are test fees included?",
+      "answer": "Package-dependent. The written quotation should identify Module 3a, Module 3b and any retest fees separately or as included.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "214",
+      "question": "Will I drive on actual test routes?",
+      "answer": "Road training takes place around the relevant local test routes, although no route can be guaranteed for the test itself.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "218",
+      "question": "Are your vehicles manual or automatic?",
+      "answer": "We have both manual and automatic LGV vehicles. Confirm which vehicle/category will be used.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "223",
+      "question": "What happens if the test is cancelled by DVSA?",
+      "answer": "DVSA may allow claims for certain out-of-pocket expenses after a short-notice cancellation. We’ll confirm how your course, vehicle hire and replacement test will be rearranged.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "225",
+      "question": "What happens if I fail Module 3a?",
+      "answer": "The failed part must be retaken. Extra tuition, test fees and vehicle hire may apply; we’ll quote for the retest and confirm the next available date.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "226",
+      "question": "What happens if I fail Module 3b?",
+      "answer": "The failed part must be retaken. Extra tuition, test fees and vehicle hire may apply; we’ll quote for the retest and confirm the next available date.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "227",
+      "question": "How quickly can you arrange a retest?",
+      "answer": "The failed part must be retaken. Extra tuition, test fees and vehicle hire may apply; we’ll quote for the retest and confirm the next available date.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "228",
+      "question": "Do I have to pay again for a retest and vehicle hire?",
+      "answer": "The failed part must be retaken. Extra tuition, test fees and vehicle hire may apply; we’ll quote for the retest and confirm the next available date.",
+      "keywords": [
+        "practical",
+        "training",
+        "and",
+        "tests"
+      ]
+    },
+    {
+      "id": "230",
+      "question": "Do I need Driver CPC?",
+      "answer": "Usually yes for professional HGV, bus or coach driving, but exemptions exist. The answer depends on the vehicle use and job; uncertain cases should use GOV.UK guidance or legal advice.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "236",
+      "question": "Can I book Module 4 only?",
+      "answer": "our Initial CPC product copy has advertised a Module 4-only option. Confirm the current price, prerequisites and availability.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "238",
+      "question": "Is Initial CPC included in my HGV package?",
+      "answer": "Package-dependent. Initial CPC is normally included only when required and selected; obtain a written inclusion list.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "240",
+      "question": "Do paramedics need Driver CPC?",
+      "answer": "Ambulance-service C1 candidates generally do not need Initial CPC. Your employer should confirm the exemption for your role and vehicle use.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "244",
+      "question": "Can I complete all 35 hours with NEDS?",
+      "answer": "We offer periodic Driver CPC courses and can help plan the full 35 hours. We’ll confirm that your selected courses provide the National or International CPC needed for your work.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "245",
+      "question": "Can I complete the 35 hours in one week?",
+      "answer": "It can be scheduled as five seven-hour days where suitable approved courses are available. We’ll confirm the dates and course type.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "246",
+      "question": "Can I book a single seven-hour CPC day?",
+      "answer": "We offer individual Driver CPC training days. Confirm the topic, approval type and next date.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "248",
+      "question": "Can my employer choose the CPC topics?",
+      "answer": "Yes. We can tailor business course content to operational needs, provided approved Driver CPC courses are used.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "249",
+      "question": "Can ADR training count towards my CPC hours?",
+      "answer": "Yes. Up to 14 hours of qualifying ADR training can count towards the 35 Driver CPC hours. We’ll confirm whether your chosen ADR course qualifies.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "251",
+      "question": "Do you provide CPC training nationwide?",
+      "answer": "Yes. We offer local delivery in Gateshead and nationwide delivery for organisations, subject to requirements.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "264",
+      "question": "What does “from” mean in the advertised price?",
+      "answer": "It indicates a starting price. The final total depends on the selected medical, theory, CPC, practical and test elements. It is not a guaranteed all-inclusive total.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "267",
+      "question": "What does my deposit cover?",
+      "answer": "It is category-specific. For example, the C1 and C+E Direct deposit pages describe medical, study/theory and scheduling elements, while standard C+E mainly reserves practical training/tests. Use the selected product's written terms.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "269",
+      "question": "Are the medical and application forms included?",
+      "answer": "Sometimes. Starting-from-scratch packages may include the medical and support with forms; practical-only and standard C+E packages may not. Confirm the written inclusion list.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "270",
+      "question": "Are study materials included?",
+      "answer": "Relevant starting packages include e-learning or study materials, but we’ll confirm this against your selected product.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "271",
+      "question": "Are theory and practical test fees included?",
+      "answer": "Package-dependent. Obtain an itemised quote that separately identifies theory, CPC, Module 3a, Module 3b and any retest fees.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "272",
+      "question": "Is test-vehicle hire included?",
+      "answer": "our practical course descriptions include test-vehicle hire in the stated practical package. Confirm this on the current quotation.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "273",
+      "question": "Is Driver CPC included?",
+      "answer": "Only where required and selected. Private-use or exempt candidates may not need it, and some packages may exclude it. We’ll confirm what your chosen package includes.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "275",
+      "question": "Can you provide an itemised quotation?",
+      "answer": "Yes. Ask us for a written itemised quotation showing price, VAT basis, deposit, inclusions, exclusions and payment dates.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "276",
+      "question": "Can I remove parts I have already completed?",
+      "answer": "Usually. A tailored package can exclude valid steps you have already completed, but we’ll verify the evidence and quote for the remaining elements.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "278",
+      "question": "Can I pay in instalments?",
+      "answer": "Staged payments or direct-debit plans may be available. Our terms describe a minimum £400 deposit and a 3–6 month plan, with the balance and payment obligations agreed before service delivery.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "279",
+      "question": "How much must I pay upfront?",
+      "answer": "Published vehicle-course deposits currently include C1 £300, Category C £400, standard C+E £400, C+E Direct £600 and Category D £400. Confirm the selected product because full prices are inconsistent.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "280",
+      "question": "When is the remaining balance due?",
+      "answer": "The balance is payable before the relevant practical vehicle training and tests. The exact deadline will be shown on your booking documents.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "281",
+      "question": "Do you offer finance?",
+      "answer": "We offer staged-payment and direct-debit arrangements. We do not currently advertise a separate third-party credit product, so please ask which payment plan is available.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "282",
+      "question": "Can my employer pay?",
+      "answer": "Yes, subject to us accepting and recording the company booking/payment details.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "283",
+      "question": "Can you invoice a company?",
+      "answer": "Yes. We can arrange an invoice for a company booking; credit and payment terms must be agreed before booking.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "284",
+      "question": "Do you accept card payments?",
+      "answer": "Yes. You can pay for selected products or deposits by card through our online shop and payment provider.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "288",
+      "question": "Can you price a package for several employees?",
+      "answer": "Yes. Ask us for a tailored group quotation with dates, delivery location, VAT, travel and certification fees.",
+      "keywords": [
+        "prices",
+        "deposits",
+        "and",
+        "payment"
+      ]
+    },
+    {
+      "id": "292",
+      "question": "Can I reserve a place without paying?",
+      "answer": "A deposit is required to reserve a course place. Ask us if a temporary quotation hold is possible.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "295",
+      "question": "What information do you need to book me in?",
+      "answer": "We need your contact details, course or category, broad current licence status and preferred timeframe. Please use our secure process for licence numbers, identity images or medical details rather than sending them in this chat.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "301",
+      "question": "Do you provide weekday training?",
+      "answer": "Yes. our course information use weekday practical blocks. Confirm the exact dates for the selected course.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "304",
+      "question": "Are Saturday medical appointments available?",
+      "answer": "Saturday medical appointments may be available, subject to availability.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "306",
+      "question": "Can I change my course dates?",
+      "answer": "Please ask us before the course. Amendments may incur an administration charge of up to £50 plus VAT, and any cancellation calculation will use the original start date.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "307",
+      "question": "Can I transfer to a different licence category?",
+      "answer": "Please ask us before the course. Amendments may incur an administration charge of up to £50 plus VAT, and any cancellation calculation will use the original start date.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "308",
+      "question": "Can I transfer my booking to another person?",
+      "answer": "For classroom courses, you may be able to nominate a substitute before the course begins. Vehicle-training transfers require our approval.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "309",
+      "question": "What happens if I am ill on the training day?",
+      "answer": "Contact us immediately. For genuinely unavoidable non-attendance after a course starts, we may sometimes offer alternative dates, but the full fees remain payable.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "311",
+      "question": "Can I postpone my training?",
+      "answer": "Please ask us before the course. Amendments may incur an administration charge of up to £50 plus VAT, and any cancellation calculation will use the original start date.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "314",
+      "question": "Will I receive a refund if DVSA cancels the test?",
+      "answer": "DVSA may allow a claim for certain out-of-pocket expenses after a short-notice cancellation. We’ll confirm the effect on your course, replacement test and any vehicle-hire charge.",
+      "keywords": [
+        "booking",
+        "availability",
+        "and",
+        "changes"
+      ]
+    },
+    {
+      "id": "324",
+      "question": "Do you provide training in Newcastle?",
+      "answer": "We provide Gateshead-based training for learners from Newcastle, Sunderland, Durham and the wider North East. We’ll confirm the venue when you book.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "325",
+      "question": "Do you provide training in Sunderland?",
+      "answer": "We provide Gateshead-based training for learners from Newcastle, Sunderland, Durham and the wider North East. We’ll confirm the venue when you book.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "326",
+      "question": "Do you provide training in Durham?",
+      "answer": "We provide Gateshead-based training for learners from Newcastle, Sunderland, Durham and the wider North East. We’ll confirm the venue when you book.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "327",
+      "question": "Do you train customers from outside the North East?",
+      "answer": "Yes, customers may travel to the centres. Some business training can also be delivered nationwide.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "328",
+      "question": "Can you deliver training at our company’s premises?",
+      "answer": "We offer client-site and nationwide delivery for suitable business courses. Vehicle/facility requirements and travel costs must be agreed.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "329",
+      "question": "Is nationwide training available?",
+      "answer": "We offer client-site and nationwide delivery for suitable business courses. Vehicle/facility requirements and travel costs must be agreed.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "331",
+      "question": "How do I reach you by public transport?",
+      "answer": "The 93 and 94 bus services from Gateshead Interchange run near our Team Valley centre. Please check current timetables before travelling.",
+      "keywords": [
+        "locations",
+        "and",
+        "practical",
+        "arrangements"
+      ]
+    },
+    {
+      "id": "340",
+      "question": "Do I need an ADR certificate?",
+      "answer": "Drivers carrying dangerous goods above relevant thresholds normally need an ADR card covering the goods carried. Employer/DGSA advice should confirm the exact requirement.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "341",
+      "question": "Which ADR course should I take?",
+      "answer": "It depends on whether you carry packages or tanks and which dangerous-goods classes are involved. Give us the load type/classes for a tailored route.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "342",
+      "question": "What does the Core module cover?",
+      "answer": "Core is the mandatory general foundation covering common ADR safety duties before packages/tanks and class-specific modules.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "347",
+      "question": "Can I book an individual ADR module?",
+      "answer": "Optional class modules can be added, but Core and delivery-mode prerequisites apply. We’ll confirm the valid combination.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "352",
+      "question": "What happens if I fail an ADR exam?",
+      "answer": "The failed module test must be retaken under the current ADR rules. Ask us for retest timing and fees.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "354",
+      "question": "Do you provide ADR refresher training?",
+      "answer": "ADR refresher training and exams are the route to stay qualified. Confirm our next refresher course and modules.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "358",
+      "question": "Can you provide ADR training for our company?",
+      "answer": "We offer business training; ask for a group ADR proposal covering modules, dates and location.",
+      "keywords": [
+        "adr",
+        "dangerous",
+        "goods",
+        "training"
+      ]
+    },
+    {
+      "id": "371",
+      "question": "My forklift certificate has expired—do I need a refresher?",
+      "answer": "UK forklift certificates do not have a universal statutory expiry date. The employer should assess competence and arrange refresher/retest where needed.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "376",
+      "question": "What certificate will I receive?",
+      "answer": "Successful operators receive training evidence or certification identifying the truck type and training completed. We’ll confirm the exact certificate or accreditation for your course.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "379",
+      "question": "Can you train me on more than one truck type?",
+      "answer": "Training should be appropriate to each truck type. We can quote for multiple categories, but separate conversion/additional training may be required.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "380",
+      "question": "Can training take place at our workplace?",
+      "answer": "Yes. We offer on-site and off-site forklift training, subject to suitable facilities and equipment.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "382",
+      "question": "Can you train several employees together?",
+      "answer": "Yes. Ask us for a group plan based on truck types, candidate experience and site suitability.",
+      "keywords": [
+        "forklift",
+        "training"
+      ]
+    },
+    {
+      "id": "391",
+      "question": "How difficult is the qualification?",
+      "answer": "It is an intensive qualification that requires study. Difficulty varies by person, so please review the syllabus and sample material before enrolling.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "403",
+      "question": "What happens if I fail an exam?",
+      "answer": "The failed exam component must be retaken under the awarding body’s rules. We’ll confirm resit preparation, dates and fees.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "405",
+      "question": "Can I visit the centre and look at the materials first?",
+      "answer": "Yes. You’re welcome to contact us or arrange a visit to discuss the course and look at the study material.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "409",
+      "question": "Can OLAT help after a DVSA investigation or public inquiry?",
+      "answer": "OLAT may be used for refresher or remedial needs and to meet Traffic Commissioner requirements. It is training, not legal representation or a guaranteed outcome.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "411",
+      "question": "Is OLAT available online?",
+      "answer": "We offer online OLAT as well as classroom/nationwide delivery. Confirm current dates and platform.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "412",
+      "question": "Can OLAT be delivered at our premises?",
+      "answer": "We offer nationwide delivery; client-site suitability and travel costs must be agreed.",
+      "keywords": [
+        "transport",
+        "manager",
+        "cpc",
+        "and",
+        "olat"
+      ]
+    },
+    {
+      "id": "419",
+      "question": "Can you deliver training at our depot?",
+      "answer": "Yes for suitable courses. We offer client-site and nationwide delivery, subject to site suitability, accreditation and travel arrangements.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "420",
+      "question": "Do you provide nationwide business training?",
+      "answer": "Yes for suitable courses. We offer client-site and nationwide delivery, subject to site suitability, accreditation and travel arrangements.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "430",
+      "question": "Can you arrange medicals for several drivers?",
+      "answer": "Yes. We offer driver medicals and business programmes; ask for a group schedule.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "431",
+      "question": "Can you monitor employees’ Driver CPC requirements?",
+      "answer": "Employers can view a driver's CPC record if the driver creates and shares a temporary password through the GOV.UK service. We can support training planning but should not access records without authority.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "435",
+      "question": "Can one person coordinate bookings for our company?",
+      "answer": "Please ask us to work with a nominated company contact, subject to appropriate authority and data protection.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "436",
+      "question": "Can you provide certificates and attendance records to our business?",
+      "answer": "We can provide relevant certificates and attendance evidence. We’ll confirm which records can be released to the employer and obtain any required consent.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "438",
+      "question": "Can you provide training required by an insurer or auditor?",
+      "answer": "We can tailor competence training and assessments, but the insurer/auditor must confirm the exact evidence it will accept.",
+      "keywords": [
+        "business",
+        "customers",
+        "and",
+        "driver",
+        "assessments"
+      ]
+    },
+    {
+      "id": "444",
+      "question": "Can you make reasonable adjustments?",
+      "answer": "DVSA provides reasonable-adjustment routes for tests. We’ll discuss any training-centre or vehicle adjustments with you before booking.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "446",
+      "question": "Can I bring an interpreter?",
+      "answer": "Foreign-language interpreters are not generally permitted for GB practical tests. BSL/interpreter support may be available for deaf candidates; request it through DVSA and confirm training arrangements with us.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "447",
+      "question": "Can I take the theory test with language support?",
+      "answer": "The GB theory test is in English or Welsh, with BSL and approved accessibility support. Foreign-language voiceovers are not generally available.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "455",
+      "question": "Can I train if I have limited experience driving manual vehicles?",
+      "answer": "Our LGV fleet includes manual and automatic vehicles. Ask us which option is suitable and how it affects your entitlement.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "456",
+      "question": "Can you help an older driver return to HGV driving?",
+      "answer": "Yes. our assessment and driver-development services can be used to identify suitable refresher training, subject to the licence and medical remaining valid.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "457",
+      "question": "Can you provide refresher training after a long break?",
+      "answer": "Yes. our assessment and driver-development services can be used to identify suitable refresher training, subject to the licence and medical remaining valid.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "459",
+      "question": "Can you help me find an HGV job after I pass?",
+      "answer": "We are not an employment agency, but it has relationships with local employers and may pass suitable candidate details on when employers are recruiting.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "461",
+      "question": "Do you work with local employers?",
+      "answer": "Yes. We have relationships with local employers, although vacancies are not guaranteed.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "462",
+      "question": "Can you pass my details to recruiting companies?",
+      "answer": "We may pass candidate details to recruiting clients, but it should do so only with the candidate's permission.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "463",
+      "question": "Do I need to give permission before you share my details?",
+      "answer": "Yes. Personal details should not be shared for recruitment without an appropriate lawful basis and clear permission where required.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "465",
+      "question": "Should I take ADR to improve my employment prospects?",
+      "answer": "ADR can open roles carrying dangerous goods, but it does not guarantee work and should match the jobs you intend to pursue.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "467",
+      "question": "Can I start work immediately after passing?",
+      "answer": "You need the correct driving entitlement and, for professional work, the required CPC/DQC position. Employers may also require induction, insurance approval and experience.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "471",
+      "question": "Do you provide a pass certificate?",
+      "answer": "Official test results/pass evidence are provided through the DVSA process. Ask us which course-completion certificates it also supplies.",
+      "keywords": [
+        "employment",
+        "and",
+        "after",
+        "passing"
+      ]
+    },
+    {
+      "id": "475",
+      "question": "I want to make a complaint—who should I contact?",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your booking details and a factual account. A person will review and handle your complaint.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "476",
+      "question": "I am unhappy with my instructor—what can I do?",
+      "answer": "Contact us on 0191 500 9450 or info@nedrivingschool.co.uk with your booking details and a factual account. A person will review your concerns about the instructor.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "495",
+      "question": "Will you send me marketing messages?",
+      "answer": "Only if you separately opt in. Marketing consent on our contact form is optional.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "496",
+      "question": "Can I opt out of marketing?",
+      "answer": "Yes. Use the unsubscribe option in marketing communications or contact us to withdraw marketing consent.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "498",
+      "question": "Do you store card details?",
+      "answer": "Payment-card details are handled by our payment provider and are not stored by us. Never send card details in this chat.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "499",
+      "question": "How can I request a copy of my personal data?",
+      "answer": "Contact us using the privacy-policy contact route to exercise data-access, correction or deletion rights. Some records may have to be retained for legal or certification reasons.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "500",
+      "question": "How can I correct or delete my information?",
+      "answer": "Contact us using the privacy-policy contact route to exercise data-access, correction or deletion rights. Some records may have to be retained for legal or certification reasons.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "71",
+      "question": "Can I use my own vehicle for C1 training?",
+      "answer": "Possibly - It will have to meet the required standards set by the DVSA and you will have to have the correct insurance policy to allow learner drivers to undertake a driving test. Our team can help advise you.",
+      "keywords": [
+        "category",
+        "c1"
+      ]
+    },
+    {
+      "id": "41",
+      "question": "Can I train using a non-UK driving licence?",
+      "answer": "No, you must have a valid UK driving licence and complete a medical to gain provisional before completing any training.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "42",
+      "question": "Can I train if I have exchanged a foreign licence?",
+      "answer": "Yes, if you have completed an application to exchange your licence to a UK licence, you will be able to complete training.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "46",
+      "question": "My vocational entitlement has expired—what do I need to do?",
+      "answer": "You will need to complete a driver medical and submit the application forms to regain your licence.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "47",
+      "question": "Can I train if I have points on my licence?",
+      "answer": "Having 3 to 6 points on your licence is usually fine to complete a provisional application and complete training however providers or employers may review higher points on a case by case basis. The points will carry over to your full licence when passing but they rarely stop you from learning.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "48",
+      "question": "Can I train after a driving ban?",
+      "answer": "You can complete training to get your licence back as long as you have legally reapplied for a provisional licence and your disqualification period has ended.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "52",
+      "question": "I already hold a DQC—do I still need Initial CPC?",
+      "answer": "No - Initial CPC is only if you have not completed Driver CPC before, if you already have a Driver Qualification Card and you are needing to renew, you will need to complete 35 hours in the classroom.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "53",
+      "question": "I have previously driven HGVs abroad—what route do I need?",
+      "answer": "I would recommend applying for a UK driving licence and then completing a driving assessment to access how you drive the larger vehicles, this might minimize your package.",
+      "keywords": [
+        "eligibility",
+        "and",
+        "existing",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "241",
+      "question": "I previously had a DQC—do I need Initial or periodic CPC?",
+      "answer": "Periodic CPC",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "242",
+      "question": "My DQC has expired—what should I do?",
+      "answer": "You will need to complete 35 hours Driver CPC training to renew your Driver Qualification Card.",
+      "keywords": [
+        "initial",
+        "and",
+        "periodic",
+        "driver",
+        "cpc"
+      ]
+    },
+    {
+      "id": "450",
+      "question": "I have a medical condition—can I still obtain an HGV licence?",
+      "answer": "You will need to complete a driver medical, and as long as you meet the requirements and your medical condition does not affect your driving, you will still be able to obtain the licence.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "451",
+      "question": "I take medication—will it affect my medical?",
+      "answer": "Taking medication does not automatically fail your driver medcical but you must declare all regular prescriptions and relevant over the counter medicines to the examining doctor. As long as the medication you take does not affect your driving for example, blurred vision, dizziness, drowsiness or slow reaction time then you should pass.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "452",
+      "question": "Can you advise me privately about medical eligibility?",
+      "answer": "You must pass a DVLA D4 medical assessment before you can obtain a heavy goods licence.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "453",
+      "question": "I am pregnant—can I undertake practical training?",
+      "answer": "Yes, you can legally complete HGV training while pregnant provided you have approval from your doctor or midwife and remain comfortable and fit to drive.",
+      "keywords": [
+        "accessibility",
+        "and",
+        "individual",
+        "circumstances"
+      ]
+    },
+    {
+      "id": "477",
+      "question": "I disagree with a test result—can NEDS appeal it?",
+      "answer": "Yes, there is an appeals procedure, there will be instructions on how to do this given to you by your examiner along with your result.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "492",
+      "question": "What information will the chatbot collect?",
+      "answer": "A safe initial enquiry should collect only a name, preferred contact route, phone/email, course of interest, broad licence status and preferred timeframe. It should not collect card, licence-number, identity-document or medical details in ordinary chat.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "494",
+      "question": "How will my enquiry information be used?",
+      "answer": "This is internal information, this will not be shared or leaked due to GDPR.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "497",
+      "question": "Who will my information be shared with?",
+      "answer": "Only with staff within the business who will be needing access to your information to complete licence checking or to check relevant documentation before testing.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "501",
+      "question": "Can I submit my licence or medical information through chat?",
+      "answer": "No. Please do not send a driving-licence number, licence image or medical information in this chat. Use the secure, purpose-specific process we provide.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
+    },
+    {
+      "id": "505",
+      "question": "How can I contact you?",
+      "answer": "Please either send us an email or ring our team with the information provided on the NEDS website; you will find our contact details at the bottom of the chatbot and on the top left of our website.",
+      "keywords": [
+        "problems",
+        "policies",
+        "privacy",
+        "and",
+        "human",
+        "contact"
+      ]
     }
   ]
 }

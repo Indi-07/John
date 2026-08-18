@@ -1,10 +1,11 @@
 {
-  "_note": "PLACEHOLDER SEED DATA — summaries are illustrative, NOT approved wording. The SERVICE LIST itself is confirmed by John (2026-08-18): C1, C, C+E, B+E, Driver CPC, ADR, Forklift, Driver Medicals. NEDS does NOT provide learner car lessons. Replace summaries/prices from the approved catalogue before any pilot (Phase 0).",
+  "_note": "PLACEHOLDER SEED DATA — definitions/summaries are illustrative, NOT approved wording. The SERVICE LIST itself is confirmed by John (2026-08-18): C1, C, C+E, B+E, Driver CPC, ADR, Forklift, Driver Medicals. NEDS does NOT provide learner car lessons. Replace definitions/summaries/prices from the approved catalogue before any pilot (Phase 0).",
   "services": [
     {
       "id": "hgv-c1",
       "name": "HGV Category C1 training",
       "category": "hgv",
+      "definition": "Category C1 is the licence for driving medium-sized rigid vehicles between 3.5 and 7.5 tonnes.",
       "summary": "Practical training toward the Category C1 licence (medium-sized vehicles, 3.5t to 7.5t).",
       "keywords": ["c1", "7.5t", "7.5 tonne", "medium", "category c1"]
     },
@@ -12,6 +13,7 @@
       "id": "hgv-c",
       "name": "HGV Category C training",
       "category": "hgv",
+      "definition": "Category C is the licence for driving a large rigid lorry over 3.5 tonnes.",
       "summary": "Practical training toward the Category C (rigid lorry, over 3.5t) licence, including off-road and on-road tuition.",
       "keywords": ["hgv", "lgv", "category c", "class 2", "rigid", "lorry", "truck"]
     },
@@ -19,6 +21,7 @@
       "id": "hgv-ce",
       "name": "HGV Category C+E training",
       "category": "hgv",
+      "definition": "Category C+E is the licence for driving an articulated lorry — a Category C rigid vehicle plus a trailer — and it builds on an existing Category C licence.",
       "summary": "Practical training toward the Category C+E (articulated lorry) licence for drivers who already hold Category C.",
       "keywords": ["category ce", "c+e", "class 1", "artic", "articulated"]
     },
@@ -26,6 +29,7 @@
       "id": "be",
       "name": "Category B+E (car and trailer) training",
       "category": "be",
+      "definition": "Category B+E is the licence that lets you tow a larger trailer, caravan or horsebox behind a car than your standard car licence alone allows.",
       "summary": "Training toward the Category B+E licence for towing a larger trailer, caravan or horsebox behind a car.",
       "keywords": ["b+e", "towing", "tow", "trailer", "caravan", "horsebox", "car and trailer"]
     },
@@ -33,6 +37,7 @@
       "id": "driver-cpc",
       "name": "Driver CPC periodic training",
       "category": "cpc",
+      "definition": "Driver CPC is a qualification that keeps a professional driver's licence valid — it means completing 35 hours of training every 5 years.",
       "summary": "Classroom Driver CPC periodic training (the 35 hours professional drivers renew every 5 years).",
       "keywords": ["cpc", "periodic", "35 hours", "professional", "module", "dcpc"]
     },
@@ -40,6 +45,7 @@
       "id": "adr",
       "name": "ADR (dangerous goods) training",
       "category": "adr",
+      "definition": "ADR is the certification required to legally transport dangerous goods by road.",
       "summary": "ADR training for drivers carrying dangerous goods, covering core and relevant class modules.",
       "keywords": ["adr", "dangerous goods", "hazmat", "tanker", "packages"]
     },
@@ -47,6 +53,7 @@
       "id": "forklift",
       "name": "Forklift truck training",
       "category": "forklift",
+      "definition": "Forklift operator training qualifies you to safely operate a forklift in a workplace or warehouse setting.",
       "summary": "Forklift truck operator training for workplace/warehouse handling (e.g. counterbalance and reach truck).",
       "keywords": ["forklift", "fork lift", "flt", "counterbalance", "reach truck", "warehouse", "fork truck"]
     },
@@ -54,6 +61,7 @@
       "id": "driver-medical",
       "name": "Driver medical (D4)",
       "category": "medical",
+      "definition": "A D4 medical is the medical assessment the DVLA requires to confirm you're fit to hold an HGV or PCV licence.",
       "summary": "D4 driver medical assessment required for HGV/PCV licence applications and renewals.",
       "keywords": ["medical", "medicals", "d4", "eyesight", "hgv medical", "pcv", "renewal"]
     }

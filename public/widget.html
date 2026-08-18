@@ -22,6 +22,7 @@
     --white: #ffffff;
     --display: Montserrat, 'Arial Black', Arial, sans-serif;
     --body: Lato, Arial, Helvetica, sans-serif;
+    --font-scale: 1;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }
@@ -31,13 +32,16 @@
     background: var(--light);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 24px;
   }
   .app {
+    position: relative;
     width: 100%;
     max-width: 440px;
+    min-width: 320px;
     height: min(720px, 92vh);
+    min-height: 360px;
     background: var(--white);
     border-radius: 12px;
     box-shadow: 0 12px 40px rgba(0,0,0,0.18);
@@ -45,6 +49,24 @@
     flex-direction: column;
     overflow: hidden;
   }
+  .resize-handle {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    width: 16px;
+    height: 16px;
+    cursor: nwse-resize;
+    background-image: linear-gradient(
+      135deg,
+      transparent 0 44%, var(--grey) 44% 50%, transparent 50% 58%,
+      var(--grey) 58% 64%, transparent 64% 72%,
+      var(--grey) 72% 78%, transparent 78% 100%
+    );
+    opacity: 0.55;
+    touch-action: none;
+  }
+  .resize-handle:hover { opacity: 0.9; }
+  .app.minimized .resize-handle { display: none; }
   header {
     background: var(--charcoal);
     padding: 16px 18px;
@@ -57,6 +79,38 @@
   header .dot { width: 8px; height: 8px; border-radius: 50%; background: #6b6b6b; }
   header .dot.ok { background: #1e8e3e; }
 
+  .min-btn {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: transparent;
+    color: var(--white);
+    font-size: 15px;
+    line-height: 1;
+    font-family: var(--body);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .min-btn:hover { background: rgba(255,255,255,0.15); }
+
+  .app.minimized {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    height: auto;
+    width: auto;
+  }
+  .app.minimized .ribbon,
+  .app.minimized .chat,
+  .app.minimized footer {
+    display: none;
+  }
+  .app.minimized header { border-radius: 12px; }
+
   .ribbon {
     background: var(--light);
     color: var(--grey);
@@ -64,6 +118,35 @@
     padding: 6px 18px;
     border-bottom: 1px solid var(--rule-2);
   }
+
+  .text-size-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    background: var(--light);
+    border-bottom: 1px solid var(--rule-2);
+    font-size: 12px;
+    color: var(--grey);
+  }
+  .text-size-bar .btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+    background: var(--white);
+    color: var(--charcoal);
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .text-size-bar .btn:hover:not(:disabled) { border-color: var(--red); color: var(--red-600); }
+  .text-size-bar .btn:disabled { opacity: 0.4; cursor: default; }
 
   .chat {
     flex: 1;
@@ -74,15 +157,6 @@
     gap: 12px;
     background: var(--white);
   }
-  .intro h1 {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 22px;
-    line-height: 1.15;
-    margin: 4px 0 6px;
-    color: var(--charcoal);
-  }
-  .intro p { margin: 0 0 12px; color: var(--grey); font-size: 15px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     border: 1px solid var(--rule);
@@ -90,22 +164,22 @@
     color: var(--charcoal);
     border-radius: 999px;
     padding: 7px 12px;
-    font-size: 13px;
+    font-size: calc(13px * var(--font-scale));
     cursor: pointer;
     font-family: var(--body);
   }
   .chip:hover { border-color: var(--red); color: var(--red-600); }
 
-  .msg { max-width: 84%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.5; white-space: pre-wrap; }
+  .msg { max-width: 84%; padding: 10px 14px; border-radius: 14px; font-size: calc(15px * var(--font-scale)); line-height: 1.5; white-space: pre-wrap; }
   .msg.user { align-self: flex-end; background: var(--charcoal); color: var(--white); border-bottom-right-radius: 4px; }
   .msg.bot { align-self: flex-start; background: var(--light); color: var(--charcoal); border-bottom-left-radius: 4px; }
   .msg.bot.handoff { background: #fff7e6; border: 1px solid #ffe1a6; }
 
   .meta { align-self: flex-start; display: flex; flex-wrap: wrap; gap: 6px; margin-top: -6px; }
-  .tag { font-size: 11px; color: var(--grey); background: var(--white); border: 1px solid var(--rule-2); border-radius: 6px; padding: 2px 7px; }
+  .tag { font-size: calc(11px * var(--font-scale)); color: var(--grey); background: var(--white); border: 1px solid var(--rule-2); border-radius: 6px; padding: 2px 7px; }
   .tag.intent { color: var(--red-600); border-color: #f6c9c0; }
 
-  .typing { align-self: flex-start; color: var(--grey); font-size: 14px; font-style: italic; }
+  .typing { align-self: flex-start; color: var(--grey); font-size: calc(14px * var(--font-scale)); font-style: italic; }
 
   footer { border-top: 1px solid var(--rule-2); padding: 12px; background: var(--white); }
   .composer { display: flex; gap: 8px; }
@@ -114,7 +188,7 @@
     border: 1px solid var(--rule);
     border-radius: 8px;
     padding: 12px 14px;
-    font-size: 15px;
+    font-size: calc(15px * var(--font-scale));
     font-family: var(--body);
     outline: none;
   }
@@ -139,24 +213,27 @@
 </style>
 </head>
 <body>
-  <div class="app">
+  <div class="app" id="app">
     <header>
+      <button class="min-btn" id="minBtn" type="button" title="Minimize chat" aria-label="Minimize chat" aria-pressed="false">−</button>
       <img src="/assets/neds-logo-reversed-light.svg" alt="NEDS - North East Driving School" />
       <div class="status"><span class="dot" id="dot"></span><span id="statusText">connecting…</span></div>
     </header>
     <div class="ribbon">Preview build · sample data only · not a live booking system</div>
+    <div class="text-size-bar">
+      <span>Text size</span>
+      <button class="btn" id="fontDec" type="button" aria-label="Decrease text size">A−</button>
+      <button class="btn" id="fontInc" type="button" aria-label="Increase text size">A+</button>
+    </div>
 
     <div class="chat" id="chat">
-      <div class="intro">
-        <h1>How can we help you drive?</h1>
-        <p>Ask about lessons, HGV training, Driver CPC, prices or getting started. Try one of these:</p>
-        <div class="chips" id="starter">
-          <button class="chip">How much is the Category C course?</button>
-          <button class="chip">Which HGV licence do I need?</button>
-          <button class="chip">Do you do forklift training?</button>
-          <button class="chip">What is Driver CPC?</button>
-          <button class="chip">Can someone call me back?</button>
-        </div>
+      <div class="msg bot">Hi there! I'm the NEDS assistant. I can help answer questions about our courses, provide help to clarify different issues or point you toward the right person on our team. What can I help with today?</div>
+      <div class="chips" id="starter">
+        <button class="chip">How much is the Category C course?</button>
+        <button class="chip">Which HGV licence do I need?</button>
+        <button class="chip">Do you do forklift training?</button>
+        <button class="chip">What is Driver CPC?</button>
+        <button class="chip">How can I contact you?</button>
       </div>
     </div>
 
@@ -167,15 +244,104 @@
       </form>
       <div class="foot-note">NEDS · 0191 500 9450 · <a href="mailto:info@nedrivingschool.co.uk">info@nedrivingschool.co.uk</a></div>
     </footer>
+    <div class="resize-handle" id="resizeHandle" title="Drag to resize"></div>
   </div>
 
 <script>
+  // One id per page load, sent with every message so the server can
+  // remember short-lived state across a conversation (see session.ts) —
+  // e.g. resolving a bare "yes please" against the bot's own last offer.
+  const sessionId = (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+
   const chat = document.getElementById('chat');
   const form = document.getElementById('composer');
   const input = document.getElementById('input');
   const sendBtn = document.getElementById('send');
   const dot = document.getElementById('dot');
   const statusText = document.getElementById('statusText');
+  const app = document.getElementById('app');
+  const minBtn = document.getElementById('minBtn');
+  const fontDec = document.getElementById('fontDec');
+  const fontInc = document.getElementById('fontInc');
+
+  // Text-size control: scales message bubbles, chips, tags and the composer
+  // input together via the --font-scale CSS variable, rather than a fixed
+  // pixel size, so their relative proportions stay consistent.
+  const FONT_SCALE_MIN = 0.8;
+  const FONT_SCALE_MAX = 1.6;
+  const FONT_SCALE_STEP = 0.1;
+  let fontScale = 1;
+
+  function applyFontScale() {
+    document.documentElement.style.setProperty('--font-scale', fontScale.toFixed(2));
+    fontDec.disabled = fontScale <= FONT_SCALE_MIN;
+    fontInc.disabled = fontScale >= FONT_SCALE_MAX;
+  }
+
+  fontDec.addEventListener('click', () => {
+    fontScale = Math.max(FONT_SCALE_MIN, +(fontScale - FONT_SCALE_STEP).toFixed(2));
+    applyFontScale();
+  });
+  fontInc.addEventListener('click', () => {
+    fontScale = Math.min(FONT_SCALE_MAX, +(fontScale + FONT_SCALE_STEP).toFixed(2));
+    applyFontScale();
+  });
+
+  // Remembers any custom size from dragging the resize handle, so restoring
+  // from the minimized tab brings it back rather than snapping to default.
+  let savedWidth = '';
+  let savedHeight = '';
+
+  minBtn.addEventListener('click', () => {
+    const minimizing = !app.classList.contains('minimized');
+    if (minimizing) {
+      savedWidth = app.style.width;
+      savedHeight = app.style.height;
+      app.style.width = '';
+      app.style.height = '';
+    } else {
+      app.style.width = savedWidth;
+      app.style.height = savedHeight;
+    }
+    app.classList.toggle('minimized', minimizing);
+    minBtn.textContent = minimizing ? '+' : '−';
+    minBtn.title = minimizing ? 'Expand chat' : 'Minimize chat';
+    minBtn.setAttribute('aria-label', minBtn.title);
+    minBtn.setAttribute('aria-pressed', String(minimizing));
+  });
+
+  // Drag-to-resize from the bottom-right tab. Pointer capture keeps the drag
+  // tracking even once the cursor leaves the small handle itself.
+  const resizeHandle = document.getElementById('resizeHandle');
+  const MIN_W = 320, MIN_H = 360;
+  let resizing = false;
+  let startX = 0, startY = 0, startW = 0, startH = 0;
+
+  resizeHandle.addEventListener('pointerdown', (e) => {
+    resizing = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    const rect = app.getBoundingClientRect();
+    startW = rect.width;
+    startH = rect.height;
+    app.style.maxWidth = 'none';
+    resizeHandle.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+
+  resizeHandle.addEventListener('pointermove', (e) => {
+    if (!resizing) return;
+    const maxW = window.innerWidth - 24;
+    const maxH = window.innerHeight - 24;
+    const newW = Math.min(Math.max(startW + (e.clientX - startX), MIN_W), maxW);
+    const newH = Math.min(Math.max(startH + (e.clientY - startY), MIN_H), maxH);
+    app.style.width = newW + 'px';
+    app.style.height = newH + 'px';
+  });
+
+  const stopResize = () => { resizing = false; };
+  resizeHandle.addEventListener('pointerup', stopResize);
+  resizeHandle.addEventListener('pointercancel', stopResize);
 
   // Health check for the status pill.
   fetch('/health').then(r => r.json()).then(h => {
@@ -225,7 +391,7 @@
       const res = await fetch('/chat/stream', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ message, sessionId })
       });
       if (!res.ok || !res.body) throw new Error('bad response');
 
@@ -274,7 +440,7 @@
     const message = input.value.trim();
     if (!message) return;
     input.value = '';
-    document.querySelector('.intro')?.remove();
+    document.getElementById('starter')?.remove();
     ask(message);
   });
 

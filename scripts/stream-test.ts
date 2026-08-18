@@ -4,7 +4,7 @@ import { answerStream } from "../src/pipeline.js";
 const q = "do you do forklift training and how much is it?";
 console.log("Q:", q, "\nStreaming:\n");
 let full = "";
-for await (const delta of answerStream(q, (m) => console.log("[meta]", m.intent, m.citations.map((c) => c.id).join(",")))) {
+for await (const delta of answerStream(q, undefined, (m) => console.log("[meta]", m.intent, m.citations.map((c) => c.id).join(",")))) {
   process.stdout.write(delta);
   full += delta;
 }

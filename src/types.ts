@@ -52,6 +52,10 @@ export interface Service {
   id: string;
   name: string;
   category: "hgv" | "be" | "cpc" | "adr" | "forklift" | "medical" | "other";
+  // Plain, generic explanation of what the qualification/thing IS — no NEDS
+  // branding, no "we offer" framing. Answers "what is X" on its own, before
+  // any mention of what NEDS does with it.
+  definition: string;
   summary: string;
   keywords: string[];
 }

@@ -20,7 +20,7 @@ export interface Hit {
 const STOP = new Set([
   "the", "a", "an", "and", "or", "of", "to", "in", "on", "for", "is", "are",
   "do", "does", "i", "you", "we", "my", "me", "it", "how", "what", "can", "with",
-  "your", "our", "at", "be", "this", "that", "if", "so", "as",
+  "your", "our", "at", "be", "this", "that", "if", "so", "as", "about",
 ]);
 
 function tokenize(s: string): string[] {

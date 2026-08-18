@@ -123,25 +123,99 @@ export async function* stream(
 }
 
 // ---- Mock answer: a templated, grounded reply for demos without the model ----
+// The pipeline only calls complete()/stream() once it has non-empty facts to
+// ground on (see pipeline.ts's UNSURE_TEXT short-circuit), so `facts` here is
+// always populated.
 function mockAnswer(messages: ChatMessage[]): string {
   const user = messages.find((m) => m.role === "user")?.content ?? "";
   const factsMatch = user.match(/APPROVED FACTS:\n([\s\S]*?)\n\nVISITOR QUESTION/);
   const facts = factsMatch?.[1]?.trim() ?? "";
-  if (!facts || facts.startsWith("(no matching")) {
-    return "Thanks for your message. I don't have that to hand, but the NEDS office can help — please give us a call or send an email and the team will sort it out.";
-  }
-  const prices = facts
-    .split("\n")
-    .filter((l) => l.startsWith("PRICE "))
-    .map((l) => l.replace(/^PRICE /, ""));
-  const svc = facts
-    .split("\n")
-    .find((l) => l.startsWith("SERVICE "))
-    ?.replace(/^SERVICE /, "");
+  const lines = facts.split("\n");
 
+  const scope = lines.find((l) => l.startsWith("SCOPE "))?.replace(/^SCOPE /, "");
+  if (scope) return `[mock] ${scope}`;
+
+  if (facts.startsWith("AVAILABILITY:")) {
+    return "[mock] I don't have live availability connected in this preview, but you can check the NEDS website or get in touch with the team directly for current dates.";
+  }
+
+  if (facts.startsWith("BROAD_OFFER_LIST")) {
+    // A broad "what do you offer" question wants the full range at a
+    // glance, not a single narrowed-down answer — and no yes/no opener,
+    // since it isn't a yes/no question.
+    const names = lines
+      .filter((l) => l.startsWith("SERVICE "))
+      .map((l) => l.replace(/^SERVICE /, "").split(": ")[0] ?? l);
+    const bullets = names.map((n) => `- ${n}`).join("\n");
+    return `[mock] We offer a range of courses, including:\n${bullets}\n\nLet me know if you'd like more detail on any of these.`;
+  }
+
+  if (facts.startsWith("CONFIRMED_OFFER")) {
+    // The visitor just said "yes please" to the bot's own pricing offer (see
+    // pipeline.ts's resolveAffirmative) — acknowledge and follow through,
+    // don't treat the bare "yes" as a fresh unrelated question.
+    const svcLine2 = lines.find((l) => l.startsWith("SERVICE "))?.replace(/^SERVICE /, "");
+    const name = svcLine2?.split(": ")[0];
+    const priceLine2 = lines.find((l) => l.startsWith("PRICE "))?.replace(/^PRICE /, "");
+    const amount = priceLine2?.replace(/\s*\(includes:[^)]*\)/, "").split(" — ")[0]?.split(": ")[1];
+    if (name && amount) {
+      return `[mock] Sure — ${name} is ${amount}. Let me know if you'd like to know anything else.`;
+    }
+  }
+
+  const definitionText = lines.find((l) => l.startsWith("DEFINITION "))?.replace(/^DEFINITION /, "");
+  const priceLines = lines.filter((l) => l.startsWith("PRICE ")).map((l) => l.replace(/^PRICE /, ""));
+  const svcLine = lines.find((l) => l.startsWith("SERVICE "))?.replace(/^SERVICE /, "");
+  const faqAnswer = lines.find((l) => l.startsWith("FAQ Q: "))?.match(/ A: (.+)$/)?.[1];
+
+  const amounts = priceLines.slice(0, 3).map((l) => {
+    const headline = l.replace(/\s*\(includes:[^)]*\)/, "").split(" — ")[0] ?? l;
+    return headline.split(": ")[1] ?? headline;
+  });
+  const priceSentence = amounts.length
+    ? amounts.length > 1
+      ? `At NEDS, prices are ${amounts.join(", ")}, depending on the course.`
+      : `At NEDS, it's ${amounts[0]}.`
+    : undefined;
+
+  // Full sentences, not stacked fact-labels — those (inclusions, exclusions,
+  // the service name as a separate label) are still in the approved facts
+  // (see facts.ts), so a live model can weave them in naturally if the
+  // visitor asks a follow-up; the mock preview just can't rephrase like that.
   const parts: string[] = [];
-  if (svc) parts.push(svc);
-  if (prices.length) parts.push(`Current pricing — ${prices.slice(0, 3).join("; ")}.`);
-  parts.push("If you'd like, I can arrange for the office to call you back.");
+  if (definitionText && svcLine) {
+    // "What is X" pattern: plain, generic explanation as its own sentence
+    // first, THEN connect it to what NEDS offers — never the other way round.
+    const name = svcLine.split(": ")[0] ?? svcLine;
+    parts.push(definitionText);
+    parts.push(`We offer ${name} here at NEDS, if that's something you need.`);
+  } else if (svcLine && priceSentence) {
+    // Direct factual question (e.g. "how much is..."): lead with the direct
+    // answer — the price — and put the description second, as supporting
+    // context, not the headline.
+    const summary = svcLine.split(/: (.+)/)[1] ?? svcLine;
+    const lowered = summary.charAt(0).toLowerCase() + summary.slice(1);
+    parts.push(priceSentence);
+    parts.push(`This covers ${lowered}`);
+  } else if (svcLine) {
+    // No price fact here (e.g. a broad "what do you offer" browse, not a
+    // specific question) — nothing to lead with, so describe the service.
+    const summary = svcLine.split(/: (.+)/)[1] ?? svcLine;
+    const lowered = summary.charAt(0).toLowerCase() + summary.slice(1);
+    parts.push(`We offer ${lowered}`);
+  } else if (priceSentence) {
+    parts.push(priceSentence);
+  }
+  if (!parts.length && faqAnswer) parts.push(faqAnswer);
+  if (!parts.length) parts.push("Happy to help with that.");
+
+  // Information pacing: a service_query deliberately doesn't get price facts
+  // (see pipeline.ts's serviceFactsOnly) — so if we described a service but
+  // withheld its price, offer it as a low-pressure follow-up rather than
+  // dumping it in by default.
+  if (svcLine && !priceLines.length) {
+    parts.push("Want me to run through pricing too?");
+  }
+
   return `[mock] ${parts.join(" ")}`;
 }

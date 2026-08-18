@@ -20,7 +20,10 @@ export function serviceLine(s: Service): string {
 }
 
 // Given a set of retrieved/relevant service ids, build the approved-fact block
-// that grounds the model, plus the citations we can show the user.
+// that grounds the model, plus the citations we can show the user. Used for
+// price_query, where the price is the direct subject of the question — so
+// naming what it's for (the service line) is necessary context, not an
+// unrequested extra.
 export function factsFor(serviceIds: string[]): {
   block: string;
   citations: Citation[];
@@ -41,6 +44,32 @@ export function factsFor(serviceIds: string[]): {
       lines.push(`PRICE ${priceLine(p)}`);
       citations.push({ kind: "price", id: p.id, label: p.label });
     }
+  }
+
+  return { block: lines.join("\n"), citations };
+}
+
+// Service description only, no price — used for service_query, so "what is
+// X" doesn't drag in pricing the visitor didn't ask about. Information
+// pacing: answer what was asked, not everything adjacent to it. Also carries
+// a DEFINITION line ahead of the SERVICE line — a "what is X" answer should
+// explain the thing generically before connecting it to what NEDS offers.
+export function serviceFactsOnly(serviceIds: string[]): {
+  block: string;
+  citations: Citation[];
+} {
+  const lines: string[] = [];
+  const citations: Citation[] = [];
+  const seen = new Set<string>();
+
+  for (const id of serviceIds) {
+    const svc = serviceById.get(id);
+    if (!svc || seen.has(id)) continue;
+    seen.add(id);
+
+    lines.push(`DEFINITION ${svc.definition}`);
+    lines.push(`SERVICE ${serviceLine(svc)}`);
+    citations.push({ kind: "service", id: svc.id, label: svc.name });
   }
 
   return { block: lines.join("\n"), citations };

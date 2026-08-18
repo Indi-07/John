@@ -52,7 +52,9 @@ app.get("/", (c) => c.html(widgetHtml));
 app.use("/assets/*", serveStatic({ root: "./public" }));
 
 // Shared validation for both chat routes.
-function validate(raw: unknown): { ok: true; message: string } | { ok: false; error: string } {
+function validate(
+  raw: unknown,
+): { ok: true; message: string; sessionId?: string } | { ok: false; error: string } {
   const parsed = ChatRequestSchema.safeParse(raw);
   if (!parsed.success) return { ok: false, error: "Invalid request." };
   const message = parsed.data.message.trim();
@@ -60,7 +62,7 @@ function validate(raw: unknown): { ok: true; message: string } | { ok: false; er
   if (message.length > config.limits.maxMessageChars) {
     return { ok: false, error: `Message too long (max ${config.limits.maxMessageChars} characters).` };
   }
-  return { ok: true, message };
+  return { ok: true, message, sessionId: parsed.data.sessionId };
 }
 
 app.post("/chat", async (c) => {
@@ -71,7 +73,7 @@ app.post("/chat", async (c) => {
   const v = validate(body);
   if (!v.ok) return c.json({ error: v.error }, 400);
 
-  const response = await answer(v.message);
+  const response = await answer(v.message, v.sessionId);
   return c.json(response);
 });
 
@@ -92,7 +94,7 @@ app.post("/chat/stream", async (c) => {
           encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`),
         );
       try {
-        const gen = answerStream(v.message, (meta) => send("meta", meta));
+        const gen = answerStream(v.message, v.sessionId, (meta) => send("meta", meta));
         for await (const delta of gen) send("token", delta);
         send("done", {});
       } catch (err) {
