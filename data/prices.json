@@ -1,0 +1,65 @@
+{
+  "_note": "PLACEHOLDER SEED DATA — NOT approved NEDS prices. Every amount here is invented for the PoC and must be replaced with reconciled, approved prices before any pilot (Phase 0). The model is instructed never to alter or invent amounts; it only reads these.",
+  "prices": [
+    {
+      "id": "hgv-c1-course",
+      "serviceId": "hgv-c1",
+      "label": "HGV Category C1 training course",
+      "amountGBP": 1195,
+      "unit": "per course",
+      "includes": ["training hours", "use of vehicle for the test"],
+      "note": "Placeholder rate; excludes DVSA test fees and medical."
+    },
+    {
+      "id": "hgv-c-course",
+      "serviceId": "hgv-c",
+      "label": "HGV Category C training course",
+      "amountGBP": 1495,
+      "unit": "per course",
+      "includes": ["training hours", "use of vehicle for the test"],
+      "note": "Placeholder rate; excludes DVSA test fees and medical."
+    },
+    {
+      "id": "hgv-ce-course",
+      "serviceId": "hgv-ce",
+      "label": "HGV Category C+E training course",
+      "amountGBP": 1695,
+      "unit": "per course",
+      "includes": ["training hours", "use of vehicle and trailer for the test"],
+      "note": "Placeholder rate; excludes DVSA test fees."
+    },
+    {
+      "id": "be-course",
+      "serviceId": "be",
+      "label": "Category B+E (car and trailer) training course",
+      "amountGBP": 495,
+      "unit": "per course",
+      "includes": ["training hours", "use of vehicle and trailer for the test"],
+      "note": "Placeholder rate; excludes DVSA test fees."
+    },
+    {
+      "id": "forklift-course",
+      "serviceId": "forklift",
+      "label": "Forklift truck training course",
+      "amountGBP": 395,
+      "unit": "per course",
+      "note": "Placeholder rate; varies by truck type and experience."
+    },
+    {
+      "id": "driver-cpc-day",
+      "serviceId": "driver-cpc",
+      "label": "Driver CPC, one 7-hour module",
+      "amountGBP": 65,
+      "unit": "per 7-hour module",
+      "note": "Placeholder rate."
+    },
+    {
+      "id": "driver-medical",
+      "serviceId": "driver-medical",
+      "label": "D4 driver medical",
+      "amountGBP": 60,
+      "unit": "per medical",
+      "note": "Placeholder rate."
+    }
+  ]
+}

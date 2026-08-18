@@ -1,0 +1,61 @@
+{
+  "_note": "PLACEHOLDER SEED DATA — summaries are illustrative, NOT approved wording. The SERVICE LIST itself is confirmed by John (2026-08-18): C1, C, C+E, B+E, Driver CPC, ADR, Forklift, Driver Medicals. NEDS does NOT provide learner car lessons. Replace summaries/prices from the approved catalogue before any pilot (Phase 0).",
+  "services": [
+    {
+      "id": "hgv-c1",
+      "name": "HGV Category C1 training",
+      "category": "hgv",
+      "summary": "Practical training toward the Category C1 licence (medium-sized vehicles, 3.5t to 7.5t).",
+      "keywords": ["c1", "7.5t", "7.5 tonne", "medium", "category c1"]
+    },
+    {
+      "id": "hgv-c",
+      "name": "HGV Category C training",
+      "category": "hgv",
+      "summary": "Practical training toward the Category C (rigid lorry, over 3.5t) licence, including off-road and on-road tuition.",
+      "keywords": ["hgv", "lgv", "category c", "class 2", "rigid", "lorry", "truck"]
+    },
+    {
+      "id": "hgv-ce",
+      "name": "HGV Category C+E training",
+      "category": "hgv",
+      "summary": "Practical training toward the Category C+E (articulated lorry) licence for drivers who already hold Category C.",
+      "keywords": ["category ce", "c+e", "class 1", "artic", "articulated"]
+    },
+    {
+      "id": "be",
+      "name": "Category B+E (car and trailer) training",
+      "category": "be",
+      "summary": "Training toward the Category B+E licence for towing a larger trailer, caravan or horsebox behind a car.",
+      "keywords": ["b+e", "towing", "tow", "trailer", "caravan", "horsebox", "car and trailer"]
+    },
+    {
+      "id": "driver-cpc",
+      "name": "Driver CPC periodic training",
+      "category": "cpc",
+      "summary": "Classroom Driver CPC periodic training (the 35 hours professional drivers renew every 5 years).",
+      "keywords": ["cpc", "periodic", "35 hours", "professional", "module", "dcpc"]
+    },
+    {
+      "id": "adr",
+      "name": "ADR (dangerous goods) training",
+      "category": "adr",
+      "summary": "ADR training for drivers carrying dangerous goods, covering core and relevant class modules.",
+      "keywords": ["adr", "dangerous goods", "hazmat", "tanker", "packages"]
+    },
+    {
+      "id": "forklift",
+      "name": "Forklift truck training",
+      "category": "forklift",
+      "summary": "Forklift truck operator training for workplace/warehouse handling (e.g. counterbalance and reach truck).",
+      "keywords": ["forklift", "fork lift", "flt", "counterbalance", "reach truck", "warehouse", "fork truck"]
+    },
+    {
+      "id": "driver-medical",
+      "name": "Driver medical (D4)",
+      "category": "medical",
+      "summary": "D4 driver medical assessment required for HGV/PCV licence applications and renewals.",
+      "keywords": ["medical", "medicals", "d4", "eyesight", "hgv medical", "pcv", "renewal"]
+    }
+  ]
+}

@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NEDS Assistant — Preview</title>
+<link rel="icon" href="/assets/neds-icon-square.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --red: #f93f23;
+    --red-600: #d3290e;
+    --red-700: #b41600;
+    --charcoal: #333333;
+    --charcoal-2: #4e4e4e;
+    --grey: #6b6b6b;
+    --rule: #cecece;
+    --rule-2: #ebebeb;
+    --light: #f2f2f2;
+    --white: #ffffff;
+    --display: Montserrat, 'Arial Black', Arial, sans-serif;
+    --body: Lato, Arial, Helvetica, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: var(--body);
+    color: var(--charcoal);
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .app {
+    width: 100%;
+    max-width: 440px;
+    height: min(720px, 92vh);
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  header {
+    background: var(--charcoal);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header img { height: 34px; width: auto; display: block; }
+  header .status { margin-left: auto; font-size: 12px; color: #cfcfcf; display: flex; align-items: center; gap: 6px; }
+  header .dot { width: 8px; height: 8px; border-radius: 50%; background: #6b6b6b; }
+  header .dot.ok { background: #1e8e3e; }
+
+  .ribbon {
+    background: var(--light);
+    color: var(--grey);
+    font-size: 12px;
+    padding: 6px 18px;
+    border-bottom: 1px solid var(--rule-2);
+  }
+
+  .chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--white);
+  }
+  .intro h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.15;
+    margin: 4px 0 6px;
+    color: var(--charcoal);
+  }
+  .intro p { margin: 0 0 12px; color: var(--grey); font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--rule);
+    background: var(--white);
+    color: var(--charcoal);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--body);
+  }
+  .chip:hover { border-color: var(--red); color: var(--red-600); }
+
+  .msg { max-width: 84%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.5; white-space: pre-wrap; }
+  .msg.user { align-self: flex-end; background: var(--charcoal); color: var(--white); border-bottom-right-radius: 4px; }
+  .msg.bot { align-self: flex-start; background: var(--light); color: var(--charcoal); border-bottom-left-radius: 4px; }
+  .msg.bot.handoff { background: #fff7e6; border: 1px solid #ffe1a6; }
+
+  .meta { align-self: flex-start; display: flex; flex-wrap: wrap; gap: 6px; margin-top: -6px; }
+  .tag { font-size: 11px; color: var(--grey); background: var(--white); border: 1px solid var(--rule-2); border-radius: 6px; padding: 2px 7px; }
+  .tag.intent { color: var(--red-600); border-color: #f6c9c0; }
+
+  .typing { align-self: flex-start; color: var(--grey); font-size: 14px; font-style: italic; }
+
+  footer { border-top: 1px solid var(--rule-2); padding: 12px; background: var(--white); }
+  .composer { display: flex; gap: 8px; }
+  .composer input {
+    flex: 1;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: var(--body);
+    outline: none;
+  }
+  .composer input:focus { border-color: var(--red); }
+  .composer button {
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0 18px;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+  }
+  .composer button:hover { background: var(--red-700); }
+  .composer button:disabled { background: var(--grey); cursor: default; }
+  .foot-note { text-align: center; font-size: 11px; color: var(--grey); margin-top: 8px; }
+  .foot-note a { color: var(--red-600); }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <img src="/assets/neds-logo-reversed-light.svg" alt="NEDS - North East Driving School" />
+      <div class="status"><span class="dot" id="dot"></span><span id="statusText">connecting…</span></div>
+    </header>
+    <div class="ribbon">Preview build · sample data only · not a live booking system</div>
+
+    <div class="chat" id="chat">
+      <div class="intro">
+        <h1>How can we help you drive?</h1>
+        <p>Ask about lessons, HGV training, Driver CPC, prices or getting started. Try one of these:</p>
+        <div class="chips" id="starter">
+          <button class="chip">How much is the Category C course?</button>
+          <button class="chip">Which HGV licence do I need?</button>
+          <button class="chip">Do you do forklift training?</button>
+          <button class="chip">What is Driver CPC?</button>
+          <button class="chip">Can someone call me back?</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <form class="composer" id="composer">
+        <input id="input" type="text" placeholder="Type your question…" autocomplete="off" maxlength="600" />
+        <button id="send" type="submit">Send</button>
+      </form>
+      <div class="foot-note">NEDS · 0191 500 9450 · <a href="mailto:info@nedrivingschool.co.uk">info@nedrivingschool.co.uk</a></div>
+    </footer>
+  </div>
+
+<script>
+  const chat = document.getElementById('chat');
+  const form = document.getElementById('composer');
+  const input = document.getElementById('input');
+  const sendBtn = document.getElementById('send');
+  const dot = document.getElementById('dot');
+  const statusText = document.getElementById('statusText');
+
+  // Health check for the status pill.
+  fetch('/health').then(r => r.json()).then(h => {
+    dot.classList.add('ok');
+    statusText.textContent = h.mode === 'mock' ? 'preview (mock)' : 'online';
+  }).catch(() => { statusText.textContent = 'offline'; });
+
+  function addMessage(text, who) {
+    const el = document.createElement('div');
+    el.className = 'msg ' + who;
+    el.textContent = text;
+    chat.appendChild(el);
+    chat.scrollTop = chat.scrollHeight;
+    return el;
+  }
+
+  function addMeta(intent, citations) {
+    const wrap = document.createElement('div');
+    wrap.className = 'meta';
+    const it = document.createElement('span');
+    it.className = 'tag intent';
+    it.textContent = intent.replace(/_/g, ' ');
+    wrap.appendChild(it);
+    (citations || []).slice(0, 4).forEach(c => {
+      const t = document.createElement('span');
+      t.className = 'tag';
+      t.textContent = c.label;
+      wrap.appendChild(t);
+    });
+    chat.appendChild(wrap);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  async function ask(message) {
+    addMessage(message, 'user');
+    const typing = document.createElement('div');
+    typing.className = 'typing';
+    typing.textContent = 'NEDS is typing…';
+    chat.appendChild(typing);
+    chat.scrollTop = chat.scrollHeight;
+
+    sendBtn.disabled = true;
+    let botEl = null;
+    let meta = null;
+
+    try {
+      const res = await fetch('/chat/stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      if (!res.ok || !res.body) throw new Error('bad response');
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const frames = buffer.split('\n\n');
+        buffer = frames.pop() || '';
+        for (const frame of frames) {
+          const evLine = frame.split('\n').find(l => l.startsWith('event:'));
+          const dataLine = frame.split('\n').find(l => l.startsWith('data:'));
+          if (!evLine || !dataLine) continue;
+          const event = evLine.slice(6).trim();
+          const data = JSON.parse(dataLine.slice(5).trim());
+          if (event === 'meta') {
+            meta = data;
+          } else if (event === 'token') {
+            typing.remove();
+            if (!botEl) botEl = addMessage('', 'bot');
+            botEl.textContent += data;
+            chat.scrollTop = chat.scrollHeight;
+          }
+        }
+      }
+    } catch (e) {
+      typing.remove();
+      addMessage("Sorry — I can't reach our system right now. Please call the office on 0191 500 9450.", 'bot');
+    } finally {
+      typing.remove();
+      if (meta) {
+        if (botEl && meta.intent === 'training_availability_query') botEl.classList.add('handoff');
+        addMeta(meta.intent, meta.citations);
+      }
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const message = input.value.trim();
+    if (!message) return;
+    input.value = '';
+    document.querySelector('.intro')?.remove();
+    ask(message);
+  });
+
+  document.getElementById('starter').addEventListener('click', (e) => {
+    if (e.target.classList.contains('chip')) {
+      input.value = e.target.textContent;
+      form.dispatchEvent(new Event('submit'));
+    }
+  });
+</script>
+</body>
+</html>

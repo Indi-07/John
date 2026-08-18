@@ -1,0 +1,2 @@
+# Offline tooling only — never imported by the TypeScript service.
+openpyxl>=3.1

@@ -1,0 +1,65 @@
+{
+  "_note": "PLACEHOLDER SEED Q&A — illustrative only, HGV/professional focus. Replaced by the approved xlsx Q&A via tooling/ingest_xlsx.py. Any licensing wording here is a placeholder and MUST be approved before a pilot — never treat these as verified licensing claims.",
+  "faqs": [
+    {
+      "id": "areas-covered",
+      "question": "What areas do you cover?",
+      "answer": "NEDS is based in the North East and covers the surrounding area. If you tell us your postcode we can confirm whether we cover you.",
+      "keywords": ["area", "areas", "cover", "location", "where", "postcode", "near me"]
+    },
+    {
+      "id": "car-licence-before-hgv",
+      "question": "Do I need a car licence before I can train for an HGV?",
+      "answer": "Yes — you'll usually need a full car (Category B) licence before you can train for a Category C HGV. Our team can confirm exactly what you need for your situation.",
+      "keywords": ["car licence", "full licence", "before hgv", "need a licence", "prerequisite", "requirement", "entitlement", "learn to drive hgv"]
+    },
+    {
+      "id": "how-to-book",
+      "question": "How do I book?",
+      "answer": "You can book by calling the office or sending us an enquiry, and our team will arrange your training. If you'd like, I can take your details for a callback.",
+      "keywords": ["book", "booking", "arrange", "sign up", "start", "enrol"]
+    },
+    {
+      "id": "hgv-which-licence",
+      "question": "Which HGV licence do I need?",
+      "answer": "It depends on the vehicle: Category C1 covers 3.5t to 7.5t, Category C covers rigid lorries over 3.5t, and Category C+E covers articulated lorries. Many drivers take C first, then C+E. Our team can advise based on the driving you plan to do.",
+      "keywords": ["which licence", "category c", "c1", "c+e", "class 1", "class 2", "rigid", "artic"]
+    },
+    {
+      "id": "cpc-what-is",
+      "question": "What is Driver CPC?",
+      "answer": "Driver CPC is the professional qualification for lorry, bus and coach drivers. Once qualified, you complete 35 hours of periodic training every 5 years to keep it valid. We run classroom periodic training modules.",
+      "keywords": ["cpc", "driver cpc", "35 hours", "periodic", "professional", "qualification"]
+    },
+    {
+      "id": "medical-what-is",
+      "question": "Do I need a medical for an HGV licence?",
+      "answer": "Yes, you need a D4 driver medical to apply for an HGV or PCV licence. It includes an eyesight and general health check completed by a medical professional. We can arrange this for you.",
+      "keywords": ["medical", "d4", "eyesight", "health", "hgv licence", "pcv"]
+    },
+    {
+      "id": "age-requirement",
+      "question": "How old do I need to be to train for an HGV?",
+      "answer": "You can usually train for a Category C HGV from age 18, provided you hold a full car licence. Some categories have different rules, so our team can confirm for your situation.",
+      "keywords": ["age", "how old", "18", "minimum age", "young"]
+    },
+    {
+      "id": "test-fees-included",
+      "question": "Are test fees included in the price?",
+      "answer": "Course prices usually cover training and use of the vehicle, but DVSA test fees are charged separately. Our team will confirm exactly what's included when you enquire.",
+      "keywords": ["test fee", "included", "dvsa", "extra cost", "what's included"]
+    },
+    {
+      "id": "how-long-hgv",
+      "question": "How long does HGV training take?",
+      "answer": "It varies with the category and your experience, but many learners complete practical HGV training over a small number of intensive days. Our team can give you a realistic timeline once they know your starting point.",
+      "keywords": ["how long", "duration", "days", "weeks", "hgv training", "time"]
+    },
+    {
+      "id": "finance-available",
+      "question": "Do you offer payment plans or finance?",
+      "answer": "For payment options, please contact the office directly and the team will talk you through what's available.",
+      "keywords": ["finance", "payment plan", "instalments", "spread cost", "afford", "deposit"]
+    }
+  ]
+}
