@@ -5,8 +5,9 @@ from the freshly-cloned repo with only placeholder seed data and no model
 running; ended with 409 approved Q&A entries, a full set of deterministic
 safety/policy guardrails, a rewritten answer-style system prompt, basic
 conversation memory, and several widget UI additions. All changes are
-committed locally (`873419a`); push to GitHub was pending GitHub
-authentication in this environment as of the end of this session.
+committed locally across three commits (`873419a`, `f177e19`, `2397b0e`);
+push to GitHub remains blocked on GitHub authentication in this environment
+— see "Outstanding" below.
 
 ## Environment setup
 
@@ -80,6 +81,8 @@ over letting an LLM paraphrase a policy-sensitive reply:
 | Callback or contact-detail request | `CALLBACK_DECLINE_TEXT` — the chat **does not** collect a name/phone/email for this at all (this reverses the original PoC's lead-capture flow, which used to ask for them) |
 | Instructor-selection request (gender, age, race/ethnicity/nationality, or general "choose/prefer/same/different") | `INSTRUCTOR_SELECTION_TEXT` |
 | Broad "what do you offer" question | Full bulleted course list (previously misrouted to a random tangential FAQ or no answer at all — a real routing bug, not just a formatting gap) |
+| Visitor asks the bot to contact NEDS *for* them ("can you call the office for me?") | `CONTACT_ON_BEHALF_TEXT` — the opposite direction from the callback decline; previously fell through to retrieval and matched unrelated FAQs on "office"/"contact" word overlap |
+| Visitor asks *how* to contact NEDS themselves, including ungrammatical phrasing ("how do contact the office") | `CONTACT_DETAILS_TEXT` — always gives the actual phone/email immediately; checked ahead of the callback decline (whose "get in touch" trigger would otherwise wrongly decline it) and never touches retrieval, which was matching "office" here against the unrelated "transport-office awareness training" course |
 
 The growing set of message-only bypasses was consolidated into one
 table-driven `deterministicReply()` helper shared by `answer()` and
@@ -156,20 +159,36 @@ schema:
   Flagged twice; a safe general fix wasn't found (tested and rejected a
   retrieval-score-based approach — it also hijacked unrelated price answers
   in testing).
-- "How do I get in touch?" (using "touch" rather than "contact") and
-  "enrol" (rather than "sign up"/"book") aren't recognised by the relevant
-  FAQs' current wording.
+- "Enrol" (rather than "sign up"/"book") isn't recognised by the booking
+  FAQ's current wording. ("How do I get in touch?" was resolved this
+  session — see `isHowToContactQuery` above — but only as a dedicated
+  deterministic guardrail, not by fixing the underlying FAQ retrieval, which
+  still wouldn't match "touch" against "contact" on its own.)
 
 ## Outstanding
 
-- Local commit `873419a` made (repo-local git identity `dwebnomad
-  <dwebnomad@gmail.com>` configured at the user's direction, since none was
-  set and Claude Code's git safety rules don't permit changing config
-  unprompted).
-- `git push origin main` failed — no GitHub credential available in this
+- Three local commits made, none yet pushed:
+  - `873419a` — the main feature/guardrail/style/session-memory work.
+  - `f177e19` — this session-notes file plus the first pass of `CLAUDE.md`/
+    `README.md` updates.
+  - `2397b0e` — the contact-on-behalf and how-to-contact guardrails added
+    after that.
+- Repo-local git identity (`dwebnomad <dwebnomad@gmail.com>`) had to be
+  configured before the first commit — none was set, and Claude Code's git
+  safety rules don't permit changing config unprompted, so this was done
+  only after asking the user for name/email to use.
+- `git push origin main` fails — no GitHub credential available in this
   environment (no `gh` CLI, no SSH key, empty keychain entry for
   github.com). Installed `gh` CLI v2.97.0 via direct binary download to
   `~/.local/bin` (no Homebrew present, same constraint as the earlier Node
-  install). `gh auth login` was started interactively by the user and was
-  still in progress when this note was written — push to GitHub still
-  pending as a next step.
+  install).
+- First `gh auth login` attempt: got as far as issuing a device code, then
+  failed with a network error reaching GitHub's OAuth token endpoint
+  (`read tcp ...: can't assign requested address`) — looks like an
+  environment/sandbox network restriction rather than a login-flow problem,
+  since the initial request to GitHub succeeded but the token-exchange
+  callback couldn't complete.
+- User asked to retry `gh auth login`, or alternatively to run `git push`
+  directly from their own terminal (outside this sandboxed session, where
+  normal network/credentials apply) — this was still unresolved as of this
+  note. **Push to GitHub remains the one open action item.**

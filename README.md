@@ -25,11 +25,14 @@ production direction; this repo is the **Phase 1 local proof**.
 - Remembers, per session, whether it just offered to give pricing — so a
   short "yes please" reply is answered directly instead of being routed as a
   fresh, unrelated question (`src/session.ts`, in-memory, 10-minute TTL).
-- Hard, model-bypassing declines for: personal information volunteered
+- Hard, model-bypassing declines/answers for: personal information volunteered
   (name/DOB/licence number/email/phone), callback/contact-detail requests
   (the chat **never** collects these, even to arrange a callback),
   instructor-selection requests (by gender, age, race/ethnicity or any other
-  characteristic), and out-of-scope car-lesson questions.
+  characteristic), out-of-scope car-lesson questions, being asked to contact
+  NEDS *on the visitor's behalf*, and being asked *how* to contact NEDS
+  (always answered with the real phone/email, never routed through
+  retrieval — see `CLAUDE.md`'s gotchas for why that matters here).
 - Serves a NEDS-branded demo widget with token streaming, a minimize toggle,
   drag-to-resize, and text-size controls.
 

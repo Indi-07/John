@@ -127,6 +127,13 @@ npm run dev            # http://localhost:8787/
   BM25 weight from being rare across this specific corpus, which can make
   unrelated messages score just high enough to dodge the
   unsure/irrelevant-detection threshold.
+- Retrieval will happily match a word in the visitor's message against the
+  *same word* in an unrelated course/FAQ — e.g. "how do I contact the
+  office" was matching the "transport-office awareness training" course on
+  "office" alone. When a phrasing pattern is safety/policy-sensitive (asking
+  how to reach NEDS, asking the bot to contact NEDS on the visitor's behalf,
+  etc.), give it its own deterministic detector in `src/intent.ts` rather
+  than trusting retrieval to disambiguate intent from a single shared word.
 - A message that both names a specific service *and* implies a different
   intent (e.g. "How do I sign up for HGV training?") currently loses to the
   literal service-name match and gets routed as a service/price answer, not
