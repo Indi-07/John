@@ -37,6 +37,11 @@ export interface ChatResponse {
   // True when we could not answer from approved facts and handed off.
   handoff: boolean;
   citations: Citation[];
+  // Deterministic follow-up prompts the widget renders as clickable chips
+  // under this reply — see pipeline.ts's suggestionsFor(). Never model
+  // output, same "facts outside the model" reasoning as the rest of the
+  // approved content.
+  suggestions: string[];
   // Non-authoritative debug aid; safe to show in the PoC, hide in production.
   meta: {
     mode: "live" | "mock";

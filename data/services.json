@@ -64,6 +64,14 @@
       "definition": "A D4 medical is the medical assessment the DVLA requires to confirm you're fit to hold an HGV or PCV licence.",
       "summary": "D4 driver medical assessment required for HGV/PCV licence applications and renewals.",
       "keywords": ["medical", "medicals", "d4", "eyesight", "hgv medical", "pcv", "renewal"]
+    },
+    {
+      "id": "olat",
+      "name": "Operator Licence Awareness Training (OLAT)",
+      "category": "other",
+      "definition": "OLAT is training that covers the responsibilities involved in obtaining and maintaining a commercial vehicle operator's licence.",
+      "summary": "One-day and two-day OLAT courses for operators, transport managers and transport staff needing operator-licence compliance knowledge, or refresher/remedial training — delivered classroom, online or nationwide at client premises.",
+      "keywords": ["olat", "operator licence", "operator's licence", "operator licence awareness", "transport manager"]
     }
   ]
 }

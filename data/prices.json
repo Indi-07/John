@@ -1,65 +1,338 @@
 {
-  "_note": "PLACEHOLDER SEED DATA — NOT approved NEDS prices. Every amount here is invented for the PoC and must be replaced with reconciled, approved prices before any pilot (Phase 0). The model is instructed never to alter or invent amounts; it only reads these.",
+  "_note": "Generated from NEDS-prices.csv by tooling/ingest_prices_csv.py. Reconciled from CWHR010, the Chartwise Order Hub catalogue, and John's corrections; every row is reviewed (JOHN OK = Y or Amend). amountGBP is the Inc VAT price for the item as described in its own label — NOT the sheet's separate All-in/package figure, which is usually a different, larger bundle and is described in the row's own note instead where relevant. Do not edit by hand — re-run the ingest script instead.",
   "prices": [
     {
-      "id": "hgv-c1-course",
+      "id": "c1-1",
       "serviceId": "hgv-c1",
-      "label": "HGV Category C1 training course",
-      "amountGBP": 1195,
+      "label": "3-day training package + Mod 3A & 3B tests",
+      "amountGBP": 900.0,
       "unit": "per course",
-      "includes": ["training hours", "use of vehicle for the test"],
-      "note": "Placeholder rate; excludes DVSA test fees and medical."
+      "note": "£900 = 3 days tuition (£745 inc VAT) + Mod 3A £40 + Mod 3B £115 DVSA fees (no VAT). £999 all-in adds medical £50, Mod 1A £26, Mod 1B £11, Mod 1 DTS £12 — EXCLUDES Driver CPC. £949 if medical already passed; £900 if theories already passed. Deposit £300.00 required."
     },
     {
-      "id": "hgv-c-course",
+      "id": "c1-2",
+      "serviceId": "hgv-c1",
+      "label": "Extra tuition day — 4 hrs, weekday",
+      "amountGBP": 285.0,
+      "unit": "per extra day",
+      "note": "£59.38/hr net. Also the 4-hr vehicle-hire price for a Mod 3B retest (£400 inc test fee)."
+    },
+    {
+      "id": "c1-3",
+      "serviceId": "hgv-c1",
+      "label": "Extra tuition day — 4 hrs, Saturday",
+      "amountGBP": 324.0,
+      "unit": "per extra day",
+      "note": "£67.50/hr net."
+    },
+    {
+      "id": "c1-4",
+      "serviceId": "hgv-c1",
+      "label": "Mod 3 vehicle hire (test only)",
+      "amountGBP": 142.5,
+      "unit": "per hire"
+    },
+    {
+      "id": "c-1",
       "serviceId": "hgv-c",
-      "label": "HGV Category C training course",
-      "amountGBP": 1495,
+      "label": "5-day training package + Mod 3A & 3B tests",
+      "amountGBP": 1865.0,
       "unit": "per course",
-      "includes": ["training hours", "use of vehicle for the test"],
-      "note": "Placeholder rate; excludes DVSA test fees and medical."
+      "note": "£1,865 = 5 days × £285 net (£1,710 inc VAT) + Mod 3A £40 + Mod 3B £115. £2,100 all-in INCLUDES all DVSA fees, medical, theories AND Initial Driver CPC; £1,964 all-in WITHOUT CPC. Deposit £400.00 required."
     },
     {
-      "id": "hgv-ce-course",
+      "id": "c-2",
+      "serviceId": "hgv-c",
+      "label": "Extra tuition day — 4 hrs, weekday",
+      "amountGBP": 374.4,
+      "unit": "per extra day",
+      "note": "£78/hr net. Also the 4-hr vehicle-hire price for a Mod 3B retest (£489.40 inc test fee)."
+    },
+    {
+      "id": "c-3",
+      "serviceId": "hgv-c",
+      "label": "Extra tuition day — 4 hrs, Saturday",
+      "amountGBP": 432.0,
+      "unit": "per extra day",
+      "note": "£90/hr net."
+    },
+    {
+      "id": "c-4",
+      "serviceId": "hgv-c",
+      "label": "Mod 3A vehicle hire (test only)",
+      "amountGBP": 187.2,
+      "unit": "per hire",
+      "note": "Waived if the 3A test falls on a tuition day."
+    },
+    {
+      "id": "c-5-hgv-c1",
+      "serviceId": "hgv-c1",
+      "label": "Driving assessment (~1 hr) — C1, C or CE",
+      "amountGBP": 84.0,
+      "unit": "per assessment",
+      "note": "A medical is needed first if you're on a provisional licence."
+    },
+    {
+      "id": "c-5-hgv-c",
+      "serviceId": "hgv-c",
+      "label": "Driving assessment (~1 hr) — C1, C or CE",
+      "amountGBP": 84.0,
+      "unit": "per assessment",
+      "note": "A medical is needed first if you're on a provisional licence."
+    },
+    {
+      "id": "c-5-hgv-ce",
       "serviceId": "hgv-ce",
-      "label": "HGV Category C+E training course",
-      "amountGBP": 1695,
-      "unit": "per course",
-      "includes": ["training hours", "use of vehicle and trailer for the test"],
-      "note": "Placeholder rate; excludes DVSA test fees."
+      "label": "Driving assessment (~1 hr) — C1, C or CE",
+      "amountGBP": 84.0,
+      "unit": "per assessment",
+      "note": "A medical is needed first if you're on a provisional licence."
     },
     {
-      "id": "be-course",
+      "id": "ce-1",
+      "serviceId": "hgv-ce",
+      "label": "5-day training package + Mod 3A & 3B tests",
+      "amountGBP": 2015.0,
+      "unit": "per course",
+      "note": "£2,015 = 5 days × £310 net (£1,860 inc VAT) + Mod 3A £40 + Mod 3B £115. No all-in price — EXCLUDES medical, theories & CPC (already held with Cat C). Deposit £400.00 required."
+    },
+    {
+      "id": "ce-2",
+      "serviceId": "hgv-ce",
+      "label": "7-day C & C+E combined package + Mod 3 tests",
+      "amountGBP": 2763.8,
+      "unit": "per course",
+      "note": "2 days Cat C + 5 days C+E + the C+E test. £2,998.80 all-in includes all fees + Initial CPC. £310/day within the 7-day package. Deposit £700.00 required."
+    },
+    {
+      "id": "ce-3",
+      "serviceId": "hgv-ce",
+      "label": "Extra tuition day — 4 hrs, weekday",
+      "amountGBP": 398.4,
+      "unit": "per extra day",
+      "note": "£83/hr net. Also the 4-hr vehicle-hire price for a Mod 3B retest (£513.40 inc test fee)."
+    },
+    {
+      "id": "ce-4",
+      "serviceId": "hgv-ce",
+      "label": "Extra tuition day — 4 hrs, Saturday",
+      "amountGBP": 444.0,
+      "unit": "per extra day",
+      "note": "£92.50/hr net."
+    },
+    {
+      "id": "ce-5",
+      "serviceId": "hgv-ce",
+      "label": "Mod 3A vehicle hire (test only)",
+      "amountGBP": 199.2,
+      "unit": "per hire",
+      "note": "Waived if the 3A test falls on a tuition day."
+    },
+    {
+      "id": "be-1",
       "serviceId": "be",
-      "label": "Category B+E (car and trailer) training course",
-      "amountGBP": 495,
+      "label": "4 hrs training — own vehicle, NEDS trailer",
+      "amountGBP": 336.0,
       "unit": "per course",
-      "includes": ["training hours", "use of vehicle and trailer for the test"],
-      "note": "Placeholder rate; excludes DVSA test fees."
+      "note": "Training is optional — no longer a legal requirement before towing (2021 change). Sold rarely."
     },
     {
-      "id": "forklift-course",
-      "serviceId": "forklift",
-      "label": "Forklift truck training course",
-      "amountGBP": 395,
+      "id": "be-2",
+      "serviceId": "be",
+      "label": "4 hrs training — NEDS vehicle + trailer",
+      "amountGBP": 420.0,
       "unit": "per course",
-      "note": "Placeholder rate; varies by truck type and experience."
+      "note": "Vehicle hire adds £84 inc over own-vehicle price."
     },
     {
-      "id": "driver-cpc-day",
+      "id": "cpc-1",
       "serviceId": "driver-cpc",
-      "label": "Driver CPC, one 7-hour module",
-      "amountGBP": 65,
-      "unit": "per 7-hour module",
-      "note": "Placeholder rate."
+      "label": "Single 7-hr module — weekday or Saturday",
+      "amountGBP": 71.25,
+      "unit": "per module",
+      "note": "All-in £80 = £71.25 + £8.75 DSA upload fee (no VAT)."
     },
     {
-      "id": "driver-medical",
+      "id": "cpc-2",
+      "serviceId": "driver-cpc",
+      "label": "Block booking — full 35 hrs (5 modules)",
+      "amountGBP": 316.25,
+      "unit": "per day",
+      "note": "All-in £360 = £316.25 + 5 × £8.75 DSA."
+    },
+    {
+      "id": "cpc-3",
+      "serviceId": "driver-cpc",
+      "label": "Online Driver CPC — per module",
+      "amountGBP": 60.0,
+      "unit": "per module",
+      "note": "Delivered via Enterprise Training. Returning to driving after a break is charged at £80 inc VAT."
+    },
+    {
+      "id": "cpc-4",
+      "serviceId": "driver-cpc",
+      "label": "Group booking — per day, up to 12 candidates (weekday or Sat)",
+      "amountGBP": 714.0,
+      "unit": "per day",
+      "note": "Employer/group rate. + £8.75 DSA per candidate. Additional candidates £40 + VAT (£48) each."
+    },
+    {
+      "id": "cpc-5",
+      "serviceId": "driver-cpc",
+      "label": "DSA upload fee — per candidate per module",
+      "amountGBP": 8.75,
+      "unit": "per candidate per module",
+      "note": "Passed through at cost. No VAT."
+    },
+    {
+      "id": "icpc-1",
+      "serviceId": "driver-cpc",
+      "label": "Initial CPC pack — Mod 2 + Mod 4",
+      "amountGBP": 250.0,
+      "unit": "per course",
+      "note": "Includes Mod 2 DTS study material (£12), Mod 2 test (£23, no VAT), Mod 4 vehicle hire (£144), Mod 4 test (£41, no VAT), admin (£30). Included in the C £2,100 and 7-day £2,998.80 all-in prices; NOT in the C1 £999."
+    },
+    {
+      "id": "icpc-2",
+      "serviceId": "driver-cpc",
+      "label": "Mod 4 only — vehicle hire + test",
+      "amountGBP": 185.0,
+      "unit": "per hire",
+      "note": "£144 hire + £41 test."
+    },
+    {
+      "id": "icpc-3",
+      "serviceId": "driver-cpc",
+      "label": "Mod 4 vehicle hire — reduced rate with a C / C+E package",
+      "amountGBP": 72.0,
+      "unit": "per hire",
+      "note": "This reduced £60 rate applies when booked alongside a Cat C or Cat C+E package; Cat C1 customers pay the full £144 Mod 4 hire rate."
+    },
+    {
+      "id": "adr-1",
+      "serviceId": "adr",
+      "label": "ADR with Tanks — 4 days training + 1 day exams",
+      "amountGBP": 457.5,
+      "unit": "per course",
+      "note": "All-in £565 = £457.50 + 2 × £8.75 DSA + 6 × £15 exam fees (£107.50, no VAT)."
+    },
+    {
+      "id": "adr-2",
+      "serviceId": "adr",
+      "label": "ADR with Tanks + 1-day Driver CPC (6-day bundle)",
+      "amountGBP": 478.75,
+      "unit": "per course",
+      "note": "All-in £595 = £478.75 + DSA + exam fees as above + the CPC day."
+    },
+    {
+      "id": "adr-3",
+      "serviceId": "adr",
+      "label": "Single day — resit / additional classes only",
+      "amountGBP": 96.0,
+      "unit": "per day",
+      "note": "Returning candidates only. Exam fees £15 each still apply; no DSA on resits."
+    },
+    {
+      "id": "flt-0",
+      "serviceId": "forklift",
+      "label": "1 Day Training",
+      "amountGBP": 595.0,
+      "unit": "per day (from)",
+      "note": "Advertised as a starting/'from' price — actual cost depends on group size and experience level."
+    },
+    {
+      "id": "flt-1",
+      "serviceId": "forklift",
+      "label": "Beginner — 1 person, 3 days (24 hrs)",
+      "amountGBP": 2142.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-2",
+      "serviceId": "forklift",
+      "label": "Beginner — 2 people, 4 days (32 hrs)",
+      "amountGBP": 2856.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-3",
+      "serviceId": "forklift",
+      "label": "Beginner — 3 people, 5 days (40 hrs)",
+      "amountGBP": 3570.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-4",
+      "serviceId": "forklift",
+      "label": "Experienced — 1 person, 2 days (16 hrs)",
+      "amountGBP": 1428.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-5",
+      "serviceId": "forklift",
+      "label": "Experienced — 2 people, 2.5 days (20 hrs)",
+      "amountGBP": 1848.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-6",
+      "serviceId": "forklift",
+      "label": "Experienced — 3 people, 3 days (24 hrs)",
+      "amountGBP": 2142.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-7",
+      "serviceId": "forklift",
+      "label": "Refresher — 1 person, half day (4.5 hrs)",
+      "amountGBP": 420.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-8",
+      "serviceId": "forklift",
+      "label": "Refresher — 2 people, 1 day (6 hrs)",
+      "amountGBP": 714.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-9",
+      "serviceId": "forklift",
+      "label": "Refresher — 3 people, 1 day (8 hrs)",
+      "amountGBP": 714.0,
+      "unit": "per course"
+    },
+    {
+      "id": "flt-10",
+      "serviceId": "forklift",
+      "label": "Qualification card — each",
+      "amountGBP": 16.8,
+      "unit": "per card"
+    },
+    {
+      "id": "med-1",
       "serviceId": "driver-medical",
-      "label": "D4 driver medical",
-      "amountGBP": 60,
+      "label": "HGV/PSV medical — weekday",
+      "amountGBP": 55.0,
       "unit": "per medical",
-      "note": "Placeholder rate."
+      "note": "No VAT. Available Monday to Friday."
+    },
+    {
+      "id": "med-2",
+      "serviceId": "driver-medical",
+      "label": "HGV/PSV medical — Saturday",
+      "amountGBP": 65.0,
+      "unit": "per medical",
+      "note": "No VAT."
+    },
+    {
+      "id": "med-3",
+      "serviceId": "driver-medical",
+      "label": "Medical added to a C1 / C / C+E training package",
+      "amountGBP": 50.0,
+      "unit": "per medical",
+      "note": "Discounted rate when bundled (Order Hub 'LGV Driver Medical £50' on the C/CE/C1 forms; CWHR010 'ADD MEDICAL (£50)')."
     }
   ]
 }

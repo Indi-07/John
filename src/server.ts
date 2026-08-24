@@ -10,6 +10,7 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { config } from "./config.js";
+import { services, prices } from "./knowledge.js";
 import { answer, answerStream } from "./pipeline.js";
 import { ChatRequestSchema } from "./types.js";
 
@@ -47,6 +48,10 @@ app.get("/health", (c) =>
 );
 
 app.get("/", (c) => c.html(widgetHtml));
+
+// Feeds the widget's price calculator. Same approved services/prices the
+// chat itself is grounded on — never a separate copy that could drift.
+app.get("/catalogue", (c) => c.json({ services, prices }));
 
 // Brand assets (logo, icon) for the widget.
 app.use("/assets/*", serveStatic({ root: "./public" }));

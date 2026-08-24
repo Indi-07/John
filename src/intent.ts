@@ -9,12 +9,14 @@ import type { Intent } from "./types.js";
 const PRICE_HINTS = [
   "price", "prices", "cost", "costs", "how much", "fee", "fees", "charge",
   "rate", "rates", "£", "pounds", "quote", "expensive", "cheap",
+  "deposit", "deposits",
 ];
 
 const AVAILABILITY_HINTS = [
   "availab", "available", "when", "next course", "next date", "dates",
   "start date", "slot", "spaces", "space", "book a place", "openings",
-  "this week", "next week", "week commencing",
+  "this week", "next week", "week commencing", "starting soon", "start soon",
+  "coming up", "upcoming", "next start", "next intake", "places left",
 ];
 
 const LEAD_HINTS = [
@@ -26,6 +28,21 @@ const GREETING = ["hi", "hello", "hey", "good morning", "good afternoon"];
 
 export function isGreeting(text: string): boolean {
   return GREETING.includes(text.toLowerCase().trim());
+}
+
+// A standalone "thanks"-shaped message (not "thanks, but also...") gets a
+// fixed acknowledgement + offer to help further — see THANKS_TEXT. Matched
+// as a whole message, same conservative approach as isGreeting/
+// isShortAffirmative, so a thank-you attached to a real follow-up question
+// still routes normally instead of being swallowed by this reply.
+const THANKS = [
+  "thanks", "thank you", "thanks a lot", "thank you so much", "thanks so much",
+  "many thanks", "much appreciated", "appreciate it", "thanks a bunch",
+  "cheers", "ta", "thankyou", "thx", "ty",
+];
+
+export function isThanks(text: string): boolean {
+  return THANKS.includes(text.toLowerCase().trim().replace(/[.!]+$/, ""));
 }
 
 // A short reply that only makes sense as an answer to something the bot just
@@ -174,10 +191,13 @@ function has(text: string, needles: string[]): boolean {
 // symbol keywords (e.g. "category c", "c+e", "7.5t") fall back to substring.
 function keywordHit(text: string, keyword: string): boolean {
   const k = keyword.toLowerCase();
-  if (/^[a-z0-9]+$/.test(k)) {
-    return new RegExp(`\\b${k}\\b`).test(text);
-  }
-  return text.includes(k);
+  const escaped = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // Word-bounded on both ends (not a plain substring) so a keyword like
+  // "category c" doesn't match inside "category c1" or "category c+e" —
+  // \b alone blocks the digit case (both are word chars, no boundary
+  // between them) but not "+" (a non-word char, so \b sees a boundary
+  // there); the trailing (?!\+) closes that gap specifically.
+  return new RegExp(`\\b${escaped}\\b(?!\\+)`).test(text);
 }
 
 // Which services does this message mention? Uses keyword hits first, then a
@@ -215,6 +235,40 @@ export function isBroadOfferingQuery(text: string): boolean {
   const t = text.toLowerCase();
   if (!has(t, BROAD_OFFER_HINTS)) return false;
   return servicesMentioned(t).length === 0;
+}
+
+// A question about how courses relate to or differ from one another (rather
+// than about one course, or the full list) — routed to the course-comparison
+// reference doc instead of ordinary retrieval, which has no way to answer a
+// "how does X differ from Y" question well since it's built to find the
+// single best-matching fact, not to compare across several.
+const COMPARISON_HINTS = [
+  "difference between", "differences between", "compare", "comparison",
+  "vs ", "versus", "similar", "similarit", "how do they differ",
+  "how does it differ", "which is better", "what's the difference",
+];
+
+export function isCourseComparisonQuery(text: string): boolean {
+  return has(text.toLowerCase(), COMPARISON_HINTS);
+}
+
+// Either direction of "which qualification for which job" — what someone
+// needs for a job ("what do I need to become a...") or what a qualification
+// is actually for ("what can I do with a C1 licence") — routed to the
+// job-mapping reference doc, which answers both symmetrically, rather than
+// ordinary retrieval, which has no job/career framing to match against at all.
+const JOB_QUALIFICATION_HINTS = [
+  "what job", "what jobs", "what career", "what careers",
+  "what can i do with", "what could i do with", "what's it used for",
+  "what is it used for", "what's this used for", "used for",
+  "what do i need to become", "what do i need for a career",
+  "what qualification do i need", "what qualifications do i need",
+  "what course do i need to become", "what training do i need to become",
+  "career as a", "work as a", "job as a", "need to work as a",
+];
+
+export function isJobQualificationQuery(text: string): boolean {
+  return has(text.toLowerCase(), JOB_QUALIFICATION_HINTS);
 }
 
 export interface Routed {

@@ -27,6 +27,8 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }
   body {
+    position: relative;
+    overflow: hidden;
     font-family: var(--body);
     color: var(--charcoal);
     background: var(--light);
@@ -35,13 +37,40 @@
     justify-content: flex-start;
     padding: 24px;
   }
-  .app {
+  .app-wrap {
     position: relative;
     width: 100%;
     max-width: 440px;
     min-width: 320px;
     height: min(720px, 92vh);
     min-height: 360px;
+  }
+  .backdrop {
+    position: absolute;
+    inset: -8px;
+    background: var(--red);
+    border-radius: 16px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .app.minimized ~ .backdrop {
+    display: none;
+  }
+  /* The wrapper carries the widget's box size (see .app-wrap) so the
+     backdrop can always match it exactly, including mid-resize — but that
+     means it must also collapse to nothing once .app floats free via
+     position:fixed while minimized, or it'd leave an invisible reserved
+     gap in the page's flex layout where the widget used to be. */
+  .app-wrap:has(.app.minimized) {
+    width: auto;
+    height: auto;
+    min-width: 0;
+    min-height: 0;
+  }
+  .app {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
     background: var(--white);
     border-radius: 12px;
     box-shadow: 0 12px 40px rgba(0,0,0,0.18);
@@ -101,10 +130,13 @@
     position: fixed;
     top: 24px;
     left: 24px;
+    right: auto;
+    bottom: auto;
     height: auto;
     width: auto;
   }
   .app.minimized .ribbon,
+  .app.minimized .text-size-bar,
   .app.minimized .chat,
   .app.minimized footer {
     display: none;
@@ -122,22 +154,20 @@
   .text-size-bar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 18px;
+    gap: 6px;
+    padding: 4px 18px;
     background: var(--light);
     border-bottom: 1px solid var(--rule-2);
-    font-size: 12px;
-    color: var(--grey);
   }
   .text-size-bar .btn {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-    border: 1px solid var(--rule);
-    background: var(--white);
-    color: var(--charcoal);
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--red);
+    background: var(--charcoal);
+    color: var(--white);
     font-family: var(--body);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     line-height: 1;
     cursor: pointer;
@@ -145,7 +175,7 @@
     align-items: center;
     justify-content: center;
   }
-  .text-size-bar .btn:hover:not(:disabled) { border-color: var(--red); color: var(--red-600); }
+  .text-size-bar .btn:hover:not(:disabled) { background: #000000; }
   .text-size-bar .btn:disabled { opacity: 0.4; cursor: default; }
 
   .chat {
@@ -169,19 +199,89 @@
     font-family: var(--body);
   }
   .chip:hover { border-color: var(--red); color: var(--red-600); }
+  .chip.chip-primary { border-color: var(--red); color: var(--red-600); font-weight: 700; }
+  .chip.chip-primary:hover { background: var(--red); color: var(--white); }
+
+  .calc-card {
+    align-self: flex-start;
+    max-width: 92%;
+    width: 320px;
+    background: var(--light);
+    border: 1px solid var(--rule-2);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: calc(14px * var(--font-scale));
+  }
+  .calc-title { font-weight: 700; color: var(--charcoal); }
+  .calc-row { display: flex; flex-direction: column; gap: 4px; }
+  .calc-row label { font-size: calc(12px * var(--font-scale)); color: var(--grey); }
+  .calc-row select {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-family: var(--body);
+    font-size: calc(14px * var(--font-scale));
+    background: var(--white);
+    color: var(--charcoal);
+  }
+  .calc-result {
+    border-top: 1px solid var(--rule-2);
+    padding-top: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .calc-result.show { display: flex; }
+  .calc-amount { font-family: var(--display); font-weight: 800; font-size: calc(20px * var(--font-scale)); color: var(--red-600); }
+  .calc-note { font-size: calc(12px * var(--font-scale)); color: var(--grey); }
+  .calc-ask {
+    align-self: flex-start;
+    border: none;
+    background: none;
+    color: var(--red-600);
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: calc(13px * var(--font-scale));
+    cursor: pointer;
+    padding: 0;
+  }
+  .calc-ask:hover { color: var(--red-700); text-decoration: underline; }
 
   .msg { max-width: 84%; padding: 10px 14px; border-radius: 14px; font-size: calc(15px * var(--font-scale)); line-height: 1.5; white-space: pre-wrap; }
   .msg.user { align-self: flex-end; background: var(--charcoal); color: var(--white); border-bottom-right-radius: 4px; }
   .msg.bot { align-self: flex-start; background: var(--light); color: var(--charcoal); border-bottom-left-radius: 4px; }
   .msg.bot.handoff { background: #fff7e6; border: 1px solid #ffe1a6; }
+  .msg a { color: var(--red-600); word-break: break-word; }
+  .msg.user a { color: var(--white); text-decoration-color: rgba(255,255,255,0.6); }
 
-  .meta { align-self: flex-start; display: flex; flex-wrap: wrap; gap: 6px; margin-top: -6px; }
-  .tag { font-size: calc(11px * var(--font-scale)); color: var(--grey); background: var(--white); border: 1px solid var(--rule-2); border-radius: 6px; padding: 2px 7px; }
-  .tag.intent { color: var(--red-600); border-color: #f6c9c0; }
+  /* Wraps the course image and the reply's message bubble together — never
+     shown alone — when the reply is about exactly one course (see the
+     meta/token-event handling in ask()). A shared flex column with both
+     children at width:100% is what makes the image match the text box's
+     width exactly, rather than the two merely sharing a max-width. */
+  .course-card { align-self: flex-start; max-width: 84%; display: flex; flex-direction: column; gap: 8px; }
+  .course-card .msg { max-width: 100%; }
+  .course-image { width: 100%; display: block; border-radius: 12px; }
 
   .typing { align-self: flex-start; color: var(--grey); font-size: calc(14px * var(--font-scale)); font-style: italic; }
 
-  footer { border-top: 1px solid var(--rule-2); padding: 12px; background: var(--white); }
+  footer { position: relative; border-top: 1px solid var(--rule-2); padding: 12px; background: var(--white); }
+  /* Fades the chat log into the composer instead of an abrupt cutoff — sits
+     just above the footer regardless of the footer's own (content-sized)
+     height, and stays put as new messages are appended since it isn't a
+     child of #chat itself. */
+  .chat-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -90px;
+    height: 90px;
+    background: linear-gradient(to top, rgba(230, 223, 223, 0.55), transparent);
+    pointer-events: none;
+  }
   .composer { display: flex; gap: 8px; }
   .composer input {
     flex: 1;
@@ -213,6 +313,7 @@
 </style>
 </head>
 <body>
+  <div class="app-wrap">
   <div class="app" id="app">
     <header>
       <button class="min-btn" id="minBtn" type="button" title="Minimize chat" aria-label="Minimize chat" aria-pressed="false">−</button>
@@ -221,7 +322,6 @@
     </header>
     <div class="ribbon">Preview build · sample data only · not a live booking system</div>
     <div class="text-size-bar">
-      <span>Text size</span>
       <button class="btn" id="fontDec" type="button" aria-label="Decrease text size">A−</button>
       <button class="btn" id="fontInc" type="button" aria-label="Increase text size">A+</button>
     </div>
@@ -238,6 +338,7 @@
     </div>
 
     <footer>
+      <div class="chat-fade" aria-hidden="true"></div>
       <form class="composer" id="composer">
         <input id="input" type="text" placeholder="Type your question…" autocomplete="off" maxlength="600" />
         <button id="send" type="submit">Send</button>
@@ -245,6 +346,8 @@
       <div class="foot-note">NEDS · 0191 500 9450 · <a href="mailto:info@nedrivingschool.co.uk">info@nedrivingschool.co.uk</a></div>
     </footer>
     <div class="resize-handle" id="resizeHandle" title="Drag to resize"></div>
+  </div>
+  <div class="backdrop" aria-hidden="true"></div>
   </div>
 
 <script>
@@ -260,6 +363,7 @@
   const dot = document.getElementById('dot');
   const statusText = document.getElementById('statusText');
   const app = document.getElementById('app');
+  const appWrap = document.querySelector('.app-wrap');
   const minBtn = document.getElementById('minBtn');
   const fontDec = document.getElementById('fontDec');
   const fontInc = document.getElementById('fontInc');
@@ -295,13 +399,13 @@
   minBtn.addEventListener('click', () => {
     const minimizing = !app.classList.contains('minimized');
     if (minimizing) {
-      savedWidth = app.style.width;
-      savedHeight = app.style.height;
-      app.style.width = '';
-      app.style.height = '';
+      savedWidth = appWrap.style.width;
+      savedHeight = appWrap.style.height;
+      appWrap.style.width = '';
+      appWrap.style.height = '';
     } else {
-      app.style.width = savedWidth;
-      app.style.height = savedHeight;
+      appWrap.style.width = savedWidth;
+      appWrap.style.height = savedHeight;
     }
     app.classList.toggle('minimized', minimizing);
     minBtn.textContent = minimizing ? '+' : '−';
@@ -321,10 +425,10 @@
     resizing = true;
     startX = e.clientX;
     startY = e.clientY;
-    const rect = app.getBoundingClientRect();
+    const rect = appWrap.getBoundingClientRect();
     startW = rect.width;
     startH = rect.height;
-    app.style.maxWidth = 'none';
+    appWrap.style.maxWidth = 'none';
     resizeHandle.setPointerCapture(e.pointerId);
     e.preventDefault();
   });
@@ -335,8 +439,8 @@
     const maxH = window.innerHeight - 24;
     const newW = Math.min(Math.max(startW + (e.clientX - startX), MIN_W), maxW);
     const newH = Math.min(Math.max(startH + (e.clientY - startY), MIN_H), maxH);
-    app.style.width = newW + 'px';
-    app.style.height = newH + 'px';
+    appWrap.style.width = newW + 'px';
+    appWrap.style.height = newH + 'px';
   });
 
   const stopResize = () => { resizing = false; };
@@ -349,33 +453,363 @@
     statusText.textContent = h.mode === 'mock' ? 'preview (mock)' : 'online';
   }).catch(() => { statusText.textContent = 'offline'; });
 
+  // Renders text into el as a mix of text nodes and real <a> elements for
+  // any http(s) URL found — never innerHTML, so this stays safe regardless
+  // of what a live model's phrasing happens to contain. Used for the
+  // initial render (addMessage) and again once a streamed reply finishes
+  // (see ask()'s finally block) — streaming itself just appends raw text
+  // per token, since a URL could be split across chunks and can't be
+  // linkified mid-stream.
+  const URL_RE = /https?:\/\/[^\s)]+/g;
+  function linkify(el, text) {
+    el.textContent = '';
+    let lastIndex = 0;
+    let match;
+    URL_RE.lastIndex = 0;
+    while ((match = URL_RE.exec(text))) {
+      if (match.index > lastIndex) el.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      const a = document.createElement('a');
+      a.href = match[0];
+      a.textContent = match[0];
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      el.appendChild(a);
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < text.length) el.appendChild(document.createTextNode(text.slice(lastIndex)));
+  }
+
   function addMessage(text, who) {
     const el = document.createElement('div');
     el.className = 'msg ' + who;
-    el.textContent = text;
+    linkify(el, text);
     chat.appendChild(el);
     chat.scrollTop = chat.scrollHeight;
     return el;
   }
 
-  function addMeta(intent, citations) {
-    const wrap = document.createElement('div');
-    wrap.className = 'meta';
-    const it = document.createElement('span');
-    it.className = 'tag intent';
-    it.textContent = intent.replace(/_/g, ' ');
-    wrap.appendChild(it);
-    (citations || []).slice(0, 4).forEach(c => {
-      const t = document.createElement('span');
-      t.className = 'tag';
-      t.textContent = c.label;
-      wrap.appendChild(t);
+  // Real NEDS training-vehicle photos, one per course, from "Courses and
+  // images" — only the courses that document actually covers. A course with
+  // no entry here just gets no image, never a wrong or generic stand-in.
+  const COURSE_IMAGES = {
+    'hgv-c1': 'c1-training.jpg',
+    'hgv-c': 'c-training.jpg',
+    'hgv-ce': 'ce-training.jpg',
+    'driver-cpc': 'cpc-training.jpg',
+  };
+
+  // Per-page-load memory of which course images this conversation has
+  // already shown, keyed by serviceId: { turn, movedAway }. `turn` is the
+  // ask()-call index it was shown at; `movedAway` flips true once a LATER
+  // turn is about anything else (a different course, no course, or several
+  // at once) — tracked on every call below, not just ones that end up
+  // showing an image, so a run of generic questions still counts as having
+  // left the topic. Resets naturally on page reload, same as sessionId.
+  const shownImages = new Map();
+  let turnIndex = 0;
+  const REPEAT_AFTER_TURNS = 5;
+  const ASK_AGAIN_RE = /\b(show|see|view)\b/i;
+  const MEDIA_WORD_RE = /\b(picture|photo|image|pic)\b/i;
+
+  // Built from the 'meta' SSE event (so it's ready the instant the reply is
+  // about exactly one course) but NOT attached to #chat yet — ask() attaches
+  // it on the first 'token' event instead, so the image appears at the same
+  // moment the reply's text starts, not several hundred ms earlier while
+  // the model is still "typing…". The message bubble then gets created
+  // INSIDE this same card rather than as a separate #chat child, so the
+  // image and the text box share one width via the .course-card CSS
+  // (both children at width:100% of the same flex column) instead of
+  // merely matching a max-width.
+  function buildCourseCard(citations, visitorMessage) {
+    const services = (citations || []).filter(c => c.kind === 'service');
+    const currentServiceId = services.length === 1 ? services[0].id : null;
+
+    // Any turn not specifically about the same single course counts as
+    // having moved away from it, per the "moved away and come back" reshow
+    // condition below.
+    shownImages.forEach((info, id) => {
+      if (id !== currentServiceId) info.movedAway = true;
     });
+
+    if (!currentServiceId) return null;
+    const file = COURSE_IMAGES[currentServiceId];
+    if (!file) return null;
+
+    const shown = shownImages.get(currentServiceId);
+    if (shown) {
+      const explicitlyAskedAgain = ASK_AGAIN_RE.test(visitorMessage) && MEDIA_WORD_RE.test(visitorMessage);
+      const movedAwayAndBack = shown.movedAway && (turnIndex - shown.turn) >= REPEAT_AFTER_TURNS;
+      if (!explicitlyAskedAgain && !movedAwayAndBack) return null; // shown too recently — text only
+    }
+    shownImages.set(currentServiceId, { turn: turnIndex, movedAway: false });
+
+    const card = document.createElement('div');
+    card.className = 'course-card';
+    const img = document.createElement('img');
+    img.className = 'course-image';
+    img.src = '/assets/courses/' + file;
+    img.alt = services[0].label;
+    // The image loads asynchronously, after the surrounding text has
+    // already finished streaming and auto-scrolling — without this, its
+    // eventual height shifts the layout and can leave the reply's own text
+    // scrolled just out of view below it.
+    img.addEventListener('load', () => { chat.scrollTop = chat.scrollHeight; });
+    card.appendChild(img);
+    return card;
+  }
+
+  // Follow-up suggestion chips, rendered fresh after every bot reply (not
+  // just the first). Click handling is a single delegated listener on #chat
+  // (see below) rather than one attached per chips block, so a chip added
+  // here works immediately without any extra wiring. When showCalculator is
+  // set (price-related turns — see the ask() call site), an extra chip opens
+  // the price calculator instead of sending a chat message; it's marked with
+  // data-calc so the delegated listener can tell the two apart.
+  function addChips(suggestions, showCalculator) {
+    if ((!suggestions || !suggestions.length) && !showCalculator) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'chips';
+    (suggestions || []).forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'chip';
+      btn.type = 'button';
+      btn.textContent = s;
+      wrap.appendChild(btn);
+    });
+    if (showCalculator) {
+      const btn = document.createElement('button');
+      btn.className = 'chip chip-primary';
+      btn.type = 'button';
+      btn.dataset.calc = '1';
+      btn.textContent = 'Calculate my course cost';
+      wrap.appendChild(btn);
+    }
     chat.appendChild(wrap);
     chat.scrollTop = chat.scrollHeight;
   }
 
+  // Price calculator — grounded in the exact same approved data the chat
+  // itself answers from (see src/server.ts's /catalogue), never a separate
+  // guessed formula. Fetched once and cached.
+  let cataloguePromise = null;
+  function loadCatalogue() {
+    if (!cataloguePromise) cataloguePromise = fetch('/catalogue').then(r => r.json());
+    return cataloguePromise;
+  }
+
+  // Mirrors facts.ts's gbp() so the calculator always formats the same way
+  // the bot's own answers do.
+  function gbp(amount) {
+    return '£' + (amount % 1 === 0 ? amount.toFixed(0) : amount.toFixed(2));
+  }
+
+  // Forklift pricing is a tier × group-size lookup table, not a formula (see
+  // tooling/ingest_prices_csv.py) — parsed from the approved labels rather
+  // than hand-coded rates that could drift from data/prices.json.
+  const FORKLIFT_RE = /^(Beginner|Experienced|Refresher) — (\d+) (?:person|people)/;
+
+  async function openCalculator() {
+    const { services: courses, prices: allPrices } = await loadCatalogue();
+    const byService = {};
+    allPrices.forEach(p => {
+      (byService[p.serviceId] = byService[p.serviceId] || []).push(p);
+    });
+
+    const card = document.createElement('div');
+    card.className = 'calc-card';
+
+    const title = document.createElement('div');
+    title.className = 'calc-title';
+    title.textContent = 'Course cost calculator';
+    card.appendChild(title);
+
+    const courseRow = document.createElement('div');
+    courseRow.className = 'calc-row';
+    const courseLabel = document.createElement('label');
+    courseLabel.textContent = 'Course';
+    const courseSelect = document.createElement('select');
+    const coursePh = document.createElement('option');
+    coursePh.value = '';
+    coursePh.textContent = 'Choose a course…';
+    courseSelect.appendChild(coursePh);
+    courses.forEach(s => {
+      if (!byService[s.id] || !byService[s.id].length) return;
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = s.name;
+      courseSelect.appendChild(opt);
+    });
+    courseRow.appendChild(courseLabel);
+    courseRow.appendChild(courseSelect);
+    card.appendChild(courseRow);
+
+    const varsWrap = document.createElement('div');
+    varsWrap.style.display = 'none';
+    varsWrap.style.flexDirection = 'column';
+    varsWrap.style.gap = '10px';
+    card.appendChild(varsWrap);
+
+    const result = document.createElement('div');
+    result.className = 'calc-result';
+    const amountEl = document.createElement('div');
+    amountEl.className = 'calc-amount';
+    const noteEl = document.createElement('div');
+    noteEl.className = 'calc-note';
+    const askBtn = document.createElement('button');
+    askBtn.className = 'calc-ask';
+    askBtn.type = 'button';
+    askBtn.textContent = 'Ask about this in chat →';
+    result.appendChild(amountEl);
+    result.appendChild(noteEl);
+    result.appendChild(askBtn);
+    card.appendChild(result);
+
+    function showPrice(p) {
+      amountEl.textContent = gbp(p.amountGBP) + ' ' + p.unit;
+      noteEl.textContent = p.note || '';
+      noteEl.style.display = p.note ? '' : 'none';
+      result.classList.add('show');
+      askBtn.onclick = () => {
+        card.remove();
+        ask('How much is ' + p.label + '?');
+      };
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function renderOptionPicker(options) {
+      const label = document.createElement('label');
+      label.textContent = 'Which best matches your situation?';
+      const select = document.createElement('select');
+      const ph = document.createElement('option');
+      ph.value = '';
+      ph.textContent = 'Choose an option…';
+      select.appendChild(ph);
+      options.forEach((p, i) => {
+        const opt = document.createElement('option');
+        opt.value = String(i);
+        opt.textContent = p.label + ' — ' + gbp(p.amountGBP) + ' ' + p.unit;
+        select.appendChild(opt);
+      });
+      select.addEventListener('change', () => {
+        result.classList.remove('show');
+        if (select.value !== '') showPrice(options[Number(select.value)]);
+      });
+      const row = document.createElement('div');
+      row.className = 'calc-row';
+      row.appendChild(label);
+      row.appendChild(select);
+      varsWrap.appendChild(row);
+    }
+
+    function renderTierSizePicker(entries) {
+      const tiers = [...new Set(entries.map(e => e.tier))];
+
+      const tierRow = document.createElement('div');
+      tierRow.className = 'calc-row';
+      const tierLabel = document.createElement('label');
+      tierLabel.textContent = 'Experience level';
+      const tierSelect = document.createElement('select');
+      const tierPh = document.createElement('option');
+      tierPh.value = '';
+      tierPh.textContent = 'Choose…';
+      tierSelect.appendChild(tierPh);
+      tiers.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        tierSelect.appendChild(opt);
+      });
+      tierRow.appendChild(tierLabel);
+      tierRow.appendChild(tierSelect);
+
+      const sizeRow = document.createElement('div');
+      sizeRow.className = 'calc-row';
+      sizeRow.style.display = 'none';
+      const sizeLabel = document.createElement('label');
+      sizeLabel.textContent = 'Number of people in the group';
+      const sizeSelect = document.createElement('select');
+      sizeRow.appendChild(sizeLabel);
+      sizeRow.appendChild(sizeSelect);
+
+      tierSelect.addEventListener('change', () => {
+        result.classList.remove('show');
+        sizeSelect.innerHTML = '';
+        if (!tierSelect.value) {
+          sizeRow.style.display = 'none';
+          return;
+        }
+        sizeRow.style.display = '';
+        const sizePh = document.createElement('option');
+        sizePh.value = '';
+        sizePh.textContent = 'Choose…';
+        sizeSelect.appendChild(sizePh);
+        entries
+          .filter(e => e.tier === tierSelect.value)
+          .sort((a, b) => a.size - b.size)
+          .forEach(e => {
+            const opt = document.createElement('option');
+            opt.value = String(e.size);
+            opt.textContent = e.size + (e.size === 1 ? ' person' : ' people');
+            sizeSelect.appendChild(opt);
+          });
+      });
+
+      sizeSelect.addEventListener('change', () => {
+        result.classList.remove('show');
+        if (!sizeSelect.value) return;
+        const match = entries.find(e => e.tier === tierSelect.value && e.size === Number(sizeSelect.value));
+        if (match) showPrice(match.p);
+      });
+
+      varsWrap.appendChild(tierRow);
+      varsWrap.appendChild(sizeRow);
+    }
+
+    function renderVariables(serviceId) {
+      varsWrap.innerHTML = '';
+      varsWrap.style.display = 'none';
+      result.classList.remove('show');
+      const options = byService[serviceId] || [];
+
+      const forkliftEntries = options
+        .map(p => {
+          const m = p.label.match(FORKLIFT_RE);
+          return m ? { p: p, tier: m[1], size: Number(m[2]) } : null;
+        })
+        .filter(Boolean);
+
+      varsWrap.style.display = 'flex';
+
+      // Take the tier/size path once enough options share that shape — a
+      // couple of non-matching entries (the forklift "from" headline, the
+      // qualification card) are accessories, not course-cost options, and
+      // are simply left out of this picker rather than blocking it.
+      if (forkliftEntries.length >= 2) {
+        renderTierSizePicker(forkliftEntries);
+      } else if (options.length === 1) {
+        varsWrap.style.display = 'none';
+        showPrice(options[0]);
+      } else {
+        renderOptionPicker(options);
+      }
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    courseSelect.addEventListener('change', () => {
+      if (!courseSelect.value) {
+        varsWrap.style.display = 'none';
+        result.classList.remove('show');
+        return;
+      }
+      renderVariables(courseSelect.value);
+    });
+
+    chat.appendChild(card);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
   async function ask(message) {
+    turnIndex++;
     addMessage(message, 'user');
     const typing = document.createElement('div');
     typing.className = 'typing';
@@ -386,6 +820,7 @@
     sendBtn.disabled = true;
     let botEl = null;
     let meta = null;
+    let pendingCourseCard = null;
 
     try {
       const res = await fetch('/chat/stream', {
@@ -413,9 +848,19 @@
           const data = JSON.parse(dataLine.slice(5).trim());
           if (event === 'meta') {
             meta = data;
+            pendingCourseCard = buildCourseCard(meta.citations, message);
           } else if (event === 'token') {
             typing.remove();
-            if (!botEl) botEl = addMessage('', 'bot');
+            if (!botEl) {
+              if (pendingCourseCard) {
+                chat.appendChild(pendingCourseCard);
+                botEl = document.createElement('div');
+                botEl.className = 'msg bot';
+                pendingCourseCard.appendChild(botEl);
+              } else {
+                botEl = addMessage('', 'bot');
+              }
+            }
             botEl.textContent += data;
             chat.scrollTop = chat.scrollHeight;
           }
@@ -426,9 +871,11 @@
       addMessage("Sorry — I can't reach our system right now. Please call the office on 0191 500 9450.", 'bot');
     } finally {
       typing.remove();
+      if (botEl) linkify(botEl, botEl.textContent);
       if (meta) {
         if (botEl && meta.intent === 'training_availability_query') botEl.classList.add('handoff');
-        addMeta(meta.intent, meta.citations);
+        const showCalculator = meta.intent === 'price_query' || meta.intent === 'service_query';
+        addChips(meta.suggestions, showCalculator);
       }
       sendBtn.disabled = false;
       input.focus();
@@ -440,11 +887,18 @@
     const message = input.value.trim();
     if (!message) return;
     input.value = '';
-    document.getElementById('starter')?.remove();
     ask(message);
   });
 
-  document.getElementById('starter').addEventListener('click', (e) => {
+  // One delegated listener covers every chips block — the hardcoded starter
+  // chips AND every chips block addChips() adds later — so a chip works the
+  // same whether it's the first message or the tenth, with no per-block
+  // wiring to remember.
+  chat.addEventListener('click', (e) => {
+    if (e.target.dataset && e.target.dataset.calc) {
+      openCalculator();
+      return;
+    }
     if (e.target.classList.contains('chip')) {
       input.value = e.target.textContent;
       form.dispatchEvent(new Event('submit'));

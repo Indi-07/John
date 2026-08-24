@@ -122,6 +122,22 @@ export async function* stream(
   }
 }
 
+// Pulls just the "£amount unit" headline out of a formatted PRICE line
+// (`${label}: £${amount} ${unit}${includes}${note}` — see facts.ts's
+// priceLine()). Slices from the first "£" rather than splitting the whole
+// line on " — ", since a real price label can itself contain " — " (e.g.
+// "Beginner — 1 person, 3 days") and would otherwise get cut at the wrong
+// dash, well before the actual amount.
+function priceHeadline(line: string): string | undefined {
+  const idx = line.indexOf("£");
+  if (idx === -1) return undefined;
+  return line
+    .slice(idx)
+    .replace(/\s*\(includes:[^)]*\)/, "")
+    .split(" — ")[0]
+    ?.trim();
+}
+
 // ---- Mock answer: a templated, grounded reply for demos without the model ----
 // The pipeline only calls complete()/stream() once it has non-empty facts to
 // ground on (see pipeline.ts's UNSURE_TEXT short-circuit), so `facts` here is
@@ -131,6 +147,18 @@ function mockAnswer(messages: ChatMessage[]): string {
   const factsMatch = user.match(/APPROVED FACTS:\n([\s\S]*?)\n\nVISITOR QUESTION/);
   const facts = factsMatch?.[1]?.trim() ?? "";
   const lines = facts.split("\n");
+
+  // Rule 19: a "Do you...", "Can you...", "Is it...", "Does NEDS..."-shaped
+  // question gets a leading "Yes"/"No" as its own opening word — never left
+  // for the person to infer from the detail that follows.
+  const questionMatch = user.match(/VISITOR QUESTION:\n([\s\S]*?)\n\nAnswer the visitor now/);
+  const question = questionMatch?.[1]?.trim() ?? "";
+  const isYesNoQuestion = /^(do|does|is|are|can|could|will|would)\b/i.test(question);
+
+  // Rule 20: "your"/"you" about a course (e.g. "What are your trailer
+  // lessons?") signals ownership, not a general concept — lead with what
+  // NEDS offers instead of rule 5's definition-first ordering.
+  const isOwnershipQuestion = /\b(your|you)\b/i.test(question);
 
   const scope = lines.find((l) => l.startsWith("SCOPE "))?.replace(/^SCOPE /, "");
   if (scope) return `[mock] ${scope}`;
@@ -157,7 +185,7 @@ function mockAnswer(messages: ChatMessage[]): string {
     const svcLine2 = lines.find((l) => l.startsWith("SERVICE "))?.replace(/^SERVICE /, "");
     const name = svcLine2?.split(": ")[0];
     const priceLine2 = lines.find((l) => l.startsWith("PRICE "))?.replace(/^PRICE /, "");
-    const amount = priceLine2?.replace(/\s*\(includes:[^)]*\)/, "").split(" — ")[0]?.split(": ")[1];
+    const amount = priceLine2 ? priceHeadline(priceLine2) : undefined;
     if (name && amount) {
       return `[mock] Sure — ${name} is ${amount}. Let me know if you'd like to know anything else.`;
     }
@@ -168,10 +196,10 @@ function mockAnswer(messages: ChatMessage[]): string {
   const svcLine = lines.find((l) => l.startsWith("SERVICE "))?.replace(/^SERVICE /, "");
   const faqAnswer = lines.find((l) => l.startsWith("FAQ Q: "))?.match(/ A: (.+)$/)?.[1];
 
-  const amounts = priceLines.slice(0, 3).map((l) => {
-    const headline = l.replace(/\s*\(includes:[^)]*\)/, "").split(" — ")[0] ?? l;
-    return headline.split(": ")[1] ?? headline;
-  });
+  const amounts = priceLines
+    .slice(0, 3)
+    .map((l) => priceHeadline(l))
+    .filter((a): a is string => Boolean(a));
   const priceSentence = amounts.length
     ? amounts.length > 1
       ? `At NEDS, prices are ${amounts.join(", ")}, depending on the course.`
@@ -184,11 +212,19 @@ function mockAnswer(messages: ChatMessage[]): string {
   // visitor asks a follow-up; the mock preview just can't rephrase like that.
   const parts: string[] = [];
   if (definitionText && svcLine) {
-    // "What is X" pattern: plain, generic explanation as its own sentence
-    // first, THEN connect it to what NEDS offers — never the other way round.
     const name = svcLine.split(": ")[0] ?? svcLine;
-    parts.push(definitionText);
-    parts.push(`We offer ${name} here at NEDS, if that's something you need.`);
+    if (isOwnershipQuestion) {
+      // "What are your X" pattern: "your"/"you" signals the visitor is
+      // asking about NEDS's own offering, not the general concept — lead
+      // with the offer, definition second, the reverse of the branch below.
+      parts.push(`We offer ${name} here at NEDS.`);
+      parts.push(definitionText);
+    } else {
+      // "What is X" pattern: plain, generic explanation as its own sentence
+      // first, THEN connect it to what NEDS offers — never the other way round.
+      parts.push(definitionText);
+      parts.push(`We offer ${name} here at NEDS, if that's something you need.`);
+    }
   } else if (svcLine && priceSentence) {
     // Direct factual question (e.g. "how much is..."): lead with the direct
     // answer — the price — and put the description second, as supporting
@@ -208,6 +244,20 @@ function mockAnswer(messages: ChatMessage[]): string {
   }
   if (!parts.length && faqAnswer) parts.push(faqAnswer);
   if (!parts.length) parts.push("Happy to help with that.");
+
+  // Rule 19: prefix the lead sentence with "Yes"/"No" as its own opening
+  // word for a yes/no-shaped question, rather than leaving the person to
+  // infer the answer from the detail that follows. Facts reaching the model
+  // are always things NEDS actually does (out-of-scope/unmatched cases are
+  // declined deterministically before this point — see pipeline.ts), so the
+  // lead sentence defaults "Yes" unless it's itself phrased as a negation
+  // (an FAQ answer along the lines of "We do not...").
+  const [lead] = parts;
+  if (isYesNoQuestion && lead && !/^(yes|no)\b/i.test(lead.trim())) {
+    const isNegative = /\b(not|n't|never|no longer)\b/i.test(lead);
+    const opener = isNegative ? "No" : "Yes";
+    parts[0] = `${opener} — ${lead.charAt(0).toLowerCase()}${lead.slice(1)}`;
+  }
 
   // Information pacing: a service_query deliberately doesn't get price facts
   // (see pipeline.ts's serviceFactsOnly) — so if we described a service but
