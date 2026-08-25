@@ -297,6 +297,10 @@ const JOB_QUALIFICATION_HINTS = [
   "what do i need to become", "what do i need for a career",
   "what qualification do i need", "what qualifications do i need",
   "what course do i need to become", "what training do i need to become",
+  "what do i need to drive", // e.g. "what do I need to drive a skip
+  // lorry?" — job-framed by an activity/vehicle rather than "become a
+  // ___", which none of the "to become"/"career"/"job as a" phrasings
+  // above catch.
   "career as a", "work as a", "job as a", "need to work as a",
 ];
 

@@ -182,6 +182,113 @@ function rewriteSimilaritiesForCount(text: string, narrowedCount: number): strin
     );
 }
 
+// Hand-verified trigger keywords for each bulleted reason in
+// data/courses-by-job.md's "who needs this and why" sections, keyed by the
+// section's own exact "## " heading line. Each inner array corresponds, IN
+// ORDER, to that section's bullets (one keyword-list per bullet) — verified
+// by reading the doc, not derived by splitting its prose at runtime, which
+// would risk cutting a multi-word reason like "light removals and
+// furniture transport" in half on its own internal "and" (see
+// narrowJobDoc's comment for why that matters). Only sections with an
+// enumerable bulleted reason list are here — Driver CPC, Driver medical
+// (D4), and the Summary section have no such list to narrow.
+const JOB_REASON_KEYWORDS: Record<string, string[][]> = {
+  "## HGV Category C1 (3.5–7.5 tonnes)": [
+    ["parcel", "courier"],
+    ["ambulance"],
+    ["removals", "furniture"],
+    ["catering", "hospitality"],
+    ["horsebox", "equestrian"],
+  ],
+  "## HGV Category C (Class 2, over 7.5 tonnes)": [
+    ["skip lorry", "scaffold"],
+    ["supermarket", "wholesaler"],
+    ["refuse", "waste collection"],
+    ["tipper", "construction-related haulage"],
+  ],
+  "## HGV Category C+E (Class 1, articulated)": [
+    ["long-distance", "european haulage"],
+    ["container transport", "ports"],
+    ["trunking"],
+    ["specialist", "high-value freight"],
+  ],
+  "## Category B+E (car and trailer)": [
+    ["caravan", "leisure trailer"],
+    ["boat trailer"],
+    ["horsebox towing"],
+    ["builders towing"],
+    ["plant hire", "tool hire"],
+  ],
+  "## ADR (dangerous goods) training": [
+    ["fuel tanker", "petroleum tanker"],
+    ["industrial gas"],
+    ["chemical", "pharmaceutical"],
+    ["hazardous waste"],
+  ],
+  "## Forklift truck training": [
+    ["warehouse", "distribution centre"],
+    ["construction site"],
+    ["retail", "builders' merchant", "garden centre", "diy store", "trade counter"],
+    ["manufacturing", "production line"],
+  ],
+  "## Operator Licence Awareness Training (OLAT)": [
+    ["director", "business owner"],
+    ["transport manager"],
+    ["sole trader", "new entrant"],
+  ],
+};
+
+// Narrows data/courses-by-job.md down to just the one reason a "what do I
+// need for job X" question actually asked about, instead of handing over a
+// whole section's list of unrelated reasons — e.g. "if I want to be an
+// ambulance driver, what qualification do I need?" only names ambulance
+// driving, not parcel/courier delivery, removals, catering, or horseboxes,
+// all of which live in the same HGV Category C1 section. Unlike
+// narrowComparisonDoc, this can't filter "- **Label** ..." bullet lines by
+// name, because this doc's bullets have no bold label — each is a plain
+// reason phrase (see JOB_REASON_KEYWORDS's comment on why splitting that
+// prose at runtime instead would risk cutting a multi-word reason in half).
+// So this matches the visitor's own wording against a small hand-verified
+// keyword list per bullet instead.
+//
+// Returns null (fall back to the full section, same conservative default as
+// narrowComparisonDoc) when zero or more than one bullet's keywords match —
+// a vague "what qualifications do I need for HGV work" or a message naming
+// two different jobs shouldn't have this guess which one reason to keep.
+function narrowJobDoc(doc: string, message: string): string | null {
+  const t = message.toLowerCase();
+  const hits: { section: string; bulletIndex: number }[] = [];
+
+  for (const [heading, keywordSets] of Object.entries(JOB_REASON_KEYWORDS)) {
+    keywordSets.forEach((keywords, bulletIndex) => {
+      const matched = keywords.some((kw) => {
+        const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        return new RegExp(`\\b${escaped}\\b`, "i").test(t);
+      });
+      if (matched) hits.push({ section: heading, bulletIndex });
+    });
+  }
+  if (hits.length !== 1) return null; // none, or ambiguous — don't guess
+
+  const { section: heading, bulletIndex } = hits[0]!;
+  const sections = doc.split(/\n(?=## )/);
+  const section = sections.find((s) => s.startsWith(heading));
+  if (!section) return null;
+
+  const bullets = [...section.matchAll(/^- (.+)$/gm)];
+  const target = bullets[bulletIndex];
+  if (!target) return null;
+
+  // Everything before the first bullet is the section's own "who this
+  // suits"/"common reasons someone needs it" lead-in — kept as the intro to
+  // the single matched reason. Other bullets, and anything after the
+  // bullet list (a general closing remark, not a specific reason), are
+  // dropped.
+  const bulletsStart = section.search(/\n- /);
+  const intro = section.slice(0, bulletsStart).trimEnd();
+  return `${intro} ${target[1]!.trim()}.`;
+}
+
 // Decide the intent and assemble the approved-fact context for the message.
 function ground(message: string, sessionId: string | undefined): Grounding {
   let { intent, serviceIds } = route(message);
@@ -296,9 +403,17 @@ function ground(message: string, sessionId: string | undefined): Grounding {
   // job-guide reference doc rather than ordinary retrieval, which has
   // nothing to match a job/career framing against.
   if (isJobQualificationQuery(message)) {
+    // When the message clearly names one specific job/reason (see
+    // narrowJobDoc's comment for why this can't just be left to rule 33/
+    // prompt instructions alone), narrow the reference doc down to just
+    // that reason before it ever reaches the model/mock renderer. A vague
+    // question, one naming no specific job, or one naming more than one,
+    // falls back to the full doc — same conservative default as
+    // narrowComparisonDoc.
+    const narrowed = narrowJobDoc(coursesByJobMd, message);
     return {
       intent: "faq_query",
-      factsBlock: `COURSES BY JOB REFERENCE:\n${coursesByJobMd}`,
+      factsBlock: `COURSES BY JOB REFERENCE:\n${narrowed ?? coursesByJobMd}`,
       citations: [{ kind: "faq", id: "courses-by-job", label: "NEDS Courses by Job" }],
       retrievalScores: [],
     };
