@@ -242,18 +242,47 @@ export function isBroadOfferingQuery(text: string): boolean {
 // reference doc instead of ordinary retrieval, which has no way to answer a
 // "how does X differ from Y" question well since it's built to find the
 // single best-matching fact, not to compare across several.
-const COMPARISON_HINTS = [
-  "difference between", "differences between", "compare", "comparison",
-  "vs ", "versus", "similar", "similarit", "differ", // covers "differ(s)"/
-  // "differing" generally — "how do they differ"/"how does it differ" used
-  // to be the only phrasings caught, which missed a directly-named-courses
-  // phrasing like "how does c+e differ from b+e?" (no pronoun, so neither
-  // matched); this is a superset of both.
-  "which is better", "what's the difference",
+//
+// Split into three groups rather than one flat list because the general
+// "lead with what was actually asked" rule (rule 39 in prompt.ts) needs to
+// know not just THAT this is a comparison question, but which half of it —
+// differences or similarities — was actually asked about, so the reference
+// doc's Similarities/Differences paragraphs can be reordered to match (see
+// comparisonFocus() below and humanizeReferenceSection() in src/llm.ts).
+const DIFFERENCE_HINTS = [
+  "difference between", "differences between", "what's the difference",
+  "differ", // covers "differ(s)"/"differing" generally — e.g. "how does
+  // c+e differ from b+e?" (no pronoun, no "between") as well as "how do
+  // they differ"/"how does it differ".
 ];
+const SIMILARITY_HINTS = [
+  "have in common", "in common", "similar", "similarit", "alike",
+];
+// Genuinely either-direction phrasing — no explicit signal for which half
+// of the comparison was actually wanted, so comparisonFocus() below falls
+// back to "neutral" (keep the doc's default order) rather than guessing.
+const NEUTRAL_COMPARISON_HINTS = ["compare", "comparison", "vs ", "versus", "which is better"];
 
 export function isCourseComparisonQuery(text: string): boolean {
-  return has(text.toLowerCase(), COMPARISON_HINTS);
+  const t = text.toLowerCase();
+  return has(t, DIFFERENCE_HINTS) || has(t, SIMILARITY_HINTS) || has(t, NEUTRAL_COMPARISON_HINTS);
+}
+
+export type ComparisonFocus = "differences" | "similarities" | "neutral";
+
+// Which half of a comparison question was actually asked about — see
+// DIFFERENCE_HINTS/SIMILARITY_HINTS's comment above. A message matching
+// both (e.g. "how are C and C1 similar, and how do they differ?") or
+// neither specifically (e.g. "compare C and C1") has no single clear
+// signal, so this returns "neutral" rather than guessing — the caller
+// keeps the doc's current default order for that case.
+export function comparisonFocus(text: string): ComparisonFocus {
+  const t = text.toLowerCase();
+  const wantsDifferences = has(t, DIFFERENCE_HINTS);
+  const wantsSimilarities = has(t, SIMILARITY_HINTS);
+  if (wantsDifferences && !wantsSimilarities) return "differences";
+  if (wantsSimilarities && !wantsDifferences) return "similarities";
+  return "neutral";
 }
 
 // Either direction of "which qualification for which job" — what someone

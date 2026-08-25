@@ -32,6 +32,7 @@ import {
   isBroadOfferingQuery,
   isCallbackRequest,
   isCourseComparisonQuery,
+  comparisonFocus,
   isJobQualificationQuery,
   isContactOnBehalfRequest,
   isGreeting,
@@ -130,6 +131,8 @@ function narrowComparisonDoc(doc: string, labels: string[]): string | null {
   const hasBullets = /^- \*\*.+?\*\*/m.test(target);
   if (!hasBullets) return target; // nothing to prune (Group 2/3/4 shape)
 
+  const originalCount = [...target.matchAll(/^- \*\*(.+?)\*\*/gm)].length;
+
   const kept = target
     .split("\n")
     .filter((line) => {
@@ -144,7 +147,39 @@ function narrowComparisonDoc(doc: string, labels: string[]): string | null {
       line.startsWith("## ") ? line.replace(/\([^)]*\)\s*$/, `(${labels.join(", ")})`) : line,
     )
     .join("\n");
-  return kept;
+
+  // Only a genuine narrow (fewer courses kept than the section actually
+  // has) needs the Similarities prose adjusted — if every course in the
+  // section was named (labels.length === originalCount), it's already
+  // accurate as written and untouched above.
+  return labels.length < originalCount ? rewriteSimilaritiesForCount(kept, labels.length) : kept;
+}
+
+// A source section's "**Similarities:**" paragraph is written for its FULL
+// course count (Group 1's says "All four are...", "All are permanent
+// entitlements... unlike the training/certificate courses below") — once
+// narrowed down to fewer courses, both go wrong: the count no longer
+// matches what's actually being compared, and "below" is a dangling
+// reference to the source document's own layout that means nothing lifted
+// into a standalone chat reply. Phrasing-only rewrite (golden rule 1) — the
+// underlying claims ("permanent entitlement", "doesn't expire") are kept,
+// just restated without the doc-structure reference.
+const COUNT_WORDS: Record<number, string> = { 2: "two", 3: "three", 4: "four", 5: "five" };
+function rewriteSimilaritiesForCount(text: string, narrowedCount: number): string {
+  const originalWord = text.match(/\ball (two|three|four|five)\b/i)?.[1]?.toLowerCase();
+  const originalCount = originalWord
+    ? Object.entries(COUNT_WORDS).find(([, w]) => w === originalWord)?.[0]
+    : undefined;
+  if (!originalCount) return text; // nothing to adjust — original text didn't spell out a count
+
+  const phrase = narrowedCount === 2 ? "Both" : `All ${COUNT_WORDS[narrowedCount] ?? narrowedCount}`;
+  return text
+    .replace(new RegExp(`\\ball ${originalWord}\\b`, "i"), phrase)
+    .replace(/\ball are\b/i, `${phrase} are`)
+    .replace(
+      /,?\s*unlike the training\/certificate courses below/i,
+      narrowedCount === 2 ? "" : ", unlike some other NEDS courses",
+    );
 }
 
 // Decide the intent and assemble the approved-fact context for the message.
@@ -237,9 +272,20 @@ function ground(message: string, sessionId: string | undefined): Grounding {
     // full doc, same as before.
     const labels = labelsNamedIn(message);
     const narrowed = labels.length >= 2 ? narrowComparisonDoc(courseComparisonMd, labels) : null;
+    // Rule 39 (prompt.ts) says the sentence that most directly answers what
+    // was asked comes first — for a comparison question, that means leading
+    // with whichever of differences/similarities was actually asked about
+    // (see comparisonFocus() in intent.ts). Threaded into the facts block's
+    // own header, alongside COURSE COMPARISON REFERENCE, rather than left
+    // for the live model to infer alone: mock mode has no inference step at
+    // all (src/llm.ts's humanizeReferenceSection() reads this header to
+    // decide the paragraph order deterministically), and the live model
+    // gets the same explicit signal instead of having to re-derive it from
+    // the visitor's phrasing on every turn.
+    const focus = comparisonFocus(message);
     return {
       intent: "faq_query",
-      factsBlock: `COURSE COMPARISON REFERENCE:\n${narrowed ?? courseComparisonMd}`,
+      factsBlock: `COURSE COMPARISON REFERENCE (focus: ${focus}):\n${narrowed ?? courseComparisonMd}`,
       citations: [{ kind: "faq", id: "course-comparison", label: "NEDS Course Comparison" }],
       retrievalScores: [],
     };

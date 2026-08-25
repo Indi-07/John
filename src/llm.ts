@@ -3,6 +3,7 @@
 // any failure the caller falls back to a phone/email hand-off.
 
 import { config } from "./config.js";
+import type { ComparisonFocus } from "./intent.js";
 
 export interface ChatMessage {
   role: "system" | "user" | "assistant";
@@ -181,6 +182,21 @@ function tokenize(text: string): string[] {
 // in a different corpus), simplified here to a one-off scan since this
 // only ever runs over a handful of sections per request, not a persistent
 // index.
+// Splits a reference doc (course-comparison.md / courses-by-job.md) into
+// its "## "-headed sections with the heading itself stripped down to just
+// the body text — the exact same split+strip shape bestMatchingSection()
+// below produces for whichever section it picks. Exported for
+// scripts/checkReadingLevel.ts's dev-time check, which needs every
+// section's raw (pre-humanize) body to check against grade 9 — see that
+// script's comment for why it checks the verbatim source text rather than
+// only post-humanize output.
+export function referenceDocSectionBodies(doc: string): string[] {
+  return doc
+    .split(/\n(?=## )/)
+    .filter((s) => s.trim().startsWith("##"))
+    .map((s) => s.replace(/^##.*(\n|$)/, "").trim());
+}
+
 function bestMatchingSection(doc: string, question: string): string | undefined {
   const qWords = new Set(tokenize(question));
   if (!qWords.size) return undefined;
@@ -220,9 +236,111 @@ function bestMatchingSection(doc: string, question: string): string | undefined 
   if (!best) return undefined;
 
   const section = sections[best.index]!;
-  const heading = section.match(/^##\s*(.+)/)?.[1]?.trim();
-  const body = section.replace(/^##.*(\n|$)/, "").trim();
-  return heading ? `${heading}: ${body}` : body;
+  return section.replace(/^##.*(\n|$)/, "").trim();
+}
+
+// bestMatchingSection() (and pipeline.ts's narrowComparisonDoc before it)
+// hand back reference-doc markdown as-is — "**bold**" course labels,
+// literal "**Similarities:**"/"**Differences:**" section labels, "- "
+// bullet lists. That's fine for a document, but the widget renders plain
+// text with no markdown support, so a visitor would otherwise see literal
+// asterisks and document-structure labels instead of a normal sentence.
+// This reshapes the SAME content into conversational prose — phrasing
+// only, never adds, removes, or alters a fact/number/claim (golden rule 1).
+// courses-by-job.md's sections need none of this (already plain prose, no
+// bold/bullets/labels — see the doc itself), so this is a no-op for them
+// beyond the heading strip bestMatchingSection already does.
+function humanizeReferenceSection(text: string, focus: ComparisonFocus = "neutral"): string {
+  // "**Similarities:** All four are..." -> "All four are...": just drop the
+  // label, the sentence that follows (already capitalized, e.g. "Both
+  // are.../All three are.../All four are...") reads naturally as its own
+  // opening sentence without needing a "They're similar in that" lead-in.
+  // An earlier version of this DID add that lead-in, but it cost ~5 words
+  // for no added meaning — measured with src/readingLevel.ts's
+  // fleschKincaidGrade() per rule 38 in prompt.ts, dropping it was worth
+  // 0.3-0.4 grade levels and was, along with the other changes in this
+  // function, what brought the C1-vs-C mock answer from 10.6 to under 9.
+  let result = text.replace(/\*\*Similarities:\*\*\s*/, "");
+  // "**Differences:** They're distinguished mainly by X and Y." -> "The
+  // main difference is X and Y." Drops the label (as elsewhere) AND swaps
+  // "distinguished" for the plainer "difference" per rule 38 in prompt.ts —
+  // same claim, same precision, just a shorter/more common word; measured
+  // with src/readingLevel.ts's fleschKincaidGrade() to matter here, not a
+  // stylistic guess (this single swap plus the sentence-split below was the
+  // difference between the C1-vs-C mock answer scoring 9.2 and 8.x).
+  // Always sentence-initial in the source, so hardcoded capitalized rather
+  // than trying to preserve/infer the original's case.
+  result = result.replace(/\*\*Differences:\*\*\s*They're distinguished mainly by\b/, "The main difference is");
+  result = result.replace(/\*\*Differences:\*\*\s*/, "");
+
+  // The Similarities lead sentence's second clause ("...and all require the
+  // person to already hold a full car (Category B) licence first") makes an
+  // already-long sentence run well past rule 38's ~20-word-per-sentence
+  // guideline (this one runs to ~34 words). Split it into its own short
+  // sentence — "They" stays count-agnostic on purpose, since it's correct
+  // whether the paragraph was narrowed to 2, 3, or left at all 4 courses by
+  // pipeline.ts's rewriteSimilaritiesForCount(), which only ever swaps the
+  // FIRST clause's count word, not this one.
+  result = result.replace(
+    /,\s*and all require the person to already hold a full car \(Category B\) licence first\./,
+    ". They also need to already hold a full car (Category B) licence first.",
+  );
+
+  // "- **C1** covers X.\n- **C** covers Y." bullets -> flowing sentences
+  // naming each course inline instead of a dash list, kept as separate
+  // sentences rather than merged with "while". An earlier version of this
+  // merged exactly-two-bullet cases into one "X does A, while Y does B"
+  // sentence for readability, but per-rule-38 grade-level checking with
+  // src/readingLevel.ts's fleschKincaidGrade() found that merge reliably
+  // pushed the result well above the grade-9 ceiling (the C1-vs-C answer
+  // scored 16 merged vs. 8.5 split) — measured, not guessed. Splitting was
+  // never worse in testing, so this always keeps bullets as separate
+  // sentences regardless of count.
+  const bullets = [...result.matchAll(/^- \*\*(.+?)\*\*(.*)$/gm)];
+  if (bullets.length) {
+    // A bullet can legitimately end inside a quoted phrase (e.g. the C+E
+    // bullet's own `...frames C+E as being "for those who already hold a C
+    // licence."`) — terminal punctuation followed by a closing quote still
+    // counts as already terminated, so this doesn't double up into `.".`.
+    const sentences = bullets.map((m) => {
+      const s = `${m[1]}${m[2]}`.trim();
+      return /[.!?]["'’”)]?$/.test(s) ? s : `${s}.`;
+    });
+    result = `${result.slice(0, bullets[0]!.index).trim()} ${sentences.join(" ")}`.trim();
+  }
+
+  // Any bold left outside a bullet (none in either doc today, but cheap
+  // insurance) — strip the syntax, keep the word. Then single-asterisk
+  // italics (e.g. Group 3's "*responsible for*") the same way — must run
+  // after the bold pass, since a bold "**word**" is also two single
+  // asterisks and would otherwise get misread as italic markup here.
+  result = result.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1");
+
+  // Normalize the blank line that separates the similarities paragraph from
+  // the differences paragraph down to exactly one — .msg in
+  // public/widget.html renders with `white-space: pre-wrap`, so a literal
+  // blank line here shows as two visually separated paragraphs in the chat
+  // bubble instead of one dense wall of text. (A job-doc section has no
+  // internal blank line to begin with, so this is a no-op for that path.)
+  const normalized = result.replace(/\n{2,}/g, "\n\n").replace(/[ \t]+/g, " ").trim();
+
+  // Rule 39 in prompt.ts: lead with whichever was actually asked about. The
+  // source doc always writes Similarities before Differences, which is
+  // already the right order for a similarities-focused or neutral/unclear
+  // question (the default, left as-is) — only a differences-focused
+  // question ("what's the difference between C and C1?") needs the two
+  // paragraphs swapped. Nothing to swap for a single-paragraph section
+  // (Group 4 / a job-doc entry — no blank line to split on), or for
+  // similarities/neutral focus, which already matches the source order.
+  if (focus === "differences") {
+    const breakIndex = normalized.indexOf("\n\n");
+    if (breakIndex !== -1) {
+      const similarities = normalized.slice(0, breakIndex);
+      const differences = normalized.slice(breakIndex + 2);
+      return `${differences}\n\n${similarities}`;
+    }
+  }
+  return normalized;
 }
 
 // ---- Mock answer: a templated, grounded reply for demos without the model ----
@@ -275,10 +393,23 @@ function mockAnswer(messages: ChatMessage[]): string {
   // specific course(s)/job asked about rather than dump the whole doc; this
   // approximates the same scoping by picking whichever "## " section of the
   // doc shares the most keywords with the visitor's question.
-  if (facts.startsWith("COURSE COMPARISON REFERENCE:") || facts.startsWith("COURSES BY JOB REFERENCE:")) {
-    const doc = facts.replace(/^COURSE COMPARISON REFERENCE:\n|^COURSES BY JOB REFERENCE:\n/, "");
+  // The comparison doc's facts block carries a "(focus: differences|
+  // similarities|neutral)" tag in its own header — see pipeline.ts's
+  // comparisonFocus() — so mock mode can reorder the Similarities/
+  // Differences paragraphs the same deterministic way the live model is
+  // told to via rule 39, without its own re-derivation of the visitor's
+  // intent from scratch. The job-doc block carries no such tag (its
+  // sections have no similarities/differences structure to reorder), so it
+  // just defaults to "neutral" (a no-op) via humanizeReferenceSection()'s
+  // own default parameter.
+  const comparisonMatch = facts.match(
+    /^COURSE COMPARISON REFERENCE \(focus: (differences|similarities|neutral)\):\n([\s\S]*)$/,
+  );
+  if (comparisonMatch || facts.startsWith("COURSES BY JOB REFERENCE:")) {
+    const focus = comparisonMatch?.[1] as ComparisonFocus | undefined;
+    const doc = comparisonMatch ? comparisonMatch[2]! : facts.replace(/^COURSES BY JOB REFERENCE:\n/, "");
     const section = bestMatchingSection(doc, question);
-    if (section) return `[mock] ${section}`;
+    if (section) return `[mock] ${humanizeReferenceSection(section, focus)}`;
   }
 
   if (facts.startsWith("BROAD_OFFER_LIST")) {
