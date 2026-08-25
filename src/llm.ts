@@ -139,6 +139,92 @@ function priceHeadline(line: string): string | undefined {
     ?.trim();
 }
 
+// Generic filler words that would otherwise dominate every section's score
+// equally and drown out the words that actually distinguish one course/job
+// from another — mirrors src/retrieval.ts's STOP list in spirit (see that
+// file's own comment on why a missing stopword inflates unrelated matches),
+// but kept separate since this is scoring markdown doc sections, not FAQs.
+const REFERENCE_DOC_STOPWORDS = new Set([
+  "the", "a", "an", "and", "or", "of", "to", "in", "on", "for", "with",
+  "about", "what", "which", "who", "how", "why", "when", "where", "is",
+  "are", "do", "does", "i", "my", "me", "want", "would", "like", "can",
+  "could", "you", "your", "it", "this", "that", "these", "those", "be",
+  "as", "at", "by", "from", "into", "if", "not", "get", "have",
+]);
+
+function tokenize(text: string): string[] {
+  return (
+    text
+      .toLowerCase()
+      .match(/[a-z0-9+]+/g)
+      ?.filter((w) => w.length > 1 && !REFERENCE_DOC_STOPWORDS.has(w)) ?? []
+  );
+}
+
+// Picks whichever "## "-headed section of a reference doc shares the most
+// keywords with the visitor's question — a rough stand-in for the live
+// model's job of reading the whole doc and answering only the relevant
+// part. Returns undefined (not a wrong guess) if nothing in the question
+// overlaps any section, so the caller can fall through to the generic
+// fallback instead of returning an arbitrary section.
+//
+// A plain match-count would pick the wrong section on a real query like "I
+// want to be an ambulance driver, what qualifications do I need?" — words
+// like "need"/"qualification"/"driving" repeat throughout every section of
+// a job-guide doc and say nothing about which one is relevant, while
+// "ambulance" (confined to a single section) is exactly the word that
+// should decide it, but a bare count lets the generic words from the
+// longest section (which has the most words to coincidentally match) drown
+// it out. So each question word is weighted by how RARE it is across the
+// doc's own sections — same idea as src/retrieval.ts's BM25 rareness
+// weighting (see that file's STOP-list comment for the same failure mode
+// in a different corpus), simplified here to a one-off scan since this
+// only ever runs over a handful of sections per request, not a persistent
+// index.
+function bestMatchingSection(doc: string, question: string): string | undefined {
+  const qWords = new Set(tokenize(question));
+  if (!qWords.size) return undefined;
+
+  const sections = doc.split(/\n(?=## )/).filter((s) => s.trim().startsWith("##"));
+  if (!sections.length) return undefined;
+  const sectionTokenSets = sections.map((s) => new Set(tokenize(s)));
+
+  const weight = new Map<string, number>();
+  for (const w of qWords) {
+    const sectionsContaining = sectionTokenSets.filter((set) => set.has(w)).length;
+    if (sectionsContaining > 0) weight.set(w, 1 / sectionsContaining);
+  }
+
+  // Both reference docs open or close with a deliberate whole-doc overview
+  // section — course-comparison.md's "Quick comparison table" (every course
+  // as a row) and "Overall takeaway", courses-by-job.md's "Summary by type
+  // of need" — that name-checks nearly every course in passing. Rareness
+  // weighting alone still lets one of these win on a close question by
+  // sheer word count, since it's by far the longest/broadest section and so
+  // has the most chances to coincidentally match a few more low-weight
+  // words than the one specific section that's actually the right answer
+  // (verified live: "difference between forklift training and OLAT" picked
+  // the table over Group 3, the section actually named for that exact
+  // pair, until this exclusion was added). Excluded from candidacy, same as
+  // rules 32/33 in prompt.ts ask a live model to answer the specific
+  // course/job asked, not the whole doc.
+  let best: { score: number; index: number } | undefined;
+  sectionTokenSets.forEach((tokens, i) => {
+    if (/^##\s*(summary|overall|quick comparison)/i.test(sections[i]!)) return;
+    let score = 0;
+    for (const [w, wt] of weight) {
+      if (tokens.has(w)) score += wt;
+    }
+    if (score > 0 && (!best || score > best.score)) best = { score, index: i };
+  });
+  if (!best) return undefined;
+
+  const section = sections[best.index]!;
+  const heading = section.match(/^##\s*(.+)/)?.[1]?.trim();
+  const body = section.replace(/^##.*(\n|$)/, "").trim();
+  return heading ? `${heading}: ${body}` : body;
+}
+
 // ---- Mock answer: a templated, grounded reply for demos without the model ----
 // The pipeline only calls complete()/stream() once it has non-empty facts to
 // ground on (see pipeline.ts's UNSURE_TEXT short-circuit), so `facts` here is
@@ -156,16 +242,43 @@ function mockAnswer(messages: ChatMessage[]): string {
   const question = questionMatch?.[1]?.trim() ?? "";
   const isYesNoQuestion = /^(do|does|is|are|can|could|will|would)\b/i.test(question);
 
-  // Rule 20: "your"/"you" about a course (e.g. "What are your trailer
-  // lessons?") signals ownership, not a general concept — lead with what
-  // NEDS offers instead of rule 5's definition-first ordering.
-  const isOwnershipQuestion = /\b(your|you)\b/i.test(question);
+  // Rule 20: genuine possessive/ownership phrasing about NEDS's own course
+  // — "your X" (e.g. "What are your trailer lessons?", "What's your
+  // forklift course?") or "do/does you offer/have/run/provide X" (e.g. "Do
+  // you offer forklift training?") — signals ownership, not a general
+  // concept, so lead with what NEDS offers instead of rule 5's
+  // definition-first ordering. Deliberately does NOT match a bare "you" —
+  // that used to also catch the conversational opener "can/could you
+  // tell/explain/describe/say about X" (e.g. "Can you tell me about
+  // C+E?"), which addresses the assistant, not NEDS's course, and is a
+  // plain "what is X" question that belongs on rule 5's definition-first
+  // path instead.
+  const isOwnershipQuestion =
+    /\byour\b/i.test(question) ||
+    /\b(?:do|does)\s+you\s+(?:offer|have|run|provide)\b/i.test(question);
 
   const scope = lines.find((l) => l.startsWith("SCOPE "))?.replace(/^SCOPE /, "");
   if (scope) return `[mock] ${scope}`;
 
   if (facts.startsWith("AVAILABILITY:")) {
     return "[mock] I don't have live availability connected in this preview, but you can check the NEDS website or get in touch with the team directly for current dates.";
+  }
+
+  // The course-comparison and courses-by-job facts blocks are whole markdown
+  // reference docs (see pipeline.ts's isCourseComparisonQuery/
+  // isJobQualificationQuery routing), not fact lines in the SERVICE/PRICE/
+  // DEFINITION shape every other branch here understands — without this
+  // branch, a query routed to either doc fell all the way through to the
+  // generic "Happy to help with that." fallback at the bottom of this
+  // function, since nothing below could parse a line out of it either. A
+  // live model is asked (rules 32/33 in prompt.ts) to answer only the
+  // specific course(s)/job asked about rather than dump the whole doc; this
+  // approximates the same scoping by picking whichever "## " section of the
+  // doc shares the most keywords with the visitor's question.
+  if (facts.startsWith("COURSE COMPARISON REFERENCE:") || facts.startsWith("COURSES BY JOB REFERENCE:")) {
+    const doc = facts.replace(/^COURSE COMPARISON REFERENCE:\n|^COURSES BY JOB REFERENCE:\n/, "");
+    const section = bestMatchingSection(doc, question);
+    if (section) return `[mock] ${section}`;
   }
 
   if (facts.startsWith("BROAD_OFFER_LIST")) {

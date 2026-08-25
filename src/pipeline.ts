@@ -63,6 +63,90 @@ interface Grounding {
   retrievalScores: { id: string; score: number }[];
 }
 
+// How each course is labelled in data/course-comparison.md's bulleted
+// "Differences:" lists and section headings — NOT the same text as a
+// service's id or its full `services.json` name (e.g. hgv-c1/"HGV Category
+// C1 training" is just "C1" in the doc's own bullets).
+const COMPARISON_LABELS = ["C1", "C", "C+E", "B+E", "Driver CPC", "ADR", "Forklift", "D4", "OLAT"];
+
+// Which of COMPARISON_LABELS does this message actually name? Deliberately
+// NOT `servicesMentioned()`/`route()`'s serviceIds — that's tuned for
+// general routing and requires the fuller phrase "category c" before it'll
+// match hgv-c, specifically to avoid a bare "c" colliding with ordinary
+// text everywhere else in the app (see keywordHit's comment). But a
+// comparison question already only reaches here after isCourseComparisonQuery
+// matched, so a visitor writing the bare shorthand "c" alongside "c1" (e.g.
+// "what's the difference between c and c1?") is unambiguous in THIS
+// context and should resolve to Category C — servicesMentioned() doesn't,
+// so narrowing would silently never fire for exactly the phrasing rule 32's
+// own worked example uses. Same word-boundary + "not followed by +" safety
+// as keywordHit, applied straight to the doc's own label vocabulary instead
+// of services.json's broader keyword lists.
+function labelsNamedIn(message: string): string[] {
+  return COMPARISON_LABELS.filter((label) => {
+    const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`\\b${escaped}\\b(?!\\+)`, "i").test(message);
+  });
+}
+
+// Narrows data/course-comparison.md down to just the courses actually named
+// in a comparison question, rather than handing over a whole section's
+// worth of unrelated courses just because they happen to share that
+// section (Group 1 alone covers 4: C1, C, C+E, B+E). Rule 32 in prompt.ts
+// tells a live model not to do this, but that's a soft instruction the
+// model has to remember to follow on every turn, and mock mode (src/llm.ts's
+// bestMatchingSection) has no instruction-following step at all — it always
+// returns whichever whole section it best-matches. Scoping the facts block
+// itself here fixes both paths at once, the same way price_query/
+// service_query already scope their own facts from `serviceIds` instead of
+// leaving it to prompting.
+//
+// Returns null (not a guess) when the named labels don't cleanly resolve to
+// a single section to narrow — e.g. they span two different groups ("how
+// do C1 and C differ from Driver CPC?") — so the caller can fall back to
+// handing over the untouched doc, same as when fewer than 2 labels are
+// named at all.
+function narrowComparisonDoc(doc: string, labels: string[]): string | null {
+  if (labels.length < 2) return null;
+
+  const sections = doc.split(/\n(?=## )/);
+  const matchCounts = sections.map((section) => {
+    const bulletLabels = [...section.matchAll(/^- \*\*(.+?)\*\*/gm)].map((m) => m[1]);
+    const present = bulletLabels.length
+      ? labels.filter((l) => bulletLabels.includes(l))
+      : labels.filter((l) => section.startsWith("##") && section.split("\n", 1)[0]!.includes(l));
+    return present.length;
+  });
+
+  // Require a section that accounts for EVERY requested label, not just
+  // whichever section happens to cover the most of them — otherwise a
+  // cross-group ask like "how do C1 and C differ from Driver CPC?" would
+  // silently narrow to just the C1/C bullets and drop Driver CPC entirely,
+  // rather than falling back to the full doc as intended.
+  const fullyMatchingSections = sections.filter((_, i) => matchCounts[i] === labels.length);
+  if (fullyMatchingSections.length !== 1) return null; // none, or ambiguous — don't guess
+
+  const target = fullyMatchingSections[0]!;
+  const hasBullets = /^- \*\*.+?\*\*/m.test(target);
+  if (!hasBullets) return target; // nothing to prune (Group 2/3/4 shape)
+
+  const kept = target
+    .split("\n")
+    .filter((line) => {
+      const m = line.match(/^- \*\*(.+?)\*\*/);
+      return !m || labels.includes(m[1]!);
+    })
+    // The heading's own trailing "(C1, C, C+E, B+E)" still lists every
+    // course in the group even after their bullets are dropped — trim it to
+    // just the ones actually kept, otherwise a narrowed C1-vs-C answer
+    // still visibly names C+E and B+E in its own heading line.
+    .map((line) =>
+      line.startsWith("## ") ? line.replace(/\([^)]*\)\s*$/, `(${labels.join(", ")})`) : line,
+    )
+    .join("\n");
+  return kept;
+}
+
 // Decide the intent and assemble the approved-fact context for the message.
 function ground(message: string, sessionId: string | undefined): Grounding {
   let { intent, serviceIds } = route(message);
@@ -127,27 +211,35 @@ function ground(message: string, sessionId: string | undefined): Grounding {
     }
   }
 
-  // A broad "what do you offer" question gets the FULL course list, not
-  // whatever a single service/FAQ retrieval happened to rank first — see
-  // isBroadOfferingQuery's comment for why that was previously misfiring.
-  if (isBroadOfferingQuery(message)) {
-    const svc = allServicesBlock();
-    return {
-      intent: "service_query",
-      factsBlock: `BROAD_OFFER_LIST\n${svc.block}`,
-      citations: svc.citations,
-      retrievalScores: [],
-    };
-  }
-
   // "How does X differ from Y" / "what's the difference between the
   // courses" — grounded on the dedicated comparison reference doc instead
   // of ordinary retrieval, which can only surface one best-matching fact at
   // a time and has no way to actually compare across several.
+  //
+  // Checked BEFORE isBroadOfferingQuery below (and isJobQualificationQuery
+  // too): both are more specific than the broad-offer catch-all, and
+  // isBroadOfferingQuery's own hint list includes the bare substring "what
+  // qualifications", which is also a prefix of isJobQualificationQuery's
+  // "what qualifications do i need" — checking broad-offer first used to
+  // let it swallow a job-framed question like "What qualifications do I
+  // need to become an ambulance driver?" (no NEDS service named, so
+  // isBroadOfferingQuery's servicesMentioned-is-empty check didn't save
+  // it), dumping the full course list instead of the job-specific answer.
   if (isCourseComparisonQuery(message)) {
+    // When the message clearly names 2+ courses, narrow the reference doc
+    // down to just those courses before it ever reaches the model/mock
+    // renderer — see narrowComparisonDoc's/labelsNamedIn's comments for why
+    // this can't just be left to rule 32/prompt instructions alone, and why
+    // this doesn't reuse `serviceIds` from route() above directly. Fewer
+    // than 2 named labels (e.g. a whole-group or vague "differences between
+    // your courses" question) or a request that doesn't resolve to a
+    // single matching section (spans multiple groups) falls back to the
+    // full doc, same as before.
+    const labels = labelsNamedIn(message);
+    const narrowed = labels.length >= 2 ? narrowComparisonDoc(courseComparisonMd, labels) : null;
     return {
       intent: "faq_query",
-      factsBlock: `COURSE COMPARISON REFERENCE:\n${courseComparisonMd}`,
+      factsBlock: `COURSE COMPARISON REFERENCE:\n${narrowed ?? courseComparisonMd}`,
       citations: [{ kind: "faq", id: "course-comparison", label: "NEDS Course Comparison" }],
       retrievalScores: [],
     };
@@ -162,6 +254,21 @@ function ground(message: string, sessionId: string | undefined): Grounding {
       intent: "faq_query",
       factsBlock: `COURSES BY JOB REFERENCE:\n${coursesByJobMd}`,
       citations: [{ kind: "faq", id: "courses-by-job", label: "NEDS Courses by Job" }],
+      retrievalScores: [],
+    };
+  }
+
+  // A broad "what do you offer" question gets the FULL course list, not
+  // whatever a single service/FAQ retrieval happened to rank first — see
+  // isBroadOfferingQuery's comment for why that was previously misfiring.
+  // Checked last of the three deterministic reference-doc routes above,
+  // since it's the least specific.
+  if (isBroadOfferingQuery(message)) {
+    const svc = allServicesBlock();
+    return {
+      intent: "service_query",
+      factsBlock: `BROAD_OFFER_LIST\n${svc.block}`,
+      citations: svc.citations,
       retrievalScores: [],
     };
   }

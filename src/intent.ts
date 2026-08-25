@@ -244,8 +244,12 @@ export function isBroadOfferingQuery(text: string): boolean {
 // single best-matching fact, not to compare across several.
 const COMPARISON_HINTS = [
   "difference between", "differences between", "compare", "comparison",
-  "vs ", "versus", "similar", "similarit", "how do they differ",
-  "how does it differ", "which is better", "what's the difference",
+  "vs ", "versus", "similar", "similarit", "differ", // covers "differ(s)"/
+  // "differing" generally — "how do they differ"/"how does it differ" used
+  // to be the only phrasings caught, which missed a directly-named-courses
+  // phrasing like "how does c+e differ from b+e?" (no pronoun, so neither
+  // matched); this is a superset of both.
+  "which is better", "what's the difference",
 ];
 
 export function isCourseComparisonQuery(text: string): boolean {
