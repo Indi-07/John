@@ -39,7 +39,8 @@ export async function complete(messages: ChatMessage[]): Promise<LlmResult> {
       signal: controller.signal,
     });
     if (!res.ok) {
-      console.error(`[llm] upstream ${res.status} ${res.statusText}`);
+      const body = await res.text().catch(() => "");
+      console.error(`[llm] upstream ${res.status} ${res.statusText}: ${body}`);
       return { text: "", ok: false };
     }
     const data = (await res.json()) as {
